@@ -1,0 +1,3 @@
+Nguyen_F10_LHS: None
+MSE: 0.0009648564384370183
+Duration: 143.077154 seconds

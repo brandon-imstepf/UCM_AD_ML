@@ -1,0 +1,3 @@
+Complexity,Loss,Equation
+2,4.605195187589817e-21,"cube(x4)"
+5,4.578349534013499e-21,"cube(sin(x5) + x5)"

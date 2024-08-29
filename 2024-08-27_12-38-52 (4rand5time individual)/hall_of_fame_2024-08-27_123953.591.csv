@@ -1,0 +1,4 @@
+Complexity,Loss,Equation
+2,2.688245678025474e-22,"cube(x5)"
+4,2.654606291220371e-22,"cube(x4 * x3)"
+6,2.387309987454305e-22,"x5 * log(exp(cube(x0)))"

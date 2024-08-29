@@ -1,0 +1,120 @@
+LHS_F1: x0**3 + x0**2 + x0
+MSE: 5.1730836755064256e-08
+Noise Level: 0.00022462454510862042
+Time Taken: 0.015644 seconds
+LHS_F10: (-cos(x0)*cos(cos(x1)) + cos(-x0 + cos(x1)))*(cos(cos(cos(x1))) + 1.4891917655785312)
+MSE: 0.0019865273061567103
+Noise Level: 0.04287626941563896
+Time Taken: 0.059261 seconds
+LHS_F2: -x0**3 + x0 + (x0**2 + x0)**2
+MSE: 0.006370653910005224
+Noise Level: 0.08017872531569348
+Time Taken: 0.039786 seconds
+LHS_F3: x0 + (x0**2 + x0)*(x0**3 + x0)
+MSE: 0.0015976529770185671
+Noise Level: 0.03996223924133663
+Time Taken: 0.016019 seconds
+LHS_F4: x0**6 + x0**3*(x0**2 + x0) + x0**3 + x0**2 + x0
+MSE: 0.008356985123248487
+Noise Level: 0.094845289522455
+Time Taken: 0.030644 seconds
+LHS_F5: -(-0.032671466662680115 - sin(x0 - sin(x0**2) - 0.5550635109792464/sin(x0**2))/((-0.6903531668327575)*exp(cos(sin(x0**2))**3/0.503790248899392))) - 1.0004338933618409
+MSE: 0.012191486944218191
+Noise Level: 0.03418906102558041
+Time Taken: 0.129047 seconds
+LHS_F6: sin(x0) + sin(x0**2 + x0)
+MSE: 0.00034332916333524037
+Noise Level: 0.01882639643867412
+Time Taken: 0.085271 seconds
+LHS_F7: log((x0 + 0.38374386443253916)**3 + 1.1129619960767192)
+MSE: 0.0030197499788990677
+Noise Level: 0.05286691004263683
+Time Taken: 0.073561 seconds
+LHS_F8: log(0.00017283386774249965*x0**4 + x0*log(x0) + 2.2694060675491095)
+MSE: 0.009618184285399366
+Noise Level: 0.04695376327074438
+Time Taken: 0.086816 seconds
+LHS_F9: sin(x0) + sin(x1**2)
+MSE: 3.749607087256394e-05
+Noise Level: 0.0060431076424256385
+Time Taken: 0.031264 seconds
+RandSample_F1: x0**3 + x0**2 + x0
+MSE: 0.0058959928566082774
+Noise Level: 0.07607825468750479
+Time Taken: 0.048371 seconds
+RandSample_F10: sin(x0)*cos(x1)/0.49905345949670765
+MSE: 0.0023141499431394634
+Noise Level: 0.04584726812746827
+Time Taken: 0.047109 seconds
+RandSample_F2: -x0**3 + x0 + (x0**2 + x0)**2
+MSE: 0.004137966321603772
+Noise Level: 0.06511128365420027
+Time Taken: 0.033315 seconds
+RandSample_F3: x0 + (x0**2 + x0)*(x0**3 + x0)
+MSE: 0.00015411443393193353
+Noise Level: 0.013183582343701317
+Time Taken: 0.031028 seconds
+RandSample_F4: x0**6 + (x0**3 + x0)*(x0*x0 + x0)
+MSE: 3390.2517127841284
+Noise Level: 0.03704146366118163
+Time Taken: 0.030141 seconds
+RandSample_F5: sin(x0**2)*cos(x0) - 1.0000158093509808
+MSE: 2.7255338319823094e-05
+Noise Level: 0.005061002117911839
+Time Taken: 0.078421 seconds
+RandSample_F6: sin(x0) + sin(x0**2 + x0)
+MSE: 0.002847782259847476
+Noise Level: 0.05333944454267822
+Time Taken: 0.094192 seconds
+RandSample_F7: log((x0 + 0.6235198400868058)**3)
+MSE: 0.014347571057682055
+Noise Level: 0.09664349270430508
+Time Taken: 0.057299 seconds
+RandSample_F8: log(1852065101.4782961*(0.028535837635447241*x0 + 1)**6 - 1368808544.3383342) - 19.540578276372216
+MSE: 0.00809206562515505
+Noise Level: 0.07687634959087863
+Time Taken: 0.094278 seconds
+RandSample_F9: sin(x0) + sin(x1**2)
+MSE: 0.00019231967635335506
+Noise Level: 0.014211898950844161
+Time Taken: 0.041316 seconds
+Uniform_F1: x0**3 + x0**2 + x0
+MSE: 0.0005635264216388167
+Noise Level: 0.02312922155935764
+Time Taken: 0.049914 seconds
+Uniform_F10: sin(x0 + x1)
+MSE: 0.011164187867457405
+Noise Level: 0.09530923243715136
+Time Taken: 0.062713 seconds
+Uniform_F2: (x0**2 + x0)**2 - (x0**3 - x0)
+MSE: 0.007858262298228419
+Noise Level: 0.08733562814413472
+Time Taken: 0.03175 seconds
+Uniform_F3: x0 + (x0**2 + x0)*(x0**3 + x0)
+MSE: 0.004263677632345743
+Noise Level: 0.06456505433626133
+Time Taken: 0.031983 seconds
+Uniform_F4: x0**6 + x0**5 + x0**4 + x0**3 + x0**2 + x0 - cos(x0)
+MSE: 0.49884909743028255
+Noise Level: 0.022725376076144988
+Time Taken: 0.04029 seconds
+Uniform_F5: sin((-cos(cos(x0)) + sin(sin(0.8911832321148845/0.169599445223133)))*cos(x0))**2*cos(-(x0*x0 - sin(sin(cos(x0))/cos(-0.8691100832103724))) + sin(sin(0.848236718926628)**3/sin(cos(x0)))/0.8218708279878854) - cos(-0.026073588203652485)**6
+MSE: 0.002070925820540594
+Noise Level: 0.016641447192063032
+Time Taken: 0.083074 seconds
+Uniform_F6: sin(x0) + sin(x0**2 + x0)
+MSE: 0.0021028369225021167
+Noise Level: 0.04753759734131557
+Time Taken: 0.042173 seconds
+Uniform_F7: log(x0 + (x0 + 0.30340891237232626)**3 + 0.885374299404575)
+MSE: 6.195213722953387e-05
+Noise Level: 0.006671569123560795
+Time Taken: 0.062174 seconds
+Uniform_F8: 0.03315340352804183*x0 + log(1.6167378439916879*(-0.21523118356442685*x0 - 1)**2 + sin(0.27366861608515014*x0))
+MSE: 0.00046125188051907956
+Noise Level: 0.009925273974983707
+Time Taken: 0.094071 seconds
+Uniform_F9: sin(x0) + sin(x1**2)
+MSE: 0.010005196095004675
+Noise Level: 0.09813135836065635
+Time Taken: 0.07789 seconds

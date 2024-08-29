@@ -1,0 +1,5 @@
+Complexity,Loss,Equation
+1,1.008429250154445e-9,"x5"
+3,9.966888405712728e-18,"sin(square(x5))"
+4,2.77839442631876e-22,"exp(cube(log(x0)))"
+5,2.6916905892481024e-22,"exp(log(cube(square(x0))))"

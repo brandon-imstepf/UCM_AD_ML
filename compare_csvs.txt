@@ -1,0 +1,72 @@
+import os
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from datetime import datetime
+
+# Get current time for unique directory naming
+current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+directory = 'C:/Users/brand/Documents/Python Scripts/pysr_code/csv_comparison_' + current_time
+
+# Create the directory
+os.makedirs(directory)
+
+# Function to calculate Normalized Mean Squared Error
+def calculate_nmse(df1, df2):
+    # Determine the number of rows to compare (for some reason, the  code somtimes spits out csv's of different length)
+    min_rows = min(len(df1), len(df2))
+    
+    # Calculate nmse row by row up to min_rows
+    nmse = np.mean((df1.values[:min_rows] - df2.values[:min_rows]) ** 2)
+    
+    # Calculate variance of the first dataframe (first dataframe is ground truth)
+    variance = np.var(df1.values[:min_rows])
+    
+    # Calculate nmse
+    nmse = nmse / variance if variance != 0 else float('inf')  # Handle zero variance case (thanks perplexity)
+    
+    return nmse
+
+# Function to compare CSV files and log results
+def compare_csv_files(ground_truth_folder, generated_folder, output_log, output_graph):
+    log_data = []
+    nmse_values = []
+
+    # Loop through all files in the ground truth folder
+    for filename in os.listdir(ground_truth_folder):
+        if filename.endswith(".csv"):
+            gt_path = os.path.join(ground_truth_folder, filename)
+            gen_path = os.path.join(generated_folder, filename)
+
+            if os.path.exists(gen_path):
+                # Load both CSV files
+                gt_df = pd.read_csv(gt_path)
+                gen_df = pd.read_csv(gen_path)
+
+                # Calculate row-by-row nmse
+                nmse = calculate_nmse(gt_df, gen_df)
+                log_data.append(f"{filename}: nmse = {nmse}\n")
+                nmse_values.append(nmse)
+            else:
+                log_data.append(f"{filename}: Generated file not found.\n")
+
+    # Write log to file
+    with open(os.path.join(directory, output_log), "w") as log_file:
+        log_file.writelines(log_data)
+
+    # Generate graph
+    plt.figure(figsize=(10, 6))
+    plt.bar(range(len(nmse_values)), nmse_values, tick_label=[f"File {i+1}" for i in range(len(nmse_values))])
+    plt.ylabel('nmse')
+    plt.title('nmse Truth vs Generated')
+    plt.savefig(os.path.join(directory, output_graph))
+    plt.show()
+
+# Define paths
+ground_truth_folder = "C:/Users/brand/Desktop/Raj-Sindi/training_data/sim_csv_v4"
+generated_folder = "C:/Users/brand/Desktop/Raj-Sindi/training_data/sim_csv_v4/pysr_x5_cubed_allparams"
+output_log = "comparison_log.txt"
+output_graph = "nmse_comparison.png"
+
+# Run the comparison
+compare_csv_files(ground_truth_folder, generated_folder, output_log, output_graph)

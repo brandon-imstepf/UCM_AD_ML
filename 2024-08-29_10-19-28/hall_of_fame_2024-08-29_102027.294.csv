@@ -1,0 +1,4 @@
+Complexity,Loss,Equation
+1,5.486846639704751e-12,"x5"
+2,2.183617037317355e-22,"square(x4)"
+3,7.228569912674163e-27,"square(square(x4))"

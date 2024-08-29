@@ -1,0 +1,4 @@
+Complexity,Loss,Equation
+2,2.621426637897896e-13,"cube(x0)"
+3,1.0873284935571013e-24,"cube(square(x0))"
+4,6.286816032001695e-25,"cube(x0 / x3)"
