@@ -1,0 +1,3 @@
+parameters[4]_training: sin(x4**3)
+Train MSE: 6.678709612592145e-23
+Test MSE: 6.172012046100134e-23

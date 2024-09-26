@@ -1,0 +1,3 @@
+allparams_training: x0*x0*(x4 - x5)
+Train MSE: 5.310328771066061e-22
+Test MSE: 7.852670602117424e-22

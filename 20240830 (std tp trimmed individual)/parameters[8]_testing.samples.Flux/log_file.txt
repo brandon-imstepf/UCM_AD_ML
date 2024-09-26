@@ -1,0 +1,3 @@
+parameters[8]_testing.samples.Flux: sin(-7.22528348101988e-13)
+Train MSE: 8.088828390235656e-23
+Test MSE: 7.294488198203596e-23

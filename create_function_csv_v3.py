@@ -6,7 +6,7 @@ from pyDOE import lhs
 
 # Booleans for controlling functionality
 testtrain = False  # Control whether to split into train/test
-noise = True       # Control whether to add noise
+noise = False      # Control whether to add noise
 out_of_sample = True  # Generate out-of-sample data
 small_sample = False  # Generate smaller sample size
 
@@ -17,8 +17,8 @@ use_randsample = True
 
 # Parameters for sampling
 a = 0
-b = 1
-c = 20  # number of samples, can be adjusted
+b = -100
+c = 100  # number of samples, can be adjusted
 abc = f"({a},{b},{c})"
       
 
@@ -38,7 +38,7 @@ directory = os.path.join(basedir, directory_name)
 os.makedirs(directory, exist_ok=True)
 
 # Import functions from the module
-from regression_benchmark_functions import Nguyen_funcs
+from regression_benchmark_functions import Imstepf_funcs
 
 # Function to generate inputs using LHS
 def generate_lhs_inputs(num_vars, num_samples=c):
@@ -114,11 +114,11 @@ log_data = []
 
 # Process the functions for each sampling method if the corresponding boolean is True
 if use_lhs:
-    log_data += process_functions(Nguyen_funcs, "Nguyen", directory, 'lhs', 'LHS')
+    log_data += process_functions(Imstepf_funcs, "Imstepf", directory, 'lhs', 'LHS')
 if use_uniform:
-    log_data += process_functions(Nguyen_funcs, "Nguyen", directory, 'uniform', 'Uniform')
+    log_data += process_functions(Imstepf_funcs, "Imstepf", directory, 'uniform', 'Uniform')
 if use_randsample:
-    log_data += process_functions(Nguyen_funcs, "Nguyen", directory, 'randsample', 'RandSample')
+    log_data += process_functions(Imstepf_funcs, "Imstepf", directory, 'randsample', 'RandSample')
 
 # Write boolean settings and generated datasets information to the log file
 log_file_path = os.path.join(directory, "dataset_info.txt")

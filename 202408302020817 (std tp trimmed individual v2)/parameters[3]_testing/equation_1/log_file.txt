@@ -1,0 +1,3 @@
+parameters[3]_testing: x5**3
+Train MSE: 2.2326689125538375e-22
+Test MSE: 2.3800732629236303e-23

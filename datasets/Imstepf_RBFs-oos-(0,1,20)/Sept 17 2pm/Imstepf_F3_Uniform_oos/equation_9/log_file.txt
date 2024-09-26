@@ -1,0 +1,3 @@
+Imstepf_F3_Uniform_oos: -0.4689212696268773*x0**3/exp(x0) + (x0**3 + x0)*exp(x3)
+Train MSE: 2.4357136962450616e-07
+Test MSE: 3.4638022212894056e-07

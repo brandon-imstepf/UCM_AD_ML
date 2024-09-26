@@ -1,0 +1,3 @@
+Imstepf_F2_LHS_oos: x0*x1*x2*x3*x4
+Train MSE: 2.1945142405028047e-33
+Test MSE: 5.433605098381374e-34

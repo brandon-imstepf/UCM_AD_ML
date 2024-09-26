@@ -1,0 +1,48 @@
+parameters[1]_testing.samples.Flux: x5**4
+Train MSE: 1.4548675528565e-22
+Test MSE: 3.492837154700821e-23
+parameters[1]_training.samples.Flux: x4**3
+Train MSE: 1.165502627441445e-22
+Test MSE: 1.1918559446464303e-22
+parameters[2]_testing.samples.Flux: -0.4372447872969628/(0.17807925677537778 - 2.33165640065832/(x4*x5))
+Train MSE: 1.0694191441216418e-22
+Test MSE: 1.3307588111583267e-22
+parameters[2]_training.samples.Flux: x4**6/x0
+Train MSE: 1.3655133440213219e-22
+Test MSE: 5.0629070207664266e-23
+parameters[3]_testing.samples.Flux: x5**3
+Train MSE: 2.2326689125538375e-22
+Test MSE: 2.3800732629236303e-23
+parameters[3]_training.samples.Flux: x4**3
+Train MSE: 1.4732523087018251e-22
+Test MSE: 4.8231393652225924e-23
+parameters[4]_testing.samples.Flux: x5**6
+Train MSE: 1.1158615956994809e-22
+Test MSE: 4.128232420183986e-22
+parameters[4]_training.samples.Flux: x4**3
+Train MSE: 6.678709612592145e-23
+Test MSE: 6.172012046100134e-23
+parameters[5]_testing.samples.Flux: x4**3
+Train MSE: 1.9665875805097975e-22
+Test MSE: 2.7176997600825074e-23
+parameters[5]_training.samples.Flux: x5**3
+Train MSE: 8.450232827551199e-23
+Test MSE: 6.335705543167043e-23
+parameters[6]_testing.samples.Flux: x4**3
+Train MSE: 9.877984197115454e-24
+Test MSE: 7.610754059668394e-23
+parameters[6]_training.samples.Flux: x5**3
+Train MSE: 8.720760678345191e-23
+Test MSE: 6.893731285657284e-23
+parameters[7]_testing.samples.Flux: x4**3
+Train MSE: 6.56546775882717e-23
+Test MSE: 1.5260086842839857e-24
+parameters[7]_training.samples.Flux: x4**3
+Train MSE: 4.820167672130617e-23
+Test MSE: 1.0304686502939344e-22
+parameters[8]_testing.samples.Flux: sin(-7.22528348101988e-13)
+Train MSE: 8.088828390235656e-23
+Test MSE: 7.294488198203596e-23
+parameters[8]_training.samples.Flux: x5**3
+Train MSE: 8.716221009398352e-23
+Test MSE: 3.1125370101078883e-23

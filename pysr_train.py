@@ -46,7 +46,8 @@ def runModel(x, y, func_name, directory, noise_level=None, stop_count=5, run_all
         maxsize=30,  # Maximum size of the equations
         maxdepth=5,  # Maximum depth of the equations
         binary_operators=["*", "+", "-", "/"],  # Binary operators to be used
-        unary_operators=["square", "cube", "exp", "sin", "cos", "log"],  # Unary operators to be used
+        unary_operators=["square", "cube", "exp", "log"],  # Unary operators to be used
+        #unary_operators=["square", "cube", "exp", "sin", "cos", "log"],
         nested_constraints={
             "square": {"square": 1, "cube": 0, "exp": 0},
             "cube": {"square": 1, "cube": 0, "exp": 0},

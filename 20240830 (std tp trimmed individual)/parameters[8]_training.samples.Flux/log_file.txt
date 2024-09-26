@@ -1,0 +1,3 @@
+parameters[8]_training.samples.Flux: x5**3
+Train MSE: 8.716221009398352e-23
+Test MSE: 3.1125370101078883e-23
