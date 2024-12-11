@@ -6,6 +6,7 @@ from pysr import PySRRegressor
 from sklearn.metrics import mean_squared_error
 import pandas as pd
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import fit_transform
 import tkinter as tk
 from tkinter import messagebox
 
@@ -25,23 +26,25 @@ def runModel(x, y, func_name, directory, stop_count=5):
     # Learn equations using PySR
     model = PySRRegressor(
         procs=4,  # Number of processes
-        populations=16,  # Number of populations in the evolutionary algorithm
-        population_size=250,  # Size of each population
+        populations=32,  # Number of populations in the evolutionary algorithm
+        population_size=500,  # Size of each population
         ncycles_per_iteration=1000,  # Number of cycles per iteration
         niterations=100000,  # Maximum number of iterations
-        complexity_of_constants=4,
+        complexity_of_constants=5,
         parsimony = 0.0001,
         adaptive_parsimony_scaling = 1000,
-        #constraints={
-        #"/": (-1, 9),
-        #"square": 9,
-        #"cube": 9,
-        #"exp": 9,
-        #},
+        constraints={
+        "/": (-1, 9),
+        "^": (-1, 1),
+        "square": 9,
+        "cube": 9,
+        "exp": 9,
+        },
         early_stop_condition=("stop_if(loss,complexity) = loss < 1e-23 && complexity < 15"),  # Early stopping condition
         timeout_in_seconds=60*45,  # Timeout in seconds
-        maxsize=30,  # Maximum size of the equations
+        maxsize=40,  # Maximum size of the equations
         maxdepth=5,  # Maximum depth of the equations
+        #binary_operators=["*", "+", "-", "/","^"],
         binary_operators=["*", "+", "-", "/","^"],  # Binary operators to be used
         unary_operators=["exp"],  # Unary operators to be used
         #nested_constraints={
@@ -49,16 +52,16 @@ def runModel(x, y, func_name, directory, stop_count=5):
         #    "cube": {"square": 1, "cube": 0, "exp": 0},
         #    "exp": {"square": 1, "cube": 1, "exp": 0},
         #},  # Constraints on nesting unary operators
-        #select_k_features=0,  # Number of features to be selected
+        #select_k_features=4,  # Number of features to be selected
         progress=False,  # Show progress
-        #weight_randomize=2,  # Randomization weight
-        #weight_add_node=2,
+        weight_randomize=100,  # Randomization weight
+        weight_add_node=2,
         weight_optimize=0.001,
         precision=64,  # Precision of the calculations
         warm_start=False,  # Use the previous model as a warm start
         turbo=False,  # Use turbo mode for faster computations
-        denoise=False,  # Denoiser (Gaussian white noise kernel)
-        model_selection="best",  # Save the best equations
+        denoise=True,  # Denoiser (Gaussian white noise kernel)
+        model_selection="accuracy",  # Save the best equations
     )
 
     start_time = datetime.now()
@@ -150,5 +153,6 @@ def process_all_datasets(base_directory):
         runModel(x, y, func_name, dataset_dir)
 
 
-base_directory = "C:/Users/brand/Documents/Python Scripts/pysr_code/datasets/Sept_20_Cumulative"
+#base_directory = "C:/Users/brand/Documents/Python Scripts/pysr_code/datasets/RBFs-oos-(0,1,500)"
+base_directory = 'C:/Users/brand/Desktop/Raj-Sindi/training_data/sim_csv_v6'
 process_all_datasets(base_directory)

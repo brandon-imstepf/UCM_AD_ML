@@ -1,0 +1,3 @@
+Nguyen_F9_RandSample_oos: (sin(x0) + sin(x1*x1))*cos(0.0046945127623687745)
+Train MSE: 7.756750709423678e-11
+Test MSE: 9.481539362167718e-11

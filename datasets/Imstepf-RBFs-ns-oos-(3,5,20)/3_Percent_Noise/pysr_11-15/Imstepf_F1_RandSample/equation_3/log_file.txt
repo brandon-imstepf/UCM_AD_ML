@@ -1,0 +1,3 @@
+Imstepf_F1_RandSample: x0 + x1 + x2 + x3 + x4
+Train MSE: 2.3665827156630354e-30
+Test MSE: 3.1554436208840472e-30

@@ -1,0 +1,3 @@
+Nguyen_F9_LHS_oos: (sin(x0) + sin(x1*x1))*cos(0.004430059896359908)
+Train MSE: 6.354247712345083e-11
+Test MSE: 8.457246448880988e-11

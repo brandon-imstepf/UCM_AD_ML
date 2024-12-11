@@ -7,7 +7,8 @@ from pyDOE import lhs
 # Booleans for controlling functionality
 testtrain = False  # Control whether to split into train/test
 noise = False      # Control whether to add noise
-out_of_sample = True  # Generate out-of-sample data
+noise_set = False # Cotrol whether to create a bevvy of datasets with different levels of additive noise
+out_of_sample = False  # Generate out-of-sample data
 small_sample = False  # Generate smaller sample size
 
 # Booleans for sampling methods
@@ -16,9 +17,9 @@ use_uniform = True
 use_randsample = True
 
 # Parameters for sampling
-a = 0
-b = -100
-c = 100  # number of samples, can be adjusted
+a = 1
+b = 2
+c = 20  # number of samples, can be adjusted
 abc = f"({a},{b},{c})"
       
 
@@ -29,6 +30,7 @@ basedir = 'C:/Users/brand/Documents/Python Scripts/pysr_code'
 options = []
 if testtrain: options.append('tt')
 if noise: options.append('n')
+if noise_set: options.append('ns')
 if out_of_sample: options.append('oos')
 if small_sample: options.append('ss')
 options.append(abc)
@@ -38,7 +40,7 @@ directory = os.path.join(basedir, directory_name)
 os.makedirs(directory, exist_ok=True)
 
 # Import functions from the module
-from regression_benchmark_functions import Imstepf_funcs
+from regression_benchmark_functions import Nguyen_funcs
 
 # Function to generate inputs using LHS
 def generate_lhs_inputs(num_vars, num_samples=c):
@@ -114,11 +116,11 @@ log_data = []
 
 # Process the functions for each sampling method if the corresponding boolean is True
 if use_lhs:
-    log_data += process_functions(Imstepf_funcs, "Imstepf", directory, 'lhs', 'LHS')
+    log_data += process_functions(Nguyen_funcs, "Nguyen", directory, 'lhs', 'LHS')
 if use_uniform:
-    log_data += process_functions(Imstepf_funcs, "Imstepf", directory, 'uniform', 'Uniform')
+    log_data += process_functions(Nguyen_funcs, "Nguyen", directory, 'uniform', 'Uniform')
 if use_randsample:
-    log_data += process_functions(Imstepf_funcs, "Imstepf", directory, 'randsample', 'RandSample')
+    log_data += process_functions(Nguyen_funcs, "Nguyen", directory, 'randsample', 'RandSample')
 
 # Write boolean settings and generated datasets information to the log file
 log_file_path = os.path.join(directory, "dataset_info.txt")

@@ -1,0 +1,3 @@
+Imstepf_F4_RandSample: sin(x0) - cos(x4)*cos(x3 + 1.5708155138952733) + cos(x1*x2)
+Train MSE: 4.574677322188476e-10
+Test MSE: 7.869510289231288e-10

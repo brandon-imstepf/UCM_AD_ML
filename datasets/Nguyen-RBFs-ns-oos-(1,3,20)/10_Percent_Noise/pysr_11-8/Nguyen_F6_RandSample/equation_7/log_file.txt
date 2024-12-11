@@ -1,0 +1,3 @@
+Nguyen_F6_RandSample: sin(x0) + sin(x0*(x0 - 1*(-0.9999986682021857)))
+Train MSE: 2.7637985708765487e-12
+Test MSE: 4.051222151299541e-12

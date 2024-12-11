@@ -1,0 +1,3 @@
+Nguyen_F1_Uniform: x0*(x0 + x0*x0) + x0
+Train MSE: 0.006370155638052504
+Test MSE: 0.011385273608723856

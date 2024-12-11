@@ -1,0 +1,3 @@
+Nguyen_F5_RandSample: sin(x0*x0)*cos(x0) - 0.9999991668459441
+Train MSE: 6.941456807910421e-13
+Test MSE: 6.941456816004055e-13

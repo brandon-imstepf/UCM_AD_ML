@@ -1,0 +1,3 @@
+Imstepf_F1_Uniform: x0 + x1 + x1 + x4 + x4
+Train MSE: 7.099748146989106e-30
+Test MSE: 6.310887241768095e-30

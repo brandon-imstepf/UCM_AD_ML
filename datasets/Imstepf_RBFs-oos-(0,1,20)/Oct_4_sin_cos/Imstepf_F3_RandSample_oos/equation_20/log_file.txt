@@ -1,0 +1,3 @@
+Imstepf_F3_RandSample_oos: x1*(x0 + 0.10156008699415056)*(x1 + x1**x4) + x2*x2 + x3*x3 + x4*x4
+Train MSE: 0.004131618028619219
+Test MSE: 0.0688641072291262

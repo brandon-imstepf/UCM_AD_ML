@@ -17,11 +17,12 @@ Nguyen_funcs = [Nguyen_F1, Nguyen_F2, Nguyen_F3, Nguyen_F4, Nguyen_F5,
                 Nguyen_F6, Nguyen_F7, Nguyen_F8, Nguyen_F9, Nguyen_F10]
 
 # Define Imstepf functions
-def Imstepf_1(x0,x1,x2,x3,x4): return x0 + x1 + x2 + x3 + x4
-def Imstepf_2(x0,x1,x2,x3,x4): return x0*x1*x2*x3*x4
-def Imstepf_3(x0,x1,x2,x3,x4): return x0 + x1**2 + x2**3 + x3**4 + x4**5
+def Imstepf_F1(x0,x1,x2,x3,x4): return x0 + x1 + x2 + x3 + x4
+def Imstepf_F2(x0,x1,x2,x3,x4): return x0*x1*x2*x3*x4
+def Imstepf_F3(x0,x1,x2,x3,x4): return x0 + x1**2 + x2**3 + x3**4 + x4**5
+def Imstepf_F4(x0,x1,x2,x3,x4): return np.sin(x0) + np.cos(x1*x2) + np.sin(x3)*np.cos(x4)
 
-Imstepf_funcs = [Imstepf_1, Imstepf_2, Imstepf_3]
+Imstepf_funcs = [Imstepf_F1, Imstepf_F2, Imstepf_F3, Imstepf_F4]
 
 # Define Korns functions
 def Korns_1(X3): return 1.57 + (24.3 * X3)
