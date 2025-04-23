@@ -1,0 +1,10 @@
+complexity,loss,score,equation,sympy_format,lambda_format
+1,0.006248816,0.0,x0,x0,PySRFunction(X=>x0)
+7,0.0045006857,0.05469370714275824,x0 / sin(exp(x0) - x0),x0/sin(-x0 + exp(x0)),PySRFunction(X=>x0/sin(-x0 + exp(x0)))
+9,0.0044481643,0.005869134365002601,sin(sin(sin(x0))) / cos(cos(exp(x0))),sin(sin(sin(x0)))/cos(cos(exp(x0))),PySRFunction(X=>sin(sin(sin(x0)))/cos(cos(exp(x0))))
+12,0.0039429525,0.04018722868592655,x0 - (cos(x0 + x0) * 0.079308815),x0 - 0.079308815*cos(x0 + x0),PySRFunction(X=>x0 - 0.079308815*cos(x0 + x0))
+13,0.00070845976,1.7165918256702997,sin(sin(x0)) / cos(sin(x0 / -0.005519504)),sin(sin(x0))/cos(sin(x0/(-0.005519504))),PySRFunction(X=>sin(sin(x0))/cos(sin(x0/(-0.005519504))))
+14,0.00031568683,0.8083425835957802,sin(sin(sin(x0))) / cos(sin(x0 / -0.027054528)),sin(sin(sin(x0)))/cos(sin(x0/(-0.027054528))),PySRFunction(X=>sin(sin(sin(x0)))/cos(sin(x0/(-0.027054528))))
+18,0.00030129502,0.011665190062845531,((x0 * -0.038360745) / sin(x0 / 0.29728362)) + x0,x0 + x0*(-0.038360745)/sin(x0/0.29728362),PySRFunction(X=>x0 + x0*(-0.038360745)/sin(x0/0.29728362))
+19,0.00015695486,0.6521316695385136,sin(sin(x0) * 0.841753) / cos(sin(-1.9902078 / x0)),sin(sin(x0)*0.841753)/cos(sin(-1.9902078/x0)),PySRFunction(X=>sin(sin(x0)*0.841753)/cos(sin(-1.9902078/x0)))
+25,3.306478e-05,0.2595815967567984,(sin(x0 * 1.0603956) * sin(0.844105)) / cos(sin(-2.001304 / x0)),sin(0.844105)*sin(x0*1.0603956)/cos(sin(-2.001304/x0)),PySRFunction(X=>sin(0.844105)*sin(x0*1.0603956)/cos(sin(-2.001304/x0)))

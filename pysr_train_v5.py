@@ -6,67 +6,67 @@ from pysr import PySRRegressor
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import PowerTransformer, StandardScaler
+from sklearn.metrics import r2_score
 import tkinter as tk
 from tkinter import messagebox
-from stat_plots import (
-    scale_data_ZScore, 
-    find_csv,
-    read_hof_csv,
-    plot_complexity_vs_error,
-    plot_complexity_vs_error_loglog,
-    plot_complexity_vs_loss,
-    plot_complexity_vs_loss_loglog,
-    Do_LinearRegression,
-    Do_PolynomialRegression,
-    plot_residual_kde,
-    scatter_residuals_vs_true,
-    heatmap_feature_target,
-    scatter_predictions_vs_true,
-    heatmap_residuals,
-    pairplot_residuals_colored,
-    time_series_predictions_vs_true,
-    binned_residuals_analysis,
-    parallel_coordinates_residuals,
-    pca_residuals_visualization,
-    combined_predictions_vs_true_and_residuals
-)
-from calculate_errors import calculate_mse, calculate_nmse, calculate_mse_nmse
+from stat_plots import *
+from calculate_errors import *
 
 # MATPLOTLIB FONT SETTINGS #
 from matplotlib.font_manager import FontProperties
 font_prop = FontProperties(size=26, family='serif', style='normal')
 plt.rcParams['font.family'] = 'serif'
-plt.rcParams.update({'font.size': 14})
+plt.rcParams.update({
+    'font.size': 14,
+    'lines.color': 'orange',
+    'scatter.edgecolors': '#1F77B4'
+})
+# ------------------------ #
 
 
 ''' // For v5 // 
 Need to:
-    - Implement Polynomial Regression ?
-    - Implement Linear Regression ? 
-    - Move holdout validation dataset comparison from inside RunModel to passing through RunModel
     - Improve data visualization
+        - Add true vs predicted plots ( x = y )
+    - Record mean, SD for z-score transformation
+    - add RMSE +
+    - add R^2 +
+        -  sklearn.metrics.r2_score(y_true, y_pred, *, sample_weight=None, multioutput='uniform_average', force_finite=True)
+    - Colors:
+        lin_color = 'orange'
+        joint_color = '#1F77B4'
 '''
 
-
+base_directory = 'C:/Users/brand/Desktop/Raj-Sindi/training_data/sim_csv_v9_fixed'
+dataset_name = 'data_frac_07_widerange.csv'
 
 def runModel(x, y, func_name, directory,validation_dataset):
     # Change the working directory to the target directory
     os.chdir(directory)
 
-    # scale data to make it easier
-    x, y = scale_data_ZScore(x, y)
+    scale_boolean = True
+    troubleshooting_boolean = False
+
+
+    if scale_boolean:
+        # scale data to make it easier
+        #x, y = scale_data_ZScore(x, y)
+        x,y,PredScaleFit,TargetScaleFit = scale_data_Nuttii(x,y)
+
 
     # Split data into training and testing sets (80/20 split)
-    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
 
     x_validate = validation_dataset.iloc[:, :-1].values
     y_validate = validation_dataset.iloc[:, -1].values.reshape(-1, 1)
     feature_columns = validation_dataset.columns[:-1]  # All columns except the last (features)
     target_column = validation_dataset.columns[-1]     # The last column (target)
 
-    # Ensure scaling consistency
-    x_validate, y_validate = scale_data_ZScore(x_validate, y_validate)
-
+    if scale_boolean:
+        # Ensure scaling consistency
+        #x_validate, y_validate = scale_data_ZScore(x_validate, y_validate)
+        x_validate, y_validate, PredScaleFit_validate,TargetScaleFit_validate = scale_data_Nuttii(x_validate,y_validate)
+    
     # Learn equations using PySR
     model = PySRRegressor(
         procs=4,  # Number of processes
@@ -74,7 +74,7 @@ def runModel(x, y, func_name, directory,validation_dataset):
         population_size=500,  # Size of each population
         ncycles_per_iteration=10000,  # Number of cycles per iteration
         niterations=100000,  # Maximum number of iterations
-        complexity_of_constants=4,
+        complexity_of_constants=5,
         #parsimony = 0.01,
         #adaptive_parsimony_scaling = 1000,
          constraints={
@@ -84,9 +84,9 @@ def runModel(x, y, func_name, directory,validation_dataset):
          "cube": 9,
          "exp": 9,
          },
-        #early_stop_condition=("stop_if(loss,complexity) = loss < 1e-5 && complexity < 20 || loss < 1e-9"),  # Early stopping condition
-        timeout_in_seconds=60*1,  # Timeout in seconds
-        maxsize=35,  # Maximum size of the equations
+        early_stop_condition=("stop_if(loss,complexity) = loss < 1e-5 && complexity < 20 || loss < 1e-9"),  # Early stopping condition
+        timeout_in_seconds=60*5,  # Timeout in seconds/minutes/hours
+        maxsize=50,  # Maximum size of the equations
         maxdepth=5,  # Maximum depth of the equations
         binary_operators=["*", "+", "-", "/","^"],  # Binary operators to be used
         unary_operators=["sin","cos","exp","log"],  # Unary operators to be used
@@ -108,6 +108,7 @@ def runModel(x, y, func_name, directory,validation_dataset):
     )
 
     start_time = datetime.now()
+
     model.fit(x_train, y_train)
 
     # Select the best equation based on score and loss
@@ -118,7 +119,7 @@ def runModel(x, y, func_name, directory,validation_dataset):
     # Prepare directory for saving results
     equation_dir = os.path.join(directory, "Info")
     os.makedirs(equation_dir, exist_ok=True)
-
+    
     # for BEST equation #
     best_eq = model.sympy(best_idx)
     best_y_train_pred = model.predict(x_train, index=best_idx)
@@ -138,28 +139,17 @@ def runModel(x, y, func_name, directory,validation_dataset):
         file.write(f"Train NMSE: {best_nmse_train}\n")
         file.write(f"Test MSE: {best_mse_test}\n")
         file.write(f"Test NMSE: {best_nmse_test}\n")
-        file.write("***************************************************************")
+        file.write("***************************************************************\n")
         file.write(f"Train Residuals: {best_residuals_train}\n")
-        file.write("***************************************************************")
+        file.write("***************************************************************\n")
         file.write(f"Test Residuals: {best_residuals_test}\n")
-        file.write("***************************************************************")
+        file.write("***************************************************************\n")
     # ----------------------------------------------------------- #
+    
+
     # Additional troubleshooting file
     model.equations_.to_csv(os.path.join(equation_dir, "model_equations.csv"), index=False)
 
-    '''
-    ## Now need to do holdout validation set. Test against each of the functions.
-    # Option A) Use another dataset as validation #
-    validation_path = 'C:/Users/brand/Desktop/Raj-Sindi/training_data/sim_csv_v6/12-6/validate/'
-    validation_dataset = pd.read_csv(validation_path + "1000_SingleEdgeOutput_2024-11-11_12-08-35.csv")
-    x_validate = validation_dataset.iloc[:, :-1].values
-    y_validate = validation_dataset.iloc[:, -1].values.reshape(-1, 1)
-    # also, get column names from validation (validation & original should have the same)
-    feature_columns = validation_dataset.columns[:-1]  # All columns except the last (features)
-    target_column = validation_dataset.columns[-1]     # The last column (target)
-    # Ensure scaling consistency
-    #x_validate, y_validate = scale_data_ZScore(x_validate, y_validate)
-    '''
     # Initialize lists to store all log values
     y_validation_pred_list = []
     y_train_pred_list = []
@@ -171,38 +161,65 @@ def runModel(x, y, func_name, directory,validation_dataset):
     mse_validation_list = []
     nmse_validation_list = []
     residuals_validation_list = []
+    r2_train_list, r2_test_list, r2_validate_list = [],[],[]       
+
+    # Inverse Transform the targets
+    if scale_boolean:
+        y_train = TargetScaleFit.inverse_transform(y_train)
+        y_test = TargetScaleFit.inverse_transform(y_test)
+        y_validate = TargetScaleFit_validate.inverse_transform(y_validate)
 
     for equation_idx in model.equations_.index:
         y_train_pred = model.predict(x_train, index=equation_idx)
         y_test_pred = model.predict(x_test, index=equation_idx)
+        y_validation_pred = model.predict(x_validate, index=equation_idx)
+        
+        if scale_boolean:
+            print(f'The shape of y_train_pred before reshaping is: {np.shape(y_train_pred)}') # should be (800,)
+            print(f'The shape of y_test_pred before reshaping is: {np.shape(y_test_pred)}') # should be (200,)
+            print(f'The shape of y_validation_pred before reshaping is: {np.shape(y_validation_pred)}') # should be (1000,)
+            y_train_pred = y_train_pred.reshape(-1, 1)  # should be (800,)
+            #print(f'The shape of y_train_pred AFTER reshaping is: {np.shape(y_train_pred)}')
+            # inverse_trasnform NEEDS to be 2D, it cannot be 1D.
+            y_train_pred = TargetScaleFit.inverse_transform(y_train_pred).flatten()  # should be (800,1)
+            print(f'The shape of y_train_pred before reshaping the transformation is: {np.shape(y_train_pred)}')
+            
+            y_test_pred = y_test_pred.reshape(-1, 1)  # should be (200,)
+            #print(f'The shape of y_test_pred AFTER reshaping is: {np.shape(y_test_pred)}')
+            y_test_pred = TargetScaleFit.inverse_transform(y_test_pred).flatten()  # should be (200,)
+
+            y_validation_pred = y_validation_pred.reshape(-1, 1)  # should be (1000,)
+            #print(f'The shape of y_validation_pred AFTER reshaping is: {np.shape(y_validation_pred)}')
+            y_validation_pred = TargetScaleFit_validate.inverse_transform(y_validation_pred).flatten()  # should be (1000,)
 
         mse_train, nmse_train = calculate_mse_nmse(y_train, y_train_pred)
         mse_test, nmse_test = calculate_mse_nmse(y_test, y_test_pred)
+        mse_validation, nmse_validation = calculate_mse_nmse(y_validate, y_validation_pred)
 
         residuals_train = np.abs(y_train.flatten() - y_train_pred)
         residuals_test = np.abs(y_test.flatten() - y_test_pred)
+        residuals_validation = np.abs(y_validate.flatten() - y_validation_pred)  
+
+        r2_train = r2_score(y_train, y_train_pred)
+        r2_test = r2_score(y_test, y_test_pred)
+        r2_validate = r2_score(y_validate, y_validation_pred)      
 
 
-        # Validation part
-        y_validation_pred = model.predict(x_validate, index=equation_idx)
-        # Calculate metrics
-        mse_validation, nmse_validation = calculate_mse_nmse(y_validate, y_validation_pred)
-        residuals_validation = np.abs(y_validate.flatten() - y_validation_pred)
-
-        print(f"This is the output from equation {equation_idx}")
-        print(f"The shape of y_train_pred is: {np.shape(y_train_pred)}")
-        print(f"The shape of mse_train is: {np.shape(mse_train)}")
-        print(f"The shape of nmse_train is: {np.shape(nmse_train)}")
-        print(f"The shape of residuals_train is: {np.shape(residuals_train)}")
-        print(f"The shape of y_test_pred is: {np.shape(y_test_pred)}")
-        print(f"The shape of mse_test is: {np.shape(mse_test)}")
-        print(f"The shape of nmse_test is: {np.shape(nmse_test)}")
-        print(f"The shape of residuals_test is: {np.shape(residuals_test)}")
-        print(f"The shape of y_validation_pred is: {np.shape(y_validation_pred)}")
-        print(f"The shape of mse_validation is: {np.shape(mse_validation)}")
-        print(f"The shape of nmse_validation is: {np.shape(nmse_validation)}")
-        print(f"The shape of residuals_validations is: {np.shape(residuals_validation)}")
-        print("***********************************************")
+        if troubleshooting_boolean:
+            print(f"This is the output from equation {equation_idx}")
+            print(f"The shape of y_train_pred is: {np.shape(y_train_pred)}")
+            print(f"The shape of mse_train is: {np.shape(mse_train)}")
+            print(f"The shape of nmse_train is: {np.shape(nmse_train)}")
+            print(f"The shape of residuals_train is: {np.shape(residuals_train)}")
+            print(f"The shape of y_test_pred is: {np.shape(y_test_pred)}")
+            print(f"The shape of mse_test is: {np.shape(mse_test)}")
+            print(f"The shape of nmse_test is: {np.shape(nmse_test)}")
+            print(f"The shape of residuals_test is: {np.shape(residuals_test)}")
+            print(f"The shape of y_validation_pred is: {np.shape(y_validation_pred)}")
+            print(f"The shape of mse_validation is: {np.shape(mse_validation)}")
+            print(f"The shape of nmse_validation is: {np.shape(nmse_validation)}")
+            print(f"The shape of residuals_validations is: {np.shape(residuals_validation)}")
+            print("***********************************************")
         
         # Append metrics to the respective lists
 
@@ -218,10 +235,16 @@ def runModel(x, y, func_name, directory,validation_dataset):
         mse_validation_list.append(mse_validation)
         nmse_validation_list.append(nmse_validation)
         residuals_validation_list.append(residuals_validation)
+        r2_train_list.append(r2_train)
+        r2_test_list.append(r2_test)
+        r2_validate_list.append(r2_validate)
 
     # ----------------------------------------------------------- #
 
 
+    print("***********************************************")
+    print("***********************************************")
+    print("***********************************************")
     print("This is the ouput of the shapes of the lists: ")
     print(f"The shape of y_train_pred_list is: {np.shape(y_train_pred_list)}")
     print(f"The shape of mse_train_list is: {np.shape(mse_train_list)}")
@@ -269,19 +292,24 @@ def runModel(x, y, func_name, directory,validation_dataset):
         'Model': [f'Model_{i+1}' for i in range(len(mse_train_list))],
         'MSE_Train': mse_train_list,
         'NMSE_Train': nmse_train_list,
+        'R2_Train' : r2_train_list,
     })
 
     test_datalog_secondary = pd.DataFrame({
         'Model': [f'Model_{i+1}' for i in range(len(mse_test_list))],
         'MSE_Test': mse_test_list,
         'NMSE_Test': nmse_test_list,
+        'R2_Test': r2_test_list,
     })
 
     validation_datalog_secondary = pd.DataFrame({
         'Model': [f'Model_{i+1}' for i in range(len(mse_validation_list))],
         'MSE_Validation': mse_validation_list,
         'NMSE_Validation': nmse_validation_list,
+        'R2_Validation': r2_validate_list,
     })
+
+
     # --------------------------------------- #
     # Write datalogs to CSV #
     train_datalog_primary.to_csv(os.path.join(equation_dir, "train_datalog_primary.csv"), index=False)
@@ -290,11 +318,53 @@ def runModel(x, y, func_name, directory,validation_dataset):
     train_datalog_secondary.to_csv(os.path.join(equation_dir, "train_datalog_secondary.csv"), index=False)
     test_datalog_secondary.to_csv(os.path.join(equation_dir, "test_datalog_secondary.csv"), index=False)
     validation_datalog_secondary.to_csv(os.path.join(equation_dir, "validation_datalog_secondary.csv"), index=False)
+    # Raw datalogs for debugging or further augmentation
+    raw_directory = os.path.join(equation_dir, "Raw Data")
+    os.makedirs(raw_directory, exist_ok=True)
+
+    y_validation_pred_list_df = pd.DataFrame(y_validation_pred_list)
+    y_validation_pred_list_df.to_csv(os.path.join(raw_directory, "y_validation_pred_list.csv"), index=False)
+
+    y_train_pred_list_df = pd.DataFrame(y_train_pred_list)
+    y_train_pred_list_df.to_csv(os.path.join(raw_directory, "y_train_pred_list.csv"), index=False)
+
+    y_test_pred_list_df = pd.DataFrame(y_test_pred_list)
+    y_test_pred_list_df.to_csv(os.path.join(raw_directory, "y_test_pred_list.csv"), index=False)
+
+    mse_train_list_df = pd.DataFrame(mse_train_list)
+    mse_train_list_df.to_csv(os.path.join(raw_directory, "mse_train_list.csv"), index=False)
+
+    nmse_train_list_df = pd.DataFrame(nmse_train_list)
+    nmse_train_list_df.to_csv(os.path.join(raw_directory, "nmse_train_list.csv"), index=False)
+
+    mse_test_list_df = pd.DataFrame(mse_test_list)
+    mse_test_list_df.to_csv(os.path.join(raw_directory, "mse_test_list.csv"), index=False)
+
+    nmse_test_list_df = pd.DataFrame(nmse_test_list)
+    nmse_test_list_df.to_csv(os.path.join(raw_directory, "nmse_test_list.csv"), index=False)
+
+    residuals_train_list_df = pd.DataFrame(residuals_train_list)
+    residuals_train_list_df.to_csv(os.path.join(raw_directory, "residuals_train_list.csv"), index=False)
+
+    residuals_test_list_df = pd.DataFrame(residuals_test_list)
+    residuals_test_list_df.to_csv(os.path.join(raw_directory, "residuals_test_list.csv"), index=False)
+
+    mse_validation_list_df = pd.DataFrame(mse_validation_list)
+    mse_validation_list_df.to_csv(os.path.join(raw_directory, "mse_validation_list.csv"), index=False)
+
+    nmse_validation_list_df = pd.DataFrame(nmse_validation_list)
+    nmse_validation_list_df.to_csv(os.path.join(raw_directory, "nmse_validation_list.csv"), index=False)
+
+    residuals_validation_list_df = pd.DataFrame(residuals_validation_list)
+    residuals_validation_list_df.to_csv(os.path.join(raw_directory, "residuals_validation_list.csv"), index=False)
+
+
     # --------------------------------------- #
 
     # Now to do stuff with the datalog ... #
     print("\n *********************************************** \n STARTING VISUALIZATIONS \n ***********************************************")
     visualization_dir = os.path.join(equation_dir, "Visualizations")
+    os.makedirs(visualization_dir, exist_ok=True)
     # Main Graphs #
     plot_complexity_vs_error(model.equations_['complexity'], nmse_train_list, nmse_validation_list, save_path=visualization_dir, best=best_idx)
     plot_complexity_vs_error_loglog(model.equations_['complexity'], nmse_train_list, nmse_validation_list, save_path=visualization_dir,best=best_idx)
@@ -302,22 +372,26 @@ def runModel(x, y, func_name, directory,validation_dataset):
     # Training Graphs #
     training_dir = os.path.join(visualization_dir, "Training")
     plot_residual_kde(residuals_train_list, output_dir=training_dir)
-    # NEED TO FIX THE SCATTEER FUNCTIONS TO WORK MORE DYNAMICALLY!
-    scatter_residuals_vs_true(residuals_train_list, y_train, output_dir=testing_dir)
-    pca_residuals_visualization(train_datalog_primary, feature_columns, output_dir=testing_dir)
-    #scatter_predictions_vs_true(train_datalog_primary, output_dir=training_dir)
+    scatter_residuals_vs_true(residuals_train_list, y_train, output_dir=training_dir)
+    scatter_best_residuals_vs_true(residuals_train_list, y_train, best=best_idx, output_dir=training_dir)
+    #pca_residuals_visualization(train_datalog_primary, feature_columns, output_dir=training_dir)
+    #parallel_coordinates_residuals(train_datalog_primary, feature_columns, output_dir=training_dir)
     # --------------------------------------- #
     # Testing Graphs #
     testing_dir = os.path.join(visualization_dir, "Testing")
     plot_residual_kde(residuals_test_list, output_dir=testing_dir)
     scatter_residuals_vs_true(residuals_test_list, y_test, output_dir=testing_dir)
-    #scatter_predictions_vs_true(test_datalog_primary, output_dir=testing_dir)
+    scatter_best_residuals_vs_true(residuals_test_list, y_test, best=best_idx, output_dir=testing_dir)
+    #pca_residuals_visualization(test_datalog_primary, feature_columns, output_dir=testing_dir)
+    #parallel_coordinates_residuals(test_datalog_primary, feature_columns, output_dir=testing_dir)
     # --------------------------------------- #
     # Validation Graphs #
     validation_dir = os.path.join(visualization_dir, "Validation")
     plot_residual_kde(residuals_validation_list, output_dir=validation_dir)
-    scatter_residuals_vs_true(residuals_validation_list, y_validate, output_dir=testing_dir)
-    #scatter_predictions_vs_true(validation_datalog_primary, output_dir=validation_dir)
+    scatter_residuals_vs_true(residuals_validation_list, y_validate, output_dir=validation_dir)
+    scatter_best_residuals_vs_true(residuals_validation_list, y_validate, best=best_idx, output_dir=validation_dir)
+    #pca_residuals_visualization(validation_datalog_primary, feature_columns, output_dir=validation_dir)
+    #parallel_coordinates_residuals(validation_datalog_primary, feature_columns, output_dir=validation_dir)
     # --------------------------------------- #
     print("\n *********************************************** \n FINISHED VISUALIZATIONS \n ***********************************************")
     
@@ -385,7 +459,8 @@ def process_all_datasets(base_directory):
     base_directory: The directory containing the datasets.
     """
     csv_files = [f for f in os.listdir(base_directory) if f.endswith('.csv')]
-
+    validation_files = [f for f in os.listdir(base_directory + '/validation/') if f.endswith('.csv')]
+    validation_set = pd.read_csv('')
     for file in csv_files:
         if file.endswith(".csv") and not file.endswith("_oos.csv"):
             df = pd.read_csv(os.path.join(base_directory, file))
@@ -398,7 +473,7 @@ def process_all_datasets(base_directory):
             os.makedirs(dataset_dir, exist_ok=True)
 
             # Run the model on the dataset
-            runModel(x, y, func_name, dataset_dir)
+            runModel(x, y, func_name, dataset_dir,validation_set)
 
 def process_large_dataset(base_directory, dataset, sample_size):
     '''
@@ -420,16 +495,20 @@ def process_large_dataset(base_directory, dataset, sample_size):
         raise ValueError(f"Sample size {sample_size} is larger than the number of rows in the DataFrame ({len(df)})")
 
 
-    # Randomly take X rows for test/train + validation
-    np.random.seed(0) # for reproducibility
+    # randomly take X rows for test/train + validation
+    np.random.seed(42) # for reproducibility
     random_indices = np.random.choice(df.index, size=sample_size*2, replace=False)
     train_test_indices = random_indices[:sample_size]
     validation_indices = random_indices[sample_size:]
     train_test_set = df.loc[train_test_indices]
     validation_set = df.loc[validation_indices]
 
+
+
     x = train_test_set.iloc[:, :-1].values
     y = train_test_set.iloc[:, -1].values.reshape(-1, 1)
+
+
 
     feature_columns = df.columns[:-1]  # All columns except the last (features)
     target_column = df.columns[-1] # Last column (target)
@@ -445,13 +524,34 @@ def process_large_dataset(base_directory, dataset, sample_size):
 
     runModel(x, y, func_name, dataset_dir, validation_set)
 
-#base_directory = "C:/Users/brand/Documents/Python Scripts/pysr_code/datasets/Nguyen-RBFs-ns-oos-(1,3,20)"
-base_directory = 'C:/Users/brand/Desktop/Raj-Sindi/training_data/sim_csv_v6/12-9'
-#dataset_name = '1000_SingleEdgeOutput_2024-11-11_11-04-22.csv'
-#process_large_dataset(base_directory,dataset_name,1000)
+
+# Batch
+batch_boolean = False
+
+if batch_boolean:
+    #base_directory = "C:/Users/brand/Documents/Python Scripts/pysr_code/datasets/Nguyen-RBFs-ns-oos-(1,3,20)"dso_paper_datasets
+    base_directory = "C:/Users/brand/Documents/Python Scripts/pysr_code/datasets/Nguyen-RBFs-n-ns-(1,100,1000)"
+    #process_all_datasets(base_directory)
+
+    noise_folders = [f for f in os.listdir(base_directory) if f.endswith('Noise')]
+    for folder in noise_folders:
+        location = base_directory + '/' + folder
+        csv_files = [f for f in os.listdir(location) if f.endswith('.csv')]
+        for file in csv_files:
+            print(f'folder: {folder}')
+            print(f'file: {file}')
+            process_large_dataset(location,file,100)
+
+# Single
+process_large_dataset(base_directory,dataset_name,1000)
+
+os.chdir(base_directory)
+
+
 #process_all_datasets(base_directory)
 #os.chdir(base_directory)
 
+'''
 csv_files = [f for f in os.listdir(base_directory) if f.endswith('.csv')]
 
 for file in csv_files:
@@ -459,6 +559,8 @@ for file in csv_files:
         process_large_dataset(base_directory,file,1000)
 
 os.chdir(base_directory)
+'''
+
 
 '''
 ##################################################

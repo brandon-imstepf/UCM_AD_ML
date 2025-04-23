@@ -1,0 +1,13 @@
+complexity,loss,score,equation,sympy_format,lambda_format
+1,319.31705,0.0,x4,x4,PySRFunction(X=>x4)
+2,93.78061,1.2252263781278783,exp(x4),exp(x4),PySRFunction(X=>exp(x4))
+4,37.536644,0.45782024451942605,exp(x4) * x1,x1*exp(x4),PySRFunction(X=>x1*exp(x4))
+5,14.026516,0.9843680909278447,exp(x4) + exp(x1),exp(x1) + exp(x4),PySRFunction(X=>exp(x1) + exp(x4))
+7,4.3177943,0.589102422548082,exp(x4) + (exp(x1) * x0),x0*exp(x1) + exp(x4),PySRFunction(X=>x0*exp(x1) + exp(x4))
+9,1.3332617,0.5875581735770413,(exp(x4) + (x0 * exp(x1))) - x2,x0*exp(x1) - x2 + exp(x4),PySRFunction(X=>x0*exp(x1) - x2 + exp(x4))
+10,0.29445142,1.5102695930612093,(sin(x2) * exp(x4)) + (exp(x1) * x0),x0*exp(x1) + exp(x4)*sin(x2),PySRFunction(X=>x0*exp(x1) + exp(x4)*sin(x2))
+11,0.06449094,1.51858928311017,x0 + (((x4 + x4) * (x3 + x1)) + x0),x0 + x0 + (x1 + x3)*(x4 + x4),PySRFunction(X=>x0 + x0 + (x1 + x3)*(x4 + x4))
+14,0.008109959,0.6911439787306034,(((x3 + x1) * (x4 + x4)) + (x0 ^ x1)) + log(x4),x0**x1 + 2*x4*(x1 + x3) + log(x4),PySRFunction(X=>x0**x1 + 2*x4*(x1 + x3) + log(x4))
+16,0.0034386143,0.4290121210816506,(((x1 + x3) * (x4 + x4)) + (x0 * x0)) + (sin(x3) / x0),x0*x0 + (x1 + x3)*(x4 + x4) + sin(x3)/x0,PySRFunction(X=>x0*x0 + (x1 + x3)*(x4 + x4) + sin(x3)/x0)
+17,0.000145831,3.1603754324447673,sin(sin(x0) + x0) + (((x4 + x4) * (x3 + x1)) + (x0 * x0)),x0*x0 + (x1 + x3)*(x4 + x4) + sin(x0 + sin(x0)),PySRFunction(X=>x0*x0 + (x1 + x3)*(x4 + x4) + sin(x0 + sin(x0)))
+21,0.00014580993,3.612318757290065e-05,sin(sin(x0) + x0) + (((x4 + x4) * (x3 + x1)) + ((x3 * x0) / (x3 / x0))),x0*x3/((x3/x0)) + (x1 + x3)*(x4 + x4) + sin(x0 + sin(x0)),PySRFunction(X=>x0*x3/((x3/x0)) + (x1 + x3)*(x4 + x4) + sin(x0 + sin(x0)))

@@ -8,14 +8,14 @@ from pyDOE import lhs
 testtrain = False  # Enable train/test splitting if True
 noise = True  # Add noise to the dataset if True
 noise_set = True  # Apply noise to specific datasets if True
-out_of_sample = True  # Generate out-of-sample data if True
+out_of_sample = False  # Generate out-of-sample data if True
 small_sample = False  # Use a small sample size if True
 
 use_lhs = True  # Use Latin Hypercube Sampling
 use_uniform = True  # Use uniform sampling
 use_randsample = True  # Use random sampling
 
-a, b, c = 3, 5, 20  # Domain range [a, b] and sample size c
+a, b, c = 1, 3, 40  # Domain range [a, b] and sample size c
 abc = f"({a},{b},{c})"
 
 noise_levels = [0, 0.01, 0.03, 0.05, 0.1, 0.25, 0.5]  # Different levels of noise
@@ -24,6 +24,7 @@ options = []
 
 # Directory naming conventions
 func_name = "Imstepf"  # Name for function set
+func_input = f"{func_name}_funcs"
 if testtrain: options.append('tt')
 if noise: options.append('n')
 if noise_set: options.append('ns')
@@ -36,7 +37,7 @@ directory = os.path.join(basedir, directory_name)
 os.makedirs(directory, exist_ok=True)
 
 # Import functions from the module
-from regression_benchmark_functions import Imstepf_funcs
+from regression_benchmark_functions import Imstepf_funcs, Nguyen_funcs
 
 # Helper functions
 def generate_lhs_inputs(num_vars, num_samples):
@@ -140,7 +141,7 @@ for sampling_key, method_name in sampling_methods:
     if (sampling_key == 'lhs' and use_lhs) or \
        (sampling_key == 'uniform' and use_uniform) or \
        (sampling_key == 'randsample' and use_randsample):
-        log_data += process_functions(Imstepf_funcs, func_name, directory, sampling_key, method_name, noise_levels)
+        log_data += process_functions(func_input, func_name, directory, sampling_key, method_name, noise_levels)
 
 # Write detailed log information
 log_file_path = os.path.join(directory, "dataset_info.txt")

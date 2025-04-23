@@ -1,49 +1,35 @@
-import pysr
-import sympy
 import numpy as np
 from matplotlib import pyplot as plt
 from pysr import PySRRegressor
 from sklearn.model_selection import train_test_split
+import os
+import pandas as pd
 
-# Sample dataset
-np.random.seed(0)
-N = 3000
-upper_sigma = 5
-X = 2 * np.random.rand(N, 5)
-sigma = np.random.rand(N) * (5 - 0.1) + 0.1
-eps = sigma * np.random.randn(N)
-y = 5 * np.cos(3.5 * X[:, 0]) - 1.3 + eps
+base_directory = r'C:\Users\brand\Desktop\Raj-Sindi\training_data\sim_csv_v10_biased'
 
-plt.scatter(X[:, 0], y, alpha=0.2)
-plt.xlabel("x_0")
-plt.ylabel("y")
+os.chdir(base_directory)
+csv_name = 'data_frac_07_widerange_biased_gamma_k2.csv'
+data = pd.read_csv(csv_name)
 
-weights = 1 / sigma**2
+# Generate histogram of data with rows of 3 subplots
+num_columns = len(data.columns)
+rows = (num_columns + 2) // 3  # Calculate the number of rows needed
+fig, axes = plt.subplots(rows, 3, figsize=(15, 5 * rows))
 
-# Learn equations
-model = PySRRegressor(
-    extra_sympy_mappings={"myloss": lambda x, y, w: w * sympy.Abs(x - y)},  # Custom loss function with weights.
-    niterations=20,
-    populations=20,  # Use more populations
-    binary_operators=["+", "*"],
-    unary_operators=["cos"],
-)
-model.fit(X, y, weights=weights)
+# Flatten axes for easier indexing, handle cases where axes is not a 2D array
+axes = axes.flatten() if rows > 1 else np.array([axes]).flatten()
 
-# Extract the best equation
-best_idx = model.equations_.query(
-    f"loss < {2 * model.equations_.loss.min()}"
-).score.idxmax()
-best_eq = model.sympy(best_idx)
-print("Best Equation:", best_eq)
+for i, column in enumerate(data.columns):
+    ax = axes[i]
+    ax.hist(data[column], bins=30, alpha=0.7)
+    ax.set_title(column)
+    ax.set_xlabel('Value')
+    ax.set_ylabel('Frequency')
 
-# Generate predictions
-y_prediction = model.predict(X, index=best_idx)
+# Hide any unused subplots
+for j in range(len(data.columns), len(axes)):
+    axes[j].axis('off')
 
-# Plot the results
-plt.scatter(X[:, 0], y, alpha=0.2, label="Original Data")
-plt.scatter(X[:, 0], y_prediction, alpha=0.2, label="Predicted Data", color='r')
-plt.xlabel("x_0")
-plt.ylabel("y")
-plt.legend()
+plt.tight_layout()
 plt.show()
+

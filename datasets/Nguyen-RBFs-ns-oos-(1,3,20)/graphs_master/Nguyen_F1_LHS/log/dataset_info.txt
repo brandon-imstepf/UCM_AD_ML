@@ -1,3 +1,0 @@
-Dataset: Nguyen_F1_LHS
-In-sample x shape: (20, 1)
-In-sample y shape: (20,)

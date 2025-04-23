@@ -1,0 +1,5 @@
+Complexity,Loss,Equation
+2,0.5537248,"sin(x0)"
+6,0.5001652,"sin((x0 * x0) + x0)"
+7,0.28158543,"sin(x0 + sin(x0 * x0))"
+9,1.1863137e-8,"sin(x0 + (x0 * x0)) + sin(x0)"

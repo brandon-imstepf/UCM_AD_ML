@@ -1,3 +1,3 @@
-Imstepf_F4_Uniform: sin(x0) - sin(x2 - 1*4.671985143188898)*cos(x1 - 1*4.671990072701689) + cos(x1*x2)
+Imstepf_F4_Uniform: sin(x0) + cos(x1*x2) + sin(x3)*cos(x4)
 Train MSE: 7.077882957883461e-10
 Test MSE: 1.4666991686912625e-09

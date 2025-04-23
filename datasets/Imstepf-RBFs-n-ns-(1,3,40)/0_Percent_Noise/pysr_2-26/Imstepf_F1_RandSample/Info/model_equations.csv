@@ -1,0 +1,10 @@
+complexity,loss,score,equation,sympy_format,lambda_format
+1,55.42273,0.0,x0,x0,PySRFunction(X=>x0)
+2,2.8244133,2.976689136802761,exp(x2),exp(x2),PySRFunction(X=>exp(x2))
+5,1.66568,0.1760224043829672,exp(x2) + sin(x0),exp(x2) + sin(x0),PySRFunction(X=>exp(x2) + sin(x0))
+6,1.3687167,0.1963598629452004,exp(x2) + exp(cos(x1)),exp(x2) + exp(cos(x1)),PySRFunction(X=>exp(x2) + exp(cos(x1)))
+7,0.79952306,0.5376134896167899,exp(x2) - cos(exp(exp(x2))),exp(x2) - cos(exp(exp(x2))),PySRFunction(X=>exp(x2) - cos(exp(exp(x2))))
+9,0.10428335,1.018451830643849,(exp(sin(x3)) * x2) + (x4 + x0),x0 + x2*exp(sin(x3)) + x4,PySRFunction(X=>x0 + x2*exp(sin(x3)) + x4)
+10,0.03831426,1.0012895629461505,(x2 + log(x0)) + ((x4 + x0) + x2),x0 + 2*x2 + x4 + log(x0),PySRFunction(X=>x0 + 2*x2 + x4 + log(x0))
+15,0.0062273378,0.36337464572017036,((x4 + (x3 + x2)) - (log(x1) - x0)) - (cos(x2) - x1),x0 + x1 + x2 + x3 + x4 - log(x1) - cos(x2),PySRFunction(X=>x0 + x1 + x2 + x3 + x4 - log(x1) - cos(x2))
+17,2.2737368e-13,12.01668760327247,(((x2 + x3) + x4) - ((x4 - x4) - x0)) - ((x4 - x4) - x1),x2 + x3 + x4 - (-x0 - x4 + x4) - (-x1 - x4 + x4),PySRFunction(X=>x2 + x3 + x4 - (-x0 - x4 + x4) - (-x1 - x4 + x4))

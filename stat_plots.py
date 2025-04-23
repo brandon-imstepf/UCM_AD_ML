@@ -67,8 +67,8 @@ def scatter_residuals_vs_true(residual_list, trueval_list, output_dir):
     ax = plt.subplot(111)
 
     # Plot each residual column
-    for residual_col in len(residual_list):
-        ax.scatter(residual_list, trueval_list, label=residual_col, alpha=0.6)
+    for idx, residuals in enumerate(residual_list):
+        ax.scatter(trueval_list, residuals, label=f"Model {idx + 1}", alpha=0.6)
 
     # Add a horizontal line at y=0
     ax.axhline(y=0, color="red", linestyle="--", linewidth=1, alpha=0.8)
@@ -247,7 +247,7 @@ def binned_residuals_analysis(datalog, feature_col, residual_col, bins, output_d
 
 # ------------------------------------ #
 # 9. Parallel Coordinates Plot
-def parallel_coordinates_residuals(datalog, output_dir):
+def parallel_coordinates_residuals(datalog, features, output_dir):
     """
     Creates a parallel coordinates plot showing feature relationships and residuals.
 
@@ -260,7 +260,6 @@ def parallel_coordinates_residuals(datalog, output_dir):
     """
     from pandas.plotting import parallel_coordinates
 
-    features = ['gamma1', 'lambda1', 'delta', 'epsilon', 'NRow', 'NCol']
     residual_columns = [col for col in datalog.columns if 'Residuals' in col]
     for residual_col in residual_columns:
         temp_data = datalog[features + [residual_col]].copy()
@@ -276,7 +275,7 @@ def parallel_coordinates_residuals(datalog, output_dir):
 # 10. Dimensionality Reduction (PCA)
 def pca_residuals_visualization(datalog, features, output_dir):
     """
-    Reduces feature dimensions using PCA and visualizes residual magnitudes in 2D.
+    Reduces feature dimensions using Principal Component Analysis (PCA) and visualizes residual magnitudes in 2D.
 
     Parameters:
         datalog (pd.DataFrame): Primary datalog containing features and residuals.
@@ -352,6 +351,19 @@ def Do_LinearRegression(x,y):
       
 def Do_PolynomialRegression():
     print("PolynomialRegression")
+
+def scale_data_Nuttii(X,y):
+    # Standard Scaler
+    PredictorScaler = StandardScaler()
+    TargetScaler = StandardScaler()
+    # Fit scalers
+    PredScaleFit = PredictorScaler.fit(X)
+    TargetScaleFit = TargetScaler.fit(y)
+    # Transform scalers
+    X_scaled = PredScaleFit.transform(X)
+    y_scaled = TargetScaleFit.transform(y)
+
+    return X_scaled,y_scaled,PredScaleFit,TargetScaleFit
 
 def scale_data_YeoJohnson(x, y):
     # Apply Yeo-Johnson power transformation (works with both positive and negative data)
@@ -438,7 +450,7 @@ def plot_complexity_vs_error(complexity, nmse_list, oos_nmse_list=None, save_pat
 
     # Save or display the plot
     if save_path:
-        plt.savefig(save_path)
+        plt.savefig(os.path.join(save_path, "Complexity_vs_Error.png"))
     else:
         plt.show()
     plt.close()
@@ -487,7 +499,8 @@ def plot_complexity_vs_error_loglog(complexity, nmse_list, oos_nmse_list=None, s
 
     # Save or display the plot
     if save_path:
-        plt.savefig(save_path + "_loglog")
+        os.makedirs(save_path, exist_ok=True)
+        plt.savefig(os.path.join(save_path, "Complexity_vs_Error_(LogLog).png"))
     else:
         plt.show()
     plt.close()
@@ -646,3 +659,92 @@ def find_csv(base_directory):
                 dataset_path = os.path.join(csv_folder, csv_file)
                 print(f"dataset_path = {dataset_path}")
                 return dataset_path
+            
+def plot_complexity_vs_diversity(sympy_equations, complexities,best=None):
+    """
+    Plots complexity vs. function diversity based on symbolic equations.
+
+    Parameters:
+    sympy_equations (list of str): List of equations in SymPy format as strings.
+    complexities (list of int): List of equation complexities.
+
+    Returns:
+    None
+    """
+    # Define symbols for variable detection (e.g., x1, x2, ..., x7)
+    variables = sp.symbols('x1 x2 x3 x4 x5 x6 x7')
+
+    # Calculate diversity for each equation
+    diversity = []
+    for eq in sympy_equations:
+        # Parse the equation into a SymPy object
+        sympy_eq = sp.sympify(eq)
+        # Find unique variables used in the equation
+        unique_vars = sympy_eq.free_symbols
+        # Count the number of unique variables
+        diversity.append(len(unique_vars))
+
+    # Plot complexity vs. diversity
+    plt.figure(figsize=(8, 6))
+    plt.scatter(complexities, diversity, color='red', alpha=0.7)
+    # Highlight the "best" function if provided
+    if best is not None and 0 <= best < len(complexities):
+        plt.scatter(complexities[best], diversity[best], color='blue', s=100, zorder=5, label='Best Function')
+        plt.annotate(f"Best",
+                     (complexities[best], diversity[best]),
+                     textcoords="offset points",
+                     xytext=(10, 10),
+                     ha='center',
+                     fontsize=10,
+                     arrowprops=dict(facecolor='blue', arrowstyle="->"))
+    plt.xlabel("Complexity", fontsize=14)
+    plt.ylabel("Function Diversity", fontsize=14)
+    plt.title("Complexity vs. Function Diversity", fontsize=16)
+    plt.grid(True)
+    plt.show()
+
+def scatter_best_residuals_vs_true(residual_list, trueval_list, best, output_dir):
+    """
+    Creates scatter plots of residuals vs. true values for each model,
+    with reduced opacity for all models except the best one.
+
+    Parameters:
+        residual_list (list of lists): Residuals for each model.
+        trueval_list (list): True values.
+        best (int): Index of the best model.
+        output_dir (str): Directory to save the generated plot.
+
+    Outputs:
+        Saves scatter plots for residuals vs. `y_true (flux)` in the output directory.
+    """
+
+    # Ensure output directory exists
+    os.makedirs(output_dir, exist_ok=True)
+
+    plt.figure(figsize=(12, 6))
+    ax = plt.subplot(111)
+
+    # Plot each residual column with reduced opacity
+    for idx, residuals in enumerate(residual_list):
+        alpha_val = 1.0 if idx == best else 0.3  # Full opacity for best, reduced for others
+        ax.scatter(trueval_list, residuals, label=f"Model {idx + 1}", alpha=alpha_val, zorder=1 if idx != best else 3)
+
+    # Highlight the best model with distinct color and annotation
+    ax.scatter(trueval_list, residual_list[best], color='blue', label=f"Best Model {best + 1}", alpha=1.0, zorder=4)
+    
+    # Add a horizontal line at y=0
+    ax.axhline(y=0, color="red", linestyle="--", linewidth=1, alpha=0.8)
+    
+    # Adjust plot area to fit the legend
+    box = ax.get_position()
+    ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])  # Reduce plot width
+    ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))  # Place legend to the right
+
+    # Set title and axis labels
+    ax.set_title("Residuals vs. True Values")  
+    ax.set_xlabel("True Values (Flux)")       
+    ax.set_ylabel("Residuals")                
+
+    # Save the plot
+    plt.savefig(os.path.join(output_dir, "best_residuals_vs_true_values.png"), bbox_inches="tight")
+    plt.close()

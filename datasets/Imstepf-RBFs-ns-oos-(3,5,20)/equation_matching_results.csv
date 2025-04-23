@@ -1,0 +1,913 @@
+Dataset,Noise Level,Matched Equation,Complexity,Loss,Accuracy (%)
+Imstepf_F1_LHS,0_Percent_Noise,x4 * x3,3,20.721407516913995,0.0
+Imstepf_F1_LHS,0_Percent_Noise,x0 + (x1 * x2),5,4.453911059885446,20.0
+Imstepf_F1_LHS,0_Percent_Noise,(((x1 + x3) + x4) + x0) + x2,9,7.795221607519851e-10,100.0
+Imstepf_F1_RandSample,0_Percent_Noise,x4,1,255.64626693910228,20.0
+Imstepf_F1_RandSample,0_Percent_Noise,x4 * x0,3,10.311232963603382,0.0
+Imstepf_F1_RandSample,0_Percent_Noise,20.316948636479143,4,1.32988181121422,0.0
+Imstepf_F1_RandSample,0_Percent_Noise,x4 + 15.975329886479466,6,0.4351019572602701,20.0
+Imstepf_F1_RandSample,0_Percent_Noise,(x4 + x4) + 11.63371113758934,8,0.0465302863531958,0.0
+Imstepf_F1_RandSample,0_Percent_Noise,10.471840186361018 + (2.2676123859364434 * x4),11,0.0284038853203199,0.0
+Imstepf_F1_RandSample,0_Percent_Noise,(cos(x4) * 2.750898228140807) + 21.170819935970282,12,0.0109044679191703,0.0
+Imstepf_F1_RandSample,0_Percent_Noise,sin(-2.123332202914084 * x4) + (x4 + 16.01558079954223),14,0.0046698186699284,20.0
+Imstepf_F1_RandSample,0_Percent_Noise,sin(-2.173219150183418 * x4) + (20.549586253293572 + cos(x4)),15,0.0003691546147541,0.0
+Imstepf_F1_RandSample,0_Percent_Noise,(cos(x4 * -2.52111790613236) / 1.1353727241780787) + (x4 + 15.900049278789538),19,9.6602906425746e-05,20.0
+Imstepf_F1_RandSample,0_Percent_Noise,(sin(x4 * -2.3316807754212783) + 20.318881179409388) + sin(cos(x4) * 2.5079651613647345),21,5.496550924577675e-05,0.0
+Imstepf_F1_RandSample,0_Percent_Noise,(cos(-2.474292527170322 * x4) + (15.111572974693159 + x4)) + cos(x4 + 14.669007495363132),22,3.8825878734640806e-05,20.0
+Imstepf_F1_RandSample,0_Percent_Noise,(cos(x4 * -2.490513028215296) + (15.872712428565302 + x4)) - (cos(-2.2962202104536598 * x4) / (x4 - sin(x4))),27,3.260278124179988e-05,20.0
+Imstepf_F1_RandSample,0_Percent_Noise,(cos(x4 * -2.492436790186677) + (15.875673488743907 + x4)) - (cos(x4 * -2.3071860815409324) / (x4 + (x4 / x0))),28,2.7200507704359345e-05,20.0
+Imstepf_F1_Uniform,0_Percent_Noise,x4 + x4,3,146.7120113869682,0.0
+Imstepf_F1_Uniform,0_Percent_Noise,x1 + (x3 * x0),5,4.7300086029808535,20.0
+Imstepf_F1_Uniform,0_Percent_Noise,(x1 - cos(x4)) + (x3 * x0),8,3.7508839598532697,20.0
+Imstepf_F1_Uniform,0_Percent_Noise,x4 + (x4 + (x1 + (x1 + x0))),9,1.466544071069376e-06,20.0
+Imstepf_F1_Uniform,0_Percent_Noise,(x4 + (x0 + (x2 + x4))) + ((x4 * x0) / x4),13,1.4665440710687405e-06,20.0
+Imstepf_F1_Uniform,0_Percent_Noise,x2 + (x1 + ((0.999999488322533 * x3) + (x0 + x4))),14,1.466539703736201e-06,80.0
+Imstepf_F1_Uniform,0_Percent_Noise,(x4 * 0.9999681716446464) + ((x1 - (0.005608283287823249 - -0.09526214335965631)) + (x2 + (x4 + x4))),24,1.4662763374600175e-06,40.0
+Imstepf_F1_Uniform,0_Percent_Noise,(x4 + ((x0 + -1.292697905748648) + (-0.0836389266628732 / x4))) + ((x4 / x0) + ((x4 + x4) + (x3 + 0.19198462916034176))),30,1.4661214121641086e-06,40.0
+Imstepf_F2_LHS,0_Percent_Noise,x4,1,804183.0557968292,0.0
+Imstepf_F2_LHS,0_Percent_Noise,x1 ^ x3,3,417233.854215589,0.0
+Imstepf_F2_LHS,0_Percent_Noise,(x0 ^ x3) - x1,5,392927.129207434,0.0
+Imstepf_F2_LHS,0_Percent_Noise,111.42783359435747 * x2,6,226319.79863993215,0.0
+Imstepf_F2_LHS,0_Percent_Noise,(638.7137327465762 + x4) + sin(x4),9,66894.98109995051,0.0
+Imstepf_F2_LHS,0_Percent_Noise,x1 - (x3 - (x3 - -900.7114146650036)),10,14.782366917159848,0.0
+Imstepf_F2_LHS,0_Percent_Noise,cos(x3) - (x3 - (x3 - -900.7114146650036)),11,0.400892813947053,0.0
+Imstepf_F2_LHS,0_Percent_Noise,sin(cos(x4)) - (x3 - (x3 - -900.7114146650036)),12,0.3812493146101992,0.0
+Imstepf_F2_LHS,0_Percent_Noise,-476.2483170785697 - (x3 - (x3 - -1376.9571277318112)),13,1.1013405329260369e-08,0.0
+Imstepf_F2_LHS,0_Percent_Noise,(sin(cos(x4)) * 0.00026285930944666057) - (x3 - (x3 - -900.708943221304)),17,2.059548173917794e-09,0.0
+Imstepf_F2_RandSample,0_Percent_Noise,x3,1,760478.6844420477,0.0
+Imstepf_F2_RandSample,0_Percent_Noise,x3 ^ x3,3,367906.49186636735,0.0
+Imstepf_F2_RandSample,0_Percent_Noise,(x3 ^ x3) + x2,5,364928.2781765377,0.0
+Imstepf_F2_RandSample,0_Percent_Noise,x3 + 872.0541722393898,6,0.2051224531867338,0.0
+Imstepf_F2_RandSample,0_Percent_Noise,875.3998822189951 - sin(x3),7,0.0813339325267709,0.0
+Imstepf_F2_RandSample,0_Percent_Noise,876.1232034890572 - (x0 - x0),8,8.21382374276729e-05,0.0
+Imstepf_F2_RandSample,0_Percent_Noise,(-0.17928862338974194 / x0) + 876.1716862722777,11,2.3509093833171743e-05,0.0
+Imstepf_F2_RandSample,0_Percent_Noise,(-0.019690232380309067 * sin(x0)) + 876.1135740789666,12,1.5001885153840343e-05,0.0
+Imstepf_F2_RandSample,0_Percent_Noise,sin(-0.019690232380309067 * sin(x0)) + 876.1135740789666,13,1.500134174526825e-05,0.0
+Imstepf_F2_RandSample,0_Percent_Noise,(0.03158839778984229 * (x0 - cos(x0))) + 875.9825525337159,14,1.4003108720500228e-05,0.0
+Imstepf_F2_RandSample,0_Percent_Noise,((x0 - cos(x0)) * sin(0.03158839778984229)) + 875.9825525337159,15,1.4001461283079412e-05,0.0
+Imstepf_F2_RandSample,0_Percent_Noise,(sin(sin(0.03158839778984229)) * (x0 - cos(x0))) + 875.9825525337159,16,1.4000912502375029e-05,0.0
+Imstepf_F2_RandSample,0_Percent_Noise,(((x2 * x1) * cos(1.5721224235276932)) * sin(x0)) + 876.1127476371519,17,7.356232234965108e-06,0.0
+Imstepf_F2_RandSample,0_Percent_Noise,(((-0.0018461312743131124 * x1) * cos(0.7694247951435436)) * (sin(x0) * x2)) + 876.1127476371533,22,7.356232234914068e-06,0.0
+Imstepf_F2_Uniform,0_Percent_Noise,x4,1,1365915.3728628878,0.0
+Imstepf_F2_Uniform,0_Percent_Noise,x0 ^ x0,3,893954.5983799952,0.0
+Imstepf_F2_Uniform,0_Percent_Noise,(x0 ^ x0) + x2,5,889558.9982324179,0.0
+Imstepf_F2_Uniform,0_Percent_Noise,x4 + 1168.7237224918651,6,0.2333479010051797,0.0
+Imstepf_F2_Uniform,0_Percent_Noise,1172.098237466676 - sin(x4),7,0.0624255881072052,0.0
+Imstepf_F2_Uniform,0_Percent_Noise,1173.8162661982803 - (x4 / x0),8,0.0008678302706436,0.0
+Imstepf_F2_Uniform,0_Percent_Noise,1172.5501481842696 + ((x4 - x1) * x3),10,5.557764604481803e-05,0.0
+Imstepf_F2_Uniform,0_Percent_Noise,(cos(x4) * (x4 - x0)) + 1172.8381830360813,11,5.0903571576060845e-05,0.0
+Imstepf_F2_Uniform,0_Percent_Noise,(cos(x4) * 0.07803719881462712) + 1172.8367298968685,12,4.968517255623105e-05,0.0
+Imstepf_F2_Uniform,0_Percent_Noise,1172.6476204008436 + (cos(cos(x0)) * 0.19126181922780888),13,3.563697346040673e-05,0.0
+Imstepf_F2_Uniform,0_Percent_Noise,cos(cos(x1) * (x3 * 0.126050816264653)) + 1171.845883853617,15,5.419750178245152e-06,0.0
+Imstepf_F2_Uniform,0_Percent_Noise,(1172.943667021407 - (-0.05221756673715561 * cos(x4))) - (cos(sin(x0)) * (x3 * (x3 - x1))),22,3.1255920332402897e-06,0.0
+Imstepf_F2_Uniform,0_Percent_Noise,(0.26616244000532696 * cos(cos(x0))) + ((sin(x2) * (0.23678358870927857 / x4)) + 1172.6274478126838),23,6.973957657499012e-07,0.0
+Imstepf_F3_LHS,0_Percent_Noise,x1,1,2359263.140252272,0.0
+Imstepf_F3_LHS,0_Percent_Noise,x4 ^ x1,3,1406488.7183726376,0.0
+Imstepf_F3_LHS,0_Percent_Noise,x4 * (x1 ^ x3),5,1223330.8314325456,0.0
+Imstepf_F3_LHS,0_Percent_Noise,x4 - -1536.0543772077333,6,0.3715941864720086,0.0
+Imstepf_F3_LHS,0_Percent_Noise,cos(x3) - -1540.6195702317407,7,0.1857341409604942,0.0
+Imstepf_F3_LHS,0_Percent_Noise,(x3 / x3) - -1539.0505272076966,8,7.911447642520696e-05,0.0
+Imstepf_F3_LHS,0_Percent_Noise,(0.01623453570080852 / x3) - -1540.046317305051,11,7.86827804438603e-05,0.0
+Imstepf_F3_LHS,0_Percent_Noise,1540.0730666415325 - (x2 / (43.92361270047381 * x4)),13,7.001371717920092e-05,0.0
+Imstepf_F3_LHS,0_Percent_Noise,((x3 / x3) + (-0.2016531924690498 / x4)) - -1539.1022263324744,15,1.416489813747762e-05,0.0
+Imstepf_F3_LHS,0_Percent_Noise,((x3 / x3) + sin(-0.20165320646408663 / x4)) - -1539.1022263360624,16,1.4157055435362655e-05,0.0
+Imstepf_F3_LHS,0_Percent_Noise,((-0.06104962015398297 / x3) + (-0.2233193180857314 / x4)) - -1540.1236122641862,18,8.809970224601853e-06,0.0
+Imstepf_F3_LHS,0_Percent_Noise,((0.008612693504231418 * x4) + 1540.0315757713536) - (0.22980527055946218 / (x2 * x4)),20,4.882031153240671e-06,0.0
+Imstepf_F3_RandSample,0_Percent_Noise,x3,1,2648916.261390757,0.0
+Imstepf_F3_RandSample,0_Percent_Noise,x3 ^ x3,3,1391997.9762916735,0.0
+Imstepf_F3_RandSample,0_Percent_Noise,(x3 ^ x0) * x2,5,622535.0413812597,0.0
+Imstepf_F3_RandSample,0_Percent_Noise,x0 + 1627.6378881001742,6,0.1536078147717079,20.0
+Imstepf_F3_RandSample,0_Percent_Noise,sin(x0) + 1632.3401485891525,7,0.0594630506762098,0.0
+Imstepf_F3_RandSample,0_Percent_Noise,(x4 / x4) + 1630.6420006002272,8,0.0020177348062499,0.0
+Imstepf_F3_RandSample,0_Percent_Noise,1631.4839991893261 - (sin(x4) / x4),9,0.0019243228479853,0.0
+Imstepf_F3_RandSample,0_Percent_Noise,1631.8304004901909 - (cos(sin(x4)) / x0),10,0.0003851118342427,0.0
+Imstepf_F3_RandSample,0_Percent_Noise,1631.3349856737602 + (x4 * 0.07551388796864447),11,0.000172457311041,0.0
+Imstepf_F3_RandSample,0_Percent_Noise,1631.6940931944298 + (cos(x4) * 0.10141087611671917),12,6.728541098207107e-05,0.0
+Imstepf_F3_RandSample,0_Percent_Noise,(cos(x4) / (5.909041719269429 + x0)) + 1631.694156327003,14,5.3773124168484605e-05,0.0
+Imstepf_F3_RandSample,0_Percent_Noise,(cos(x4) / (x4 + (x0 / 0.6317891203054325))) + 1631.6943226610963,16,4.7442027748222906e-05,0.0
+Imstepf_F3_RandSample,0_Percent_Noise,1631.6517372684784 + (-0.05774347595976082 * cos(x4 / 0.5363958663835035)),17,1.0926754527012944e-05,0.0
+Imstepf_F3_RandSample,0_Percent_Noise,(sin(-0.05946974488178767) * cos(x4 / 0.539616919392255)) + 1631.653542787356,18,9.13092811232188e-06,0.0
+Imstepf_F3_RandSample,0_Percent_Noise,((0.19424844749091058 * cos(x4)) + 1631.7035662384658) + ((0.07486249630515864 * cos(x4)) / cos(x4 + -0.6665422772704787)),28,2.497760804583014e-06,0.0
+Imstepf_F3_Uniform,0_Percent_Noise,x4,1,2521127.649646826,0.0
+Imstepf_F3_Uniform,0_Percent_Noise,x3 ^ x0,3,1588281.3860495116,0.0
+Imstepf_F3_Uniform,0_Percent_Noise,x4 + (x3 ^ x0),5,1580738.386559463,0.0
+Imstepf_F3_Uniform,0_Percent_Noise,x3 + 1586.9734974113242,6,0.981211406938179,0.0
+Imstepf_F3_Uniform,0_Percent_Noise,sin(x1) + 1592.5421188138653,7,0.0943166432112004,0.0
+Imstepf_F3_Uniform,0_Percent_Noise,1591.8576055645985 + (x2 - x1),8,9.939942775985744e-05,0.0
+Imstepf_F3_Uniform,0_Percent_Noise,sin(x2 - x1) + 1591.8576069381254,9,9.939942775985742e-05,0.0
+Imstepf_F3_Uniform,0_Percent_Noise,(x1 / x3) + (x1 * (1590.8879372563958 / x1)),12,7.702373242745592e-05,0.0
+Imstepf_F3_Uniform,0_Percent_Noise,(-0.29156573748370906 / x1) + (x1 * (1591.9516862525338 / x1)),15,1.1021788230374665e-05,0.0
+Imstepf_F3_Uniform,0_Percent_Noise,((1591.839253394585 / x1) * x1) + (sin(-109.9581517703668) * (x1 * x0)),18,2.926357213625984e-06,0.0
+Imstepf_F3_Uniform,0_Percent_Noise,(cos(-30.370962398442607) / (x2 * x4)) + (((1591.7082061492424 / x1) - -0.03428513761408914) * x1),23,6.901125031598085e-07,0.0
+Imstepf_F4_LHS,0_Percent_Noise,x1,1,18.138738031184925,0.0
+Imstepf_F4_LHS,0_Percent_Noise,sin(x4),2,0.8836837907959174,0.0
+Imstepf_F4_LHS,0_Percent_Noise,sin(sin(x0)),3,0.8127294040038996,0.0
+Imstepf_F4_LHS,0_Percent_Noise,cos(x2 * x1),4,0.3799962716824462,33.33333333333333
+Imstepf_F4_LHS,0_Percent_Noise,sin(x0) + cos(x2 * x1),7,0.2483513535752186,66.66666666666666
+Imstepf_F4_LHS,0_Percent_Noise,sin(sin(x0)) + cos(x2 * x1),8,0.2039866854831812,33.33333333333333
+Imstepf_F4_LHS,0_Percent_Noise,cos(x4 + x0) + cos(x2 * x1),9,0.1258068309908284,33.33333333333333
+Imstepf_F4_LHS,0_Percent_Noise,sin(cos(x4) + x0) + cos(x2 * x1),10,0.0284339660009729,33.33333333333333
+Imstepf_F4_LHS,0_Percent_Noise,sin(x0) + (cos(x2 * x1) + (sin(x3) * cos(x4))),13,1.2386789313132296e-09,100.0
+Imstepf_F4_RandSample,0_Percent_Noise,x2,1,15.695425905909463,0.0
+Imstepf_F4_RandSample,0_Percent_Noise,sin(x0),2,0.8042614895620408,33.33333333333333
+Imstepf_F4_RandSample,0_Percent_Noise,x2 - x0,3,0.4936705064285052,0.0
+Imstepf_F4_RandSample,0_Percent_Noise,cos(x1 * x2),4,0.4242511207572384,33.33333333333333
+Imstepf_F4_RandSample,0_Percent_Noise,sin(x0) - sin(x1),5,0.4077250288388658,33.33333333333333
+Imstepf_F4_RandSample,0_Percent_Noise,cos(x1) * (x0 - x1),6,0.3769401282139373,0.0
+Imstepf_F4_RandSample,0_Percent_Noise,sin(x0) + cos(x2 * x1),7,0.3329163801209739,66.66666666666666
+Imstepf_F4_RandSample,0_Percent_Noise,cos(x1 * x2) - (x0 - x3),8,0.1827169949155987,33.33333333333333
+Imstepf_F4_RandSample,0_Percent_Noise,cos(x1 * x2) - sin(x0 - x3),9,0.1173736890812706,33.33333333333333
+Imstepf_F4_RandSample,0_Percent_Noise,sin(x0 + sin(x3)) + cos(x2 * x1),10,0.0799581035342167,33.33333333333333
+Imstepf_F4_RandSample,0_Percent_Noise,sin(sin(x4) + (x3 - x0)) + cos(x2 * x1),12,0.0682475118663052,33.33333333333333
+Imstepf_F4_RandSample,0_Percent_Noise,(sin(x0) + cos(x2 * x1)) - (cos(x4) * cos(cos(x3))),14,0.0217480027891506,66.66666666666666
+Imstepf_F4_RandSample,0_Percent_Noise,(sin(x0) + cos(x2 * x1)) - (sin(cos(x4)) * cos(cos(x3))),15,0.0177818415061995,66.66666666666666
+Imstepf_F4_RandSample,0_Percent_Noise,(cos(x2 * x1) + sin(x0)) - (cos(x3 + 1.5708155138952733) * cos(x4)),18,9.414657111461528e-10,66.66666666666666
+Imstepf_F4_RandSample,0_Percent_Noise,(cos(x1 * x2) + sin(x0)) - (cos(1.5708288401081218 + x3) * (cos(x4) * 0.9999769971749549)),23,8.140240811452428e-10,66.66666666666666
+Imstepf_F4_RandSample,0_Percent_Noise,((sin(x0) - 3.8031087515675876e-6) + cos(x1 * x2)) - (cos(1.5708321540196981 + x3) * (cos(x4) / 1.0000196607059075)),28,8.091013529736397e-10,66.66666666666666
+Imstepf_F4_Uniform,0_Percent_Noise,x0,1,19.500192330637923,0.0
+Imstepf_F4_Uniform,0_Percent_Noise,sin(x0),2,0.6318044599678254,33.33333333333333
+Imstepf_F4_Uniform,0_Percent_Noise,sin(sin(x0)),3,0.6017650482116547,0.0
+Imstepf_F4_Uniform,0_Percent_Noise,cos(x0 * x0),4,0.3096781546622943,0.0
+Imstepf_F4_Uniform,0_Percent_Noise,sin(cos(x0 * x0)),5,0.3074896780363462,0.0
+Imstepf_F4_Uniform,0_Percent_Noise,cos(x0 * x3) + sin(x0),7,0.1212196651451922,33.33333333333333
+Imstepf_F4_Uniform,0_Percent_Noise,cos(x1 * x1) + sin(sin(x0)),8,0.105233948910028,0.0
+Imstepf_F4_Uniform,0_Percent_Noise,cos(x1 * x1) + sin(sin(sin(x0))),9,0.1009844696502528,0.0
+Imstepf_F4_Uniform,0_Percent_Noise,sin(x4 + sin(x2)) + cos(x1 * x1),10,0.0628086024736985,0.0
+Imstepf_F4_Uniform,0_Percent_Noise,cos(x1 * x1) + sin(1.363619399645101 ^ x4),12,0.0164406467045504,0.0
+Imstepf_F4_Uniform,0_Percent_Noise,(cos(x1 * x2) + (sin(x3) * cos(x4))) + sin(x0),13,1.7552310117335294e-07,100.0
+Imstepf_F1_LHS,10_Percent_Noise,x3 + x1,3,145.2907643538415,40.0
+Imstepf_F1_LHS,10_Percent_Noise,(x4 * x1) + x3,5,4.13949001728465,20.0
+Imstepf_F1_LHS,10_Percent_Noise,((x3 + x0) + (x1 + x4)) + x2,9,5.85741585261768e-10,100.0
+Imstepf_F1_RandSample,10_Percent_Noise,x0,1,244.28483540117765,20.0
+Imstepf_F1_RandSample,10_Percent_Noise,x1 * x0,3,13.27897096122141,0.0
+Imstepf_F1_RandSample,10_Percent_Noise,19.821362377731806,4,0.7165988036012868,0.0
+Imstepf_F1_RandSample,10_Percent_Noise,x1 + 15.753224877848755,6,0.194779399783234,20.0
+Imstepf_F1_RandSample,10_Percent_Noise,x3 + ((x4 + (x0 + x2)) + x1),9,0.1167309843417604,100.0
+Imstepf_F1_Uniform,10_Percent_Noise,x4 + x3,3,147.19778048135365,40.0
+Imstepf_F1_Uniform,10_Percent_Noise,x4 + (x0 * x1),5,4.59347508242182,20.0
+Imstepf_F1_Uniform,10_Percent_Noise,(sin(x0) + x4) + (x3 * x0),8,3.6404125024429166,20.0
+Imstepf_F1_Uniform,10_Percent_Noise,(x4 + x0) - (x2 / -0.31366982928174914),10,0.5842167887203743,40.0
+Imstepf_F1_Uniform,10_Percent_Noise,x4 - ((x3 / -0.3357459087605783) * 1.343236536120303),13,0.0154401952049247,20.0
+Imstepf_F1_Uniform,10_Percent_Noise,(x4 + x1) - (cos(cos(x1)) + (x2 / -0.31366982928174914)),14,0.00529935577916,40.0
+Imstepf_F1_Uniform,10_Percent_Noise,(x2 + -0.4076777632447748) - (cos(cos(x0)) + (x0 / -0.23089762762697438)),17,0.0019116298604867,20.0
+Imstepf_F1_Uniform,10_Percent_Noise,((x4 + 0.13404982534431026) - (x2 / -0.25002599708109685)) - 0.17260474368309403,18,1.5336068909362147e-06,20.0
+Imstepf_F1_Uniform,10_Percent_Noise,x2 - (((x0 / -0.32556796430851226) * 1.302368454214703) + cos(1.7318592995166493)),19,1.4971347110454097e-06,20.0
+Imstepf_F1_Uniform,10_Percent_Noise,(x0 - (-1.1298381084440574 * 0.6342629288101181)) - (cos(cos(-0.778080238704221)) + (1.3171585796415137 * (x3 / -0.3292922693525485))),30,1.46627987867109e-06,20.0
+Imstepf_F2_LHS,10_Percent_Noise,cos(x0),2,875978.2622832741,0.0
+Imstepf_F2_LHS,10_Percent_Noise,x1 ^ x3,3,461355.1816379319,0.0
+Imstepf_F2_LHS,10_Percent_Noise,(x3 ^ x2) - cos(x2),6,459222.7051602862,0.0
+Imstepf_F2_LHS,10_Percent_Noise,(x1 ^ x4) + (x3 ^ x1),7,365449.3735899413,0.0
+Imstepf_F2_LHS,10_Percent_Noise,(x4 * x3) * (x2 * (x0 + x1)),9,208112.1656942327,0.0
+Imstepf_F2_LHS,10_Percent_Noise,((x3 + x3) * x4) * (x2 * (x0 + x1)),11,72768.29148641197,0.0
+Imstepf_F2_LHS,10_Percent_Noise,x4 + (cos(cos(x3)) / (0.2500909918501632 * 0.004296393257002176)),15,64366.508712015646,0.0
+Imstepf_F2_LHS,10_Percent_Noise,(2.551611501820042 / sin(cos(935.8238714195134))) * 294.32436319161224,16,5.029327145912562e-09,0.0
+Imstepf_F2_RandSample,10_Percent_Noise,x2,1,1020146.81274236,0.0
+Imstepf_F2_RandSample,10_Percent_Noise,x4 ^ x2,3,442788.2269408059,0.0
+Imstepf_F2_RandSample,10_Percent_Noise,(x4 ^ x2) + x3,5,437858.060171545,0.0
+Imstepf_F2_RandSample,10_Percent_Noise,1018.3440607695892 - x0,6,0.2738131714804006,0.0
+Imstepf_F2_RandSample,10_Percent_Noise,1013.4519910921957 - sin(x2),7,0.1054394811504468,0.0
+Imstepf_F2_RandSample,10_Percent_Noise,1014.1875232695709 + (x4 - x4),8,3.067460013599508e-05,0.0
+Imstepf_F2_RandSample,10_Percent_Noise,507.10299384887446 - -507.0845294206965,9,3.067460013599508e-05,0.0
+Imstepf_F2_RandSample,10_Percent_Noise,(cos(x1) / (x4 ^ x0)) + 1014.19120046118,11,8.886320335904972e-06,0.0
+Imstepf_F2_RandSample,10_Percent_Noise,(1497.1754995547226 + (cos(x1) / (x4 ^ x0))) + -482.9842990935425,16,8.886320335776113e-06,0.0
+Imstepf_F2_RandSample,10_Percent_Noise,(((1.003169381887403 ^ x4) + 663.092916316988) + (cos(1.9634847279181782) / (x1 ^ x0))) / sin(sin(sin(0.9191770875293778))),29,4.8809249679954464e-06,0.0
+Imstepf_F2_Uniform,10_Percent_Noise,x4,1,1365915.373821666,0.0
+Imstepf_F2_Uniform,10_Percent_Noise,x0 ^ x0,3,893954.6009291514,0.0
+Imstepf_F2_Uniform,10_Percent_Noise,(x0 ^ x0) + x2,5,889559.0007788423,0.0
+Imstepf_F2_Uniform,10_Percent_Noise,x0 + 1168.8045229023342,6,0.233348324953119,0.0
+Imstepf_F2_Uniform,10_Percent_Noise,1172.102629094928 - sin(x4),7,0.0624442462858627,0.0
+Imstepf_F2_Uniform,10_Percent_Noise,1171.8158450480319 + (x0 / x4),8,0.0008735166395706,0.0
+Imstepf_F2_Uniform,10_Percent_Noise,1172.5501485942566 + (x3 * (x3 - x0)),10,5.546233830580623e-05,0.0
+Imstepf_F2_Uniform,10_Percent_Noise,((x4 - x0) * cos(x4)) + 1172.838183446082,11,5.085240107180229e-05,0.0
+Imstepf_F2_Uniform,10_Percent_Noise,(0.0780333445893504 * cos(x4)) + 1172.8367282797165,12,4.96306171950273e-05,0.0
+Imstepf_F2_Uniform,10_Percent_Noise,(0.10809371580198827 / cos(sin(x1))) + 1172.6437475390771,13,1.569201400174034e-05,0.0
+Imstepf_F2_Uniform,10_Percent_Noise,(sin(0.10809371580198827) / cos(sin(x0))) + 1172.6437475390771,14,1.5028232533446766e-05,0.0
+Imstepf_F2_Uniform,10_Percent_Noise,1172.8018460986616 + (0.04297647253801416 * cos(x4 / 0.3793251121894125)),17,1.2955183317858905e-05,0.0
+Imstepf_F2_Uniform,10_Percent_Noise,1172.8026074666384 + (sin(sin(-0.04513434037377588)) * cos(x4 / 0.5324394069635909)),19,6.9570381676319e-06,0.0
+Imstepf_F2_Uniform,10_Percent_Noise,(cos(cos(x1)) * 0.23854204862496653) + ((sin(x4) / (x4 * x4)) + 1172.6496125740764),20,1.2251145817876095e-06,0.0
+Imstepf_F2_Uniform,10_Percent_Noise,(cos(cos(x0)) * sin(sin(0.2584271881151971))) + (1172.6370521940482 + (sin(x4) / (x4 * 4.456239433421058))),25,8.686905278288249e-07,0.0
+Imstepf_F2_Uniform,10_Percent_Noise,(((-0.14925794676812393 / x1) + 1172.7040589899755) + (sin(x3) / (x3 * x2))) + (cos(cos(x2)) * 0.2155201949585343),27,5.391746331909789e-07,0.0
+Imstepf_F3_LHS,10_Percent_Noise,x0,1,1938278.4804413267,20.0
+Imstepf_F3_LHS,10_Percent_Noise,x2 ^ x2,3,1105988.668972145,0.0
+Imstepf_F3_LHS,10_Percent_Noise,x0 + (x3 ^ x3),5,1101983.6288658285,20.0
+Imstepf_F3_LHS,10_Percent_Noise,(x0 - cos(x2)) ^ x3,6,830992.6830426676,0.0
+Imstepf_F3_LHS,10_Percent_Noise,1391.1749074788172 - cos(x3),7,21.20141442827118,0.0
+Imstepf_F3_LHS,10_Percent_Noise,1.849430778784291e6 * 0.0007549813178441614,9,5.047948209176391e-05,0.0
+Imstepf_F3_LHS,10_Percent_Noise,(cos(x4) / (x3 ^ x4)) + 1396.2908038971427,11,1.9000114455133696e-05,0.0
+Imstepf_F3_LHS,10_Percent_Noise,((x4 + 50440.590119538225) / 2.9505563846262866e6) * (81670.94097849927 + sin(x4)),19,8.66180792140125e-06,0.0
+Imstepf_F3_LHS,10_Percent_Noise,(-0.9789337033326957 * cos(x4)) + (cos(x4) - (-740.8035512181063 - 655.492950233608)),20,7.30040600888917e-06,0.0
+Imstepf_F3_LHS,10_Percent_Noise,(((39823.4258027292 + 26888.71783096072) + cos(x4)) / 3.5354197905761604e6) * 73997.04915668847,22,2.3716651858202264e-06,0.0
+Imstepf_F3_LHS,10_Percent_Noise,sin(0.018842025332663614 * cos(x4)) + (cos(x4 - x4) - (-740.3039647097945 - 654.9933637253014)),23,1.7725198132039365e-06,0.0
+Imstepf_F3_RandSample,10_Percent_Noise,x3,1,2773688.579455273,0.0
+Imstepf_F3_RandSample,10_Percent_Noise,x0 ^ x0,3,1430431.3847157422,0.0
+Imstepf_F3_RandSample,10_Percent_Noise,x1 * (x2 ^ x0),5,934498.7874107888,0.0
+Imstepf_F3_RandSample,10_Percent_Noise,1664.6063226740787 + x4,6,0.837558401503568,0.0
+Imstepf_F3_RandSample,10_Percent_Noise,cos(x4) + 1669.4703301118875,7,0.3566001623160674,0.0
+Imstepf_F3_RandSample,10_Percent_Noise,1669.470219139564 + sin(cos(x4)),8,0.2791553130703775,0.0
+Imstepf_F3_RandSample,10_Percent_Noise,-86.3400178062647 * -19.335890794474317,9,6.461928971316818e-05,0.0
+Imstepf_F3_RandSample,10_Percent_Noise,1669.4006972691207 + (x4 / 67.98269572712144),11,8.884008526674951e-06,0.0
+Imstepf_F3_RandSample,10_Percent_Noise,(cos(x4) / 49.95403249117608) + 1669.4704368402906,12,2.0033826865703207e-06,0.0
+Imstepf_F3_RandSample,10_Percent_Noise,1669.470731775158 + (sin(cos(x4)) / 43.38028387811117),13,1.3386591961178369e-06,0.0
+Imstepf_F3_Uniform,10_Percent_Noise,x4,1,2521127.298432744,0.0
+Imstepf_F3_Uniform,10_Percent_Noise,x4 ^ x0,3,1587832.3724957171,0.0
+Imstepf_F3_Uniform,10_Percent_Noise,(x4 ^ x0) + x4,5,1580397.9219705884,0.0
+Imstepf_F3_Uniform,10_Percent_Noise,1587.8057416298186 + x4,6,0.2252801375044565,0.0
+Imstepf_F3_Uniform,10_Percent_Noise,1592.5751516548962 + sin(x4),7,0.0992679415261431,0.0
+Imstepf_F3_Uniform,10_Percent_Noise,(x0 / x4) + 1590.8929016678078,8,0.0014867568753167,0.0
+Imstepf_F3_Uniform,10_Percent_Noise,1591.548689559815 + (x4 * (x4 - x0)),10,9.278854548969616e-05,0.0
+Imstepf_F3_Uniform,10_Percent_Noise,(0.07692014042067988 * x2) + 1591.5675957762003,11,8.881017577262767e-05,0.0
+Imstepf_F3_Uniform,10_Percent_Noise,1591.929834415598 + (cos(x4) * 0.0991134335263575),12,8.446237699206145e-05,0.0
+Imstepf_F3_Uniform,10_Percent_Noise,(cos(cos(x0)) * 0.2436650262964343) + 1591.6890718006675,13,5.199861387273097e-05,0.0
+Imstepf_F3_Uniform,10_Percent_Noise,(cos(cos(x0)) * (x0 * (x3 - x1))) + 1591.7495514308484,14,3.0991210407156794e-05,0.0
+Imstepf_F3_Uniform,10_Percent_Noise,(cos(cos(x0)) * (x0 * 0.038272065251687686)) + 1591.756301445235,15,2.596293200738021e-05,0.0
+Imstepf_F3_Uniform,10_Percent_Noise,1591.9138642892804 + (cos(-60.444164470534645 * x4) / (x1 * x4)),16,1.6232491724102184e-05,0.0
+Imstepf_F3_Uniform,10_Percent_Noise,1591.9398618857508 - (sin(cos(x0)) * ((x1 * 0.04016762268288687) * cos(x0))),18,5.208630608839399e-06,0.0
+Imstepf_F3_Uniform,10_Percent_Noise,((0.5187378921827753 ^ x1) + 1591.60478708356) + (cos(cos(x1)) * (x3 * 0.06081937986539766)),22,1.2707624650287907e-06,0.0
+Imstepf_F3_Uniform,10_Percent_Noise,(((1.069403990192966 * x0) - x0) * cos(cos(x1))) + (1591.4001608410122 + ((x4 / x3) / x0)),23,7.887267321051892e-08,0.0
+Imstepf_F3_Uniform,10_Percent_Noise,(cos(cos(x1)) * (0.06973217781068503 * x0)) + (1591.3976529735648 - ((-0.18629325538005953 - x0) / (x4 * x3))),26,7.40851290771702e-08,0.0
+Imstepf_F4_LHS,10_Percent_Noise,x4,1,19.560984837440696,0.0
+Imstepf_F4_LHS,10_Percent_Noise,sin(x0),2,0.6245111660574698,33.33333333333333
+Imstepf_F4_LHS,10_Percent_Noise,sin(sin(x0)),3,0.6139202117614659,0.0
+Imstepf_F4_LHS,10_Percent_Noise,cos(x2 * x1),4,0.3107774949149238,33.33333333333333
+Imstepf_F4_LHS,10_Percent_Noise,cos(x1 * x2) + sin(x0),7,0.2342600562454143,66.66666666666666
+Imstepf_F4_LHS,10_Percent_Noise,cos((x1 - (x1 * x2)) - x4),8,0.1858683810388108,0.0
+Imstepf_F4_LHS,10_Percent_Noise,cos(x1 * x2) + sin(sin(sin(x0))),9,0.1691417955668721,33.33333333333333
+Imstepf_F4_LHS,10_Percent_Noise,(sin(x0) + cos(x1 * x2)) - cos(x4),10,0.1636450416647431,66.66666666666666
+Imstepf_F4_LHS,10_Percent_Noise,(sin(x0) + cos(x1 * x2)) - sin(cos(x4)),11,0.1129442552561907,66.66666666666666
+Imstepf_F4_LHS,10_Percent_Noise,sin((x3 - x4) + sin(x0)) + cos(x2 * x1),12,0.0666440381409165,33.33333333333333
+Imstepf_F4_LHS,10_Percent_Noise,(cos(x2 * x1) + sin(x0)) - (cos(x4) / 1.6330582237940625),15,0.0652235222025354,66.66666666666666
+Imstepf_F4_LHS,10_Percent_Noise,(sin(x0) + cos(x2 * x1)) - (x3 * (cos(x4) / (x4 + x2))),16,0.0433853335943511,66.66666666666666
+Imstepf_F4_LHS,10_Percent_Noise,cos(x4 / (x3 - 0.8495869425789923)) + (sin(x0) + cos(x1 * x2)),17,0.0303864786651922,66.66666666666666
+Imstepf_F4_LHS,10_Percent_Noise,(sin(x0) + cos(x2 * x1)) - (cos(x4) * sin(x3 + 3.141604274720332)),18,1.1823540507834559e-09,66.66666666666666
+Imstepf_F4_LHS,10_Percent_Noise,(sin(x0 - -3.3053633075474676e-5) + cos(x1 * x2)) - (cos(x4) * sin(x3 + 3.141631143794912)),23,8.63776191056929e-10,33.33333333333333
+Imstepf_F4_RandSample,10_Percent_Noise,x1,1,22.04324863399746,0.0
+Imstepf_F4_RandSample,10_Percent_Noise,sin(x4),2,0.826709103847212,0.0
+Imstepf_F4_RandSample,10_Percent_Noise,sin(sin(x4)),3,0.8202640500292935,0.0
+Imstepf_F4_RandSample,10_Percent_Noise,sin(cos(x2 * x1)),5,0.3693572707427828,0.0
+Imstepf_F4_RandSample,10_Percent_Noise,cos(x1 * x2) + cos(x3),7,0.2033188792953405,33.33333333333333
+Imstepf_F4_RandSample,10_Percent_Noise,cos(x2 * x1) + sin(cos(x3)),8,0.1805099830317635,33.33333333333333
+Imstepf_F4_RandSample,10_Percent_Noise,cos(x4 + x0) + cos(x2 * x1),9,0.0412289426344394,33.33333333333333
+Imstepf_F4_RandSample,10_Percent_Noise,cos(x1 * x2) + sin(cos(x0) + x4),10,0.0347823312034669,33.33333333333333
+Imstepf_F4_RandSample,10_Percent_Noise,(cos(x1 * x2) + sin(x0)) - sin(cos(x4)),11,0.0332692486334091,66.66666666666666
+Imstepf_F4_RandSample,10_Percent_Noise,(cos(x2 * x1) + sin(x0)) - sin(sin(cos(x4))),12,0.0313283750601122,66.66666666666666
+Imstepf_F4_RandSample,10_Percent_Noise,cos(x1 * x2) + (cos(x4 + x0) * cos(cos(x4))),13,0.0275168624313836,33.33333333333333
+Imstepf_F4_RandSample,10_Percent_Noise,(sin(x0) + cos(x2 * x1)) - (cos(x4) * cos(cos(x3))),14,0.0067345429080578,66.66666666666666
+Imstepf_F4_RandSample,10_Percent_Noise,(sin(x0) + cos(x1 * x2)) - (cos(-1.5708504364422033 - x3) * cos(x4)),18,3.1685857362340617e-10,66.66666666666666
+Imstepf_F4_RandSample,10_Percent_Noise,((sin(x0) - 8.315054039405797e-6) + cos(x2 * x1)) - (cos(x3 - -1.5708599166736572) * cos(x4)),23,2.5859800360643566e-10,66.66666666666666
+Imstepf_F4_Uniform,10_Percent_Noise,x0,1,19.500192330637923,0.0
+Imstepf_F4_Uniform,10_Percent_Noise,sin(x0),2,0.6318044599678254,33.33333333333333
+Imstepf_F4_Uniform,10_Percent_Noise,sin(sin(x0)),3,0.6017650482116547,0.0
+Imstepf_F4_Uniform,10_Percent_Noise,cos(x0 * x1),4,0.3136193988418498,0.0
+Imstepf_F4_Uniform,10_Percent_Noise,sin(cos(x0 * x1)),5,0.3126826970400775,0.0
+Imstepf_F4_Uniform,10_Percent_Noise,cos(x3 * x0) + sin(x0),7,0.1212196651451922,33.33333333333333
+Imstepf_F4_Uniform,10_Percent_Noise,cos(x1 * x1) + sin(sin(x0)),8,0.105233948910028,0.0
+Imstepf_F4_Uniform,10_Percent_Noise,cos(x0 * x3) + sin(sin(sin(x0))),9,0.1047887987624058,0.0
+Imstepf_F4_Uniform,10_Percent_Noise,sin(sin(x2) + x4) + cos(x1 * x1),10,0.0628086024736985,0.0
+Imstepf_F4_Uniform,10_Percent_Noise,cos(x0 * x3) - (cos(x2) - -0.9594254416680716),12,0.0026683824083391,0.0
+Imstepf_F4_Uniform,10_Percent_Noise,cos(x3 * x0) + ((sin(x3) * cos(x4)) + sin(x0)),13,5.071809162857671e-07,66.66666666666666
+Imstepf_F1_LHS,1_Percent_Noise,x3,1,261.23968884884823,20.0
+Imstepf_F1_LHS,1_Percent_Noise,x4 * x0,3,18.550187038827005,0.0
+Imstepf_F1_LHS,1_Percent_Noise,20.275869242768064,4,0.937866673855934,0.0
+Imstepf_F1_LHS,1_Percent_Noise,x3 + 16.144894242768153,6,0.5820787386762032,20.0
+Imstepf_F1_LHS,1_Percent_Noise,(x2 - -12.097537991995216) + x3,8,0.3206970472024271,40.0
+Imstepf_F1_LHS,1_Percent_Noise,(((x2 + x0) + x3) + x4) + x1,9,0.1422054350812467,100.0
+Imstepf_F1_RandSample,1_Percent_Noise,x0,1,253.88927744977545,20.0
+Imstepf_F1_RandSample,1_Percent_Noise,x1 * x3,3,21.1372991340428,0.0
+Imstepf_F1_RandSample,1_Percent_Noise,(x1 * x3) + x4,5,4.12284892837461,20.0
+Imstepf_F1_RandSample,1_Percent_Noise,(x3 + x2) + (x4 + (x0 + x1)),9,3.244957062706816e-10,100.0
+Imstepf_F1_Uniform,1_Percent_Noise,x3 * x2,3,15.441640782055227,0.0
+Imstepf_F1_Uniform,1_Percent_Noise,(x0 * x1) + x0,5,4.569552630214584,20.0
+Imstepf_F1_Uniform,1_Percent_Noise,x0 / 0.18792830424045706,6,1.193398302382506,0.0
+Imstepf_F1_Uniform,1_Percent_Noise,((x4 - cos(x0)) * x4) + cos(sin(x3)),10,0.2500923828184415,0.0
+Imstepf_F1_Uniform,1_Percent_Noise,(x0 + -0.20637146218804847) / 0.18792830424045706,11,0.0276029492896706,0.0
+Imstepf_F1_Uniform,1_Percent_Noise,((0.3281280246766182 + x0) * x3) - (cos(x4) / 0.22264934519148544),16,0.0074289292886644,0.0
+Imstepf_F1_Uniform,1_Percent_Noise,((0.3281280246766182 + x0) * x3) - (cos(x4) / sin(0.22264934519148544)),17,0.0063353149438493,0.0
+Imstepf_F1_Uniform,1_Percent_Noise,(x4 * (cos(x4) - 1.3630764780796318)) - (x3 * (cos(x4) - 6.347566839014567)),19,3.248697803577321e-06,0.0
+Imstepf_F1_Uniform,1_Percent_Noise,(((x1 + x1) / 0.3333429574105753) - sin(0.5926032336084367)) - ((x4 + -0.824492590414093) - -0.10376214384147364),26,1.479071723787422e-06,0.0
+Imstepf_F2_LHS,1_Percent_Noise,x0,1,945392.8192851468,0.0
+Imstepf_F2_LHS,1_Percent_Noise,x3 ^ x0,3,457496.8990911544,0.0
+Imstepf_F2_LHS,1_Percent_Noise,(x3 - cos(x0)) ^ x0,6,325422.54229404783,0.0
+Imstepf_F2_LHS,1_Percent_Noise,x3 / cos(1.5625249310732279),7,247980.7100590696,0.0
+Imstepf_F2_LHS,1_Percent_Noise,(x0 / x2) / 0.001034759170801291,8,50762.56446129906,0.0
+Imstepf_F2_LHS,1_Percent_Noise,(x4 + x3) / cos(1.5625249310732279),9,10711.48772495153,0.0
+Imstepf_F2_LHS,1_Percent_Noise,((x0 / x0) / 0.001034759170801291) + x0,10,35.19179644881445,0.0
+Imstepf_F2_LHS,1_Percent_Noise,((x0 / x0) / 0.001034759170801291) + (x3 + x0),12,3.99258963765765,0.0
+Imstepf_F2_LHS,1_Percent_Noise,((x0 / x0) / 0.0010252010692465383) + sin(0.397827987053105 * x3),16,0.0009042932337691,0.0
+Imstepf_F2_LHS,1_Percent_Noise,((1.5774375952232946 / 45.75304187759015) / (64.28452896554639 + 63.72181294558856)) + 976.4106149439524,24,1.404023448397713e-13,0.0
+Imstepf_F2_RandSample,1_Percent_Noise,x4,1,757810.3515959632,0.0
+Imstepf_F2_RandSample,1_Percent_Noise,x4 ^ x0,3,379412.4419269704,0.0
+Imstepf_F2_RandSample,1_Percent_Noise,x3 * (x2 ^ x2),5,329956.4263801615,0.0
+Imstepf_F2_RandSample,1_Percent_Noise,805.6802968988292 + x4,6,4204.762445192066,0.0
+Imstepf_F2_RandSample,1_Percent_Noise,879.6926236814212 + cos(x0),7,20.43573124793038,0.0
+Imstepf_F2_RandSample,1_Percent_Noise,sin(cos(x0)) + 875.1093820262455,8,0.0807732376851908,0.0
+Imstepf_F2_RandSample,1_Percent_Noise,(876.2105097335668 - (x2 / x0)) + sin(cos(x2)),12,0.0212114158805643,0.0
+Imstepf_F2_RandSample,1_Percent_Noise,(436.5761061629496 - (x2 / x2)) + 438.97017675662454,13,0.0001566963382206,0.0
+Imstepf_F2_RandSample,1_Percent_Noise,(-1.8213088843822698 * -241.10349416145044) + 435.4223469477044,14,0.0001566963382206,0.0
+Imstepf_F2_RandSample,1_Percent_Noise,(875.5283045876339 - (x1 / x1)) + (sin(3389.773802173783) * x1),16,0.0001473997379069,0.0
+Imstepf_F2_RandSample,1_Percent_Noise,(875.4653837857358 - (x1 / x1)) + (0.010199492698797942 * (x3 + x3)),17,5.328869869865685e-06,0.0
+Imstepf_F2_Uniform,1_Percent_Noise,x4,1,1365915.3730956833,0.0
+Imstepf_F2_Uniform,1_Percent_Noise,x1 ^ x0,3,900833.2208179272,0.0
+Imstepf_F2_Uniform,1_Percent_Noise,x4 + (x0 ^ x0),5,889508.8043196856,0.0
+Imstepf_F2_Uniform,1_Percent_Noise,x0 + 1168.804522591264,6,0.2333479953201922,0.0
+Imstepf_F2_Uniform,1_Percent_Noise,1172.0982375662386 - sin(x4),7,0.0624254321644275,0.0
+Imstepf_F2_Uniform,1_Percent_Noise,(x0 / x4) + 1171.8158447375667,8,0.0008736310705579,0.0
+Imstepf_F2_Uniform,1_Percent_Noise,1172.5501482838094 - ((x0 - x3) * x3),10,5.554966401992434e-05,0.0
+Imstepf_F2_Uniform,1_Percent_Noise,1172.8381831355987 + ((x4 - x0) * cos(x4)),11,5.0891154960353175e-05,0.0
+Imstepf_F2_Uniform,1_Percent_Noise,(0.07803630150259039 * cos(x4)) + 1172.836729524481,12,4.9671953823579045e-05,0.0
+Imstepf_F2_Uniform,1_Percent_Noise,1172.6476218229668 + (cos(cos(x0)) * 0.19126011080406918),13,3.561872236704216e-05,0.0
+Imstepf_F2_Uniform,1_Percent_Noise,1172.6501907591667 - (sin(-0.1051011280059851) / cos(sin(x0))),14,8.869130787549845e-06,0.0
+Imstepf_F2_Uniform,1_Percent_Noise,((0.01790632901262441 * cos(x0)) + 1172.6926235550225) - (-0.08182977219349488 / cos(sin(x0))),21,5.837195536080996e-06,0.0
+Imstepf_F2_Uniform,1_Percent_Noise,(1172.4282804004167 + (0.794579027156154 / x4)) + ((0.053326489270670394 * x0) * cos(cos(x0))),22,2.1521440658406225e-07,0.0
+Imstepf_F3_LHS,1_Percent_Noise,x3,1,2401325.8168842685,0.0
+Imstepf_F3_LHS,1_Percent_Noise,x3 ^ x3,3,1389870.3023853365,0.0
+Imstepf_F3_LHS,1_Percent_Noise,(x3 ^ x0) * x1,5,807463.0066388781,0.0
+Imstepf_F3_LHS,1_Percent_Noise,x0 - -1549.6901968255277,6,0.3528055178374847,20.0
+Imstepf_F3_LHS,1_Percent_Noise,sin(x2) - -1554.265868730633,7,0.1178131152458233,0.0
+Imstepf_F3_LHS,1_Percent_Noise,(x4 - x4) - -1553.656121825557,8,6.923767050693154e-05,0.0
+Imstepf_F3_LHS,1_Percent_Noise,(x4 / 135.40396298163185) - -1553.6264892426511,11,1.91003801987286e-05,0.0
+Imstepf_F3_LHS,1_Percent_Noise,(x4 / (x3 + (71.41616772308204 + x4))) - -1553.6056475644664,15,6.977704790483636e-06,0.0
+Imstepf_F3_LHS,1_Percent_Noise,((x4 + x4) / (144.34931179653202 + sin(x4))) - -1553.6001805618223,16,4.6024213224189885e-06,0.0
+Imstepf_F3_LHS,1_Percent_Noise,(sin(x4 / 219.54803661736938) * 3.085684994276629) - -1553.5996520972765,17,4.534409323272388e-06,0.0
+Imstepf_F3_RandSample,1_Percent_Noise,x3,1,2215798.3330428046,0.0
+Imstepf_F3_RandSample,1_Percent_Noise,x0 ^ x0,3,1154152.4996943474,0.0
+Imstepf_F3_RandSample,1_Percent_Noise,x2 * (x4 ^ x1),5,581167.79708994,0.0
+Imstepf_F3_RandSample,1_Percent_Noise,x3 - -1488.7751530304663,6,0.3872037976923232,0.0
+Imstepf_F3_RandSample,1_Percent_Noise,1493.2933193568274 + sin(x3),7,0.0970253971452546,0.0
+Imstepf_F3_RandSample,1_Percent_Noise,1491.8380136464232 + cos(cos(x2)),8,0.0277699210836039,0.0
+Imstepf_F3_RandSample,1_Percent_Noise,-767.6209743533536 + 2260.2478606560294,9,5.288808572577748e-05,0.0
+Imstepf_F3_RandSample,1_Percent_Noise,(sin(x1) / (x3 ^ x4)) + 1492.6312449309187,11,1.7039189699961686e-05,0.0
+Imstepf_F3_RandSample,1_Percent_Noise,1492.6318126388594 + (sin(sin(x1)) / (x4 ^ x4)),12,1.5989319123873806e-05,0.0
+Imstepf_F3_RandSample,1_Percent_Noise,(3.857314410640918 - -1488.8192122947419) - (0.1955020731104439 / x4),16,8.959028428364641e-06,0.0
+Imstepf_F3_RandSample,1_Percent_Noise,(1492.6691490894066 - (0.18998880350627412 / x4)) - (-0.001468312097142612 * x3),18,8.256319347644198e-06,0.0
+Imstepf_F3_Uniform,1_Percent_Noise,x4,1,2521127.298774615,0.0
+Imstepf_F3_Uniform,1_Percent_Noise,x4 ^ x0,3,1587832.3731547322,0.0
+Imstepf_F3_Uniform,1_Percent_Noise,x4 + (x4 ^ x0),5,1580397.922628847,0.0
+Imstepf_F3_Uniform,1_Percent_Noise,x4 + 1587.8057417374714,6,0.2252802134761591,0.0
+Imstepf_F3_Uniform,1_Percent_Noise,1591.1181829459795 - sin(x3),7,0.0672054883054299,0.0
+Imstepf_F3_Uniform,1_Percent_Noise,1590.8929017754504 + (x0 / x4),8,0.0014867129168273,0.0
+Imstepf_F3_Uniform,1_Percent_Noise,1591.5503218274462 + ((x4 - x0) * x3),10,9.2754389043865e-05,0.0
+Imstepf_F3_Uniform,1_Percent_Noise,1591.5707043840941 + (0.07691990915400289 * x0),11,8.877555447274212e-05,0.0
+Imstepf_F3_Uniform,1_Percent_Noise,(0.099112586631245 * cos(x4)) + 1591.9298340777914,12,8.444533834458825e-05,0.0
+Imstepf_F3_Uniform,1_Percent_Noise,1591.689073287978 + (cos(cos(x0)) * 0.24366324409966666),13,5.197753996399165e-05,0.0
+Imstepf_F3_Uniform,1_Percent_Noise,1591.7563024577205 + ((0.03827178001651473 * x0) * cos(cos(x0))),15,2.594327957062381e-05,0.0
+Imstepf_F3_Uniform,1_Percent_Noise,((sin(x0) * sin(x0)) * (sin(x0) * -0.10981636270076933)) + 1591.8274075528761,18,9.91794041327794e-06,0.0
+Imstepf_F3_Uniform,1_Percent_Noise,((sin(1636.7605905050605) * sin(x4)) * (sin(x4) * (x0 * x0))) + ((x1 / (x0 * x3)) + 1591.529386983465),26,4.099118607181746e-06,0.0
+Imstepf_F3_Uniform,1_Percent_Noise,((sin(x4) * sin(1636.7613972823217)) * ((x0 * x0) * sin(x4))) + ((0.8079525103373469 / x3) + 1591.5873045836981),27,7.757650013476747e-07,0.0
+Imstepf_F3_Uniform,1_Percent_Noise,((0.008264896673610047 * (x0 * x0)) * (sin(x0) * sin(x1))) + (1591.8979225094336 + (-0.006280713076228604 * (x1 * x0))),28,6.79998537939525e-07,0.0
+Imstepf_F3_Uniform,1_Percent_Noise,((sin(x4) * (x0 * x0)) * (sin(1636.7624476173005) * sin(x4))) + ((1.0996138116082828 / (x4 * x3)) + 1591.731160376861),29,5.617124620649438e-07,0.0
+Imstepf_F4_LHS,1_Percent_Noise,x2,1,17.650491329497886,0.0
+Imstepf_F4_LHS,1_Percent_Noise,cos(x3),2,0.7128411001830977,0.0
+Imstepf_F4_LHS,1_Percent_Noise,x3 - x4,3,0.5992751005854798,0.0
+Imstepf_F4_LHS,1_Percent_Noise,cos(x2 * x1),4,0.3721255821072116,33.33333333333333
+Imstepf_F4_LHS,1_Percent_Noise,sin(x0) - cos(x4),5,0.3341676069239293,33.33333333333333
+Imstepf_F4_LHS,1_Percent_Noise,sin(x0) - sin(cos(x4)),6,0.3300516436195751,33.33333333333333
+Imstepf_F4_LHS,1_Percent_Noise,cos(cos(x1 * x2) + x3),7,0.2474361220154232,0.0
+Imstepf_F4_LHS,1_Percent_Noise,sin(cos(x1 * x2) + sin(x0)),8,0.1762142054262909,0.0
+Imstepf_F4_LHS,1_Percent_Noise,cos(x2 * x1) + cos(x0 + x4),9,0.1478838625665045,33.33333333333333
+Imstepf_F4_LHS,1_Percent_Noise,cos(x2 * x1) + sin(cos(x4) + x0),10,0.0932918474933353,33.33333333333333
+Imstepf_F4_LHS,1_Percent_Noise,sin(cos(x4) + x0) + sin(cos(x2 * x1)),11,0.0575616453747282,0.0
+Imstepf_F4_LHS,1_Percent_Noise,(sin(x0) + (sin(x1) * cos(x4))) + sin(cos(x1 * x2)),14,0.0494402151088012,33.33333333333333
+Imstepf_F4_LHS,1_Percent_Noise,(sin(sin(x0)) + (sin(x1) * cos(x4))) + sin(cos(x1 * x2)),15,0.044370124356999,0.0
+Imstepf_F4_LHS,1_Percent_Noise,sin(cos(x4) + x0) + (cos(x2 * x1) / ((x3 / x0) - cos(x3))),17,0.0373620100176604,0.0
+Imstepf_F4_LHS,1_Percent_Noise,(cos(x1 * x2) / ((x3 / x0) - cos(x3))) + (((x0 / x4) * sin(x0)) - cos(x4)),21,0.0303617294024453,0.0
+Imstepf_F4_LHS,1_Percent_Noise,(cos(x1 * x2) / ((x3 / x0) - cos(x3))) + ((sin(x0) * (x0 / x4)) - sin(cos(x4))),22,0.026887294190409,0.0
+Imstepf_F4_LHS,1_Percent_Noise,(cos(x1 * x2) * (x2 * 0.16686009888231587)) + ((cos(x4) + sin(x0)) - (cos(x4) * (x3 / 2.2338364199142955))),27,0.0246268985939933,33.33333333333333
+Imstepf_F4_LHS,1_Percent_Noise,(((x2 / x4) * sin(x0)) - ((x3 / 4.681872046149801) * cos(x4))) + (cos(x1 * x2) / ((x4 / x1) - cos(x4))),28,0.023016362461584,0.0
+Imstepf_F1_LHS,25_Percent_Noise,x1,1,249.1813991280008,20.0
+Imstepf_F1_LHS,25_Percent_Noise,x2 * x1,3,17.457686254999093,0.0
+Imstepf_F1_LHS,25_Percent_Noise,19.895117792206246,4,1.0046126236114563,0.0
+Imstepf_F1_LHS,25_Percent_Noise,x4 - -16.00769279280113,6,0.7305801586950188,20.0
+Imstepf_F1_LHS,25_Percent_Noise,x0 - (-12.008124042992446 - x4),8,0.4207733798751386,40.0
+Imstepf_F1_LHS,25_Percent_Noise,(x0 + ((x4 + x1) + x3)) + x2,9,0.0278434143033473,100.0
+Imstepf_F1_RandSample,25_Percent_Noise,x4,1,254.5954075235562,20.0
+Imstepf_F1_RandSample,25_Percent_Noise,x4 * x0,3,16.35893320157367,0.0
+Imstepf_F1_RandSample,25_Percent_Noise,20.120247183145672,4,1.5819706481219564,0.0
+Imstepf_F1_RandSample,25_Percent_Noise,x1 - -16.06149092421885,6,0.580868198603625,20.0
+Imstepf_F1_RandSample,25_Percent_Noise,x0 + (x4 + (x3 + (x1 + x2))),9,0.0321888232558052,100.0
+Imstepf_F1_Uniform,25_Percent_Noise,x3 * x3,3,14.900144397134577,0.0
+Imstepf_F1_Uniform,25_Percent_Noise,x3 + (x1 * x0),5,4.586270349372126,20.0
+Imstepf_F1_Uniform,25_Percent_Noise,x4 * (x2 + cos(sin(x2))),7,2.371622132042753,0.0
+Imstepf_F1_Uniform,25_Percent_Noise,(x4 + 0.09381465943471791) * (x2 + cos(sin(x2))),12,2.205746718503688,0.0
+Imstepf_F1_Uniform,25_Percent_Noise,x4 - ((x0 / 0.2820953019541841) * -1.1368076617545662),13,0.000241704955442,20.0
+Imstepf_F1_Uniform,25_Percent_Noise,x4 - (((x1 / 0.2251868177345722) - x4) * -1.1706025270644083),15,0.0002055844491769,0.0
+Imstepf_F1_Uniform,25_Percent_Noise,sin(0.10134437278336549) - (-1.0977649547908896 * (x1 / 0.2195547190631643)),17,1.4664648465215798e-06,0.0
+Imstepf_F2_LHS,25_Percent_Noise,x4,1,1022768.9167551788,0.0
+Imstepf_F2_LHS,25_Percent_Noise,x3 ^ x4,3,492380.820336881,0.0
+Imstepf_F2_LHS,25_Percent_Noise,x4 + (x3 ^ x4),5,488215.8489935905,0.0
+Imstepf_F2_LHS,25_Percent_Noise,1011.385564680283 + x2,6,0.3186226284506966,0.0
+Imstepf_F2_LHS,25_Percent_Noise,1014.7518158324722 - sin(x2),7,0.1147187488696955,0.0
+Imstepf_F2_LHS,25_Percent_Noise,1015.3963271803163 + (x2 - x2),8,6.789522227567142e-05,0.0
+Imstepf_F2_LHS,25_Percent_Noise,(-0.18220920639509686 / x2) + 1015.4427086906264,11,2.246123085298976e-05,0.0
+Imstepf_F2_LHS,25_Percent_Noise,1015.3836131600473 + (-0.019726604214938423 * sin(x2)),12,2.144760609856927e-05,0.0
+Imstepf_F2_LHS,25_Percent_Noise,(cos(cos(x2)) * 0.040398178326124794) + 1015.3647394915076,13,1.8598926404304665e-05,0.0
+Imstepf_F2_LHS,25_Percent_Noise,((sin(x2) * x3) * -0.0053784376862041515) + 1015.3829721813094,14,1.4537989328535984e-05,0.0
+Imstepf_F2_LHS,25_Percent_Noise,(sin(-0.005599590726110805) * (sin(x2) * x4)) + 1015.3819499112145,15,8.632197964684545e-06,0.0
+Imstepf_F2_RandSample,25_Percent_Noise,x4 ^ x0,3,362381.820759562,0.0
+Imstepf_F2_RandSample,25_Percent_Noise,(x4 ^ x0) + x1,5,358217.28844006395,0.0
+Imstepf_F2_RandSample,25_Percent_Noise,x3 / 0.00432086282392456,6,13506.42660740556,0.0
+Imstepf_F2_RandSample,25_Percent_Noise,(x3 / 0.00432086282392456) - cos(x0 + x2),11,13479.681890873284,0.0
+Imstepf_F2_RandSample,25_Percent_Noise,(x3 / 0.004498204475713728) + (x2 * (x4 + x1)),12,12245.343318892676,0.0
+Imstepf_F2_RandSample,25_Percent_Noise,(x3 - -191.57560494746772) * (x3 + 0.7805612114321451),13,9954.42971251968,0.0
+Imstepf_F2_RandSample,25_Percent_Noise,(sin(x3 + -0.5035931609121154) + x3) / 0.004498204475713728,14,7730.959940205023,0.0
+Imstepf_F2_RandSample,25_Percent_Noise,((x4 + x4) + (x2 + 921.174985689289)) + (x4 - sin(x3)),15,1131.089980089079,0.0
+Imstepf_F2_RandSample,25_Percent_Noise,((x4 - -544.407724722125) + 178.25046585353786) - -177.73387663590069,16,0.2484972158482795,0.0
+Imstepf_F2_RandSample,25_Percent_Noise,((x4 - sin(x3)) - (cos(x4) * x4)) + ((x4 + x2) + (886.1044855138138 + x4)),20,0.0891781188385343,0.0
+Imstepf_F2_RandSample,25_Percent_Noise,((x3 + 58.460410717075675) + (58.944194620162165 - x3)) * (40.18564565424805 / 5.215346622269146),23,1.6907552046286887e-16,0.0
+Imstepf_F2_Uniform,25_Percent_Noise,x4,1,1365915.3729067084,0.0
+Imstepf_F2_Uniform,25_Percent_Noise,x0 ^ x0,3,893954.5984941681,0.0
+Imstepf_F2_Uniform,25_Percent_Noise,(x0 ^ x0) + x4,5,889508.8038253031,0.0
+Imstepf_F2_Uniform,25_Percent_Noise,1168.8045225104956 + x0,6,0.2333479183349353,0.0
+Imstepf_F2_Uniform,25_Percent_Noise,1171.9753100013907 - sin(x4),7,0.0775367248710134,0.0
+Imstepf_F2_Uniform,25_Percent_Noise,(x0 / x4) + 1171.8143622146245,8,0.0008758579527419,0.0
+Imstepf_F2_Uniform,25_Percent_Noise,((x4 - x1) * x0) + 1172.5538205629957,10,5.55723795613287e-05,0.0
+Imstepf_F2_Uniform,25_Percent_Noise,(cos(x4) * (x4 - x0)) + 1172.8381830548212,11,5.090123470583636e-05,0.0
+Imstepf_F2_Uniform,25_Percent_Noise,1172.8367298336907 + (cos(x4) * 0.07803704283041668),12,4.9682685667468986e-05,0.0
+Imstepf_F2_Uniform,25_Percent_Noise,1172.6450905087625 + (cos(cos(x0)) * 0.19200201328215433),13,3.947774797149096e-05,0.0
+Imstepf_F2_Uniform,25_Percent_Noise,(cos(x0) / (x2 / 0.28870531781852393)) + 1172.8412515451923,14,3.762000760349786e-05,0.0
+Imstepf_F2_Uniform,25_Percent_Noise,1172.841284823356 + ((cos(x0) / x4) * sin(sin(0.3009557547446698))),16,3.754643517807885e-05,0.0
+Imstepf_F2_Uniform,25_Percent_Noise,(0.04298087351187875 * cos(x4 / -0.3793299583637452)) + 1172.8018481615209,17,1.2909178730159478e-05,0.0
+Imstepf_F2_Uniform,25_Percent_Noise,1172.8017945254196 + (cos(x3 / 0.5291000252797071) * sin(sin(-0.04556502309704574))),19,7.207272835071552e-06,0.0
+Imstepf_F3_LHS,25_Percent_Noise,x3,1,2017784.924198036,0.0
+Imstepf_F3_LHS,25_Percent_Noise,x2 ^ x2,3,1130609.0838885768,0.0
+Imstepf_F3_LHS,25_Percent_Noise,x4 + (x2 ^ x2),5,1123969.2104177156,0.0
+Imstepf_F3_LHS,25_Percent_Noise,1420.542879700665 + x4,6,0.2671128324512219,0.0
+Imstepf_F3_LHS,25_Percent_Noise,1425.0817335517013 + cos(x4),7,0.1131080586193982,0.0
+Imstepf_F3_LHS,25_Percent_Noise,x4 + (1424.4885797006648 - x4),8,0.001060971012182,0.0
+Imstepf_F3_LHS,25_Percent_Noise,cos(cos(x4) / x4) + 1423.5086971766893,10,0.0002345890549248,0.0
+Imstepf_F3_LHS,25_Percent_Noise,(cos(x4) / (x4 * x4)) + 1424.535631880966,11,6.034980397106898e-05,0.0
+Imstepf_F3_LHS,25_Percent_Noise,(sin(cos(x4)) / (x4 * x4)) + 1424.5298178186172,12,4.877268362420575e-05,0.0
+Imstepf_F3_LHS,25_Percent_Noise,1424.5336398619365 + (cos(x4) / ((x4 * x4) - cos(x2))),14,3.905669394398205e-05,0.0
+Imstepf_F3_LHS,25_Percent_Noise,1424.5320988182418 + (cos(x4) / ((x4 * x4) + (x0 / x2))),15,3.647636062964503e-05,0.0
+Imstepf_F3_LHS,25_Percent_Noise,cos(cos(x4) / (1.789887089373286 / 0.7408992882036676)) + 1423.5299522019614,18,3.842659928001669e-06,0.0
+Imstepf_F3_RandSample,25_Percent_Noise,x2,1,908184.4892978446,0.0
+Imstepf_F3_RandSample,25_Percent_Noise,x0 ^ x2,3,380850.8366999085,0.0
+Imstepf_F3_RandSample,25_Percent_Noise,(x4 ^ x0) * x1,5,254877.0109832828,0.0
+Imstepf_F3_RandSample,25_Percent_Noise,x4 + 953.5816227126678,6,0.1943556463005943,0.0
+Imstepf_F3_RandSample,25_Percent_Noise,957.9530443436516 + cos(x4),7,0.0519768648017471,0.0
+Imstepf_F3_RandSample,25_Percent_Noise,(x0 - x0) + 957.1197164626126,8,0.0004344968049599,0.0
+Imstepf_F3_RandSample,25_Percent_Noise,956.9636595970431 - (-0.04410761179737721 * x4),11,2.072592126878274e-05,0.0
+Imstepf_F3_RandSample,25_Percent_Noise,(sin(-0.13838991924654795) * cos(sin(x4))) + 957.24175271865,14,4.561594780311719e-06,0.0
+Imstepf_F3_Uniform,25_Percent_Noise,x1 ^ x0,3,1591224.1329114498,0.0
+Imstepf_F3_Uniform,25_Percent_Noise,x0 + (x3 ^ x0),5,1580901.006455034,20.0
+Imstepf_F3_Uniform,25_Percent_Noise,(x4 - cos(x4)) ^ x4,6,1150121.0806962785,0.0
+Imstepf_F3_Uniform,25_Percent_Noise,x3 * (x3 / (x1 - x0)),7,630844.4654768999,0.0
+Imstepf_F3_Uniform,25_Percent_Noise,(x2 - x1) + 1591.7811886243392,8,0.005939029283622,0.0
+Imstepf_F3_Uniform,25_Percent_Noise,((x2 - x2) / x2) + (1591.8014408983863 - (-0.01894169227571789 * x2)),17,4.665544310704986e-06,0.0
+Imstepf_F3_Uniform,25_Percent_Noise,((x2 - (x1 + x4)) - x1) + (1591.8014408628223 - (-2.0189417013955024 * x2)),19,4.6655443106605015e-06,0.0
+Imstepf_F3_Uniform,25_Percent_Noise,(((x3 - x0) / (x1 ^ x1)) - x1) + (1591.7811886243392 - (x2 * -1.0189535086579462)),21,4.2558640517596745e-06,0.0
+Imstepf_F3_Uniform,25_Percent_Noise,(((0.30522995764037286 / 1591.7811886243392) / cos(x1)) - x1) + (1591.7811886243392 - (x2 * -1.0189535086579462)),26,3.894843067615896e-06,0.0
+Imstepf_F3_Uniform,25_Percent_Noise,(((x2 - x1) / (x1 / 26.52484921938774)) - x1) + ((1591.720519298262 + -0.20954136489932895) - (x2 * -1.0523020940682895)),29,1.970816706650692e-07,0.0
+Imstepf_F4_LHS,25_Percent_Noise,x3,1,24.147374905125503,0.0
+Imstepf_F4_LHS,25_Percent_Noise,sin(x0),2,0.5864453299133724,33.33333333333333
+Imstepf_F4_LHS,25_Percent_Noise,cos(x2 * x1),4,0.2680986366436002,33.33333333333333
+Imstepf_F4_LHS,25_Percent_Noise,cos(x2 * x1) + sin(x4),7,0.1664828962877051,33.33333333333333
+Imstepf_F4_LHS,25_Percent_Noise,sin(sin(x4)) + cos(x1 * x2),8,0.1140994491178853,33.33333333333333
+Imstepf_F4_LHS,25_Percent_Noise,cos(x1 * x2) - cos(x1 / x4),9,0.0837315894118943,33.33333333333333
+Imstepf_F4_LHS,25_Percent_Noise,cos(x1 * x2) - (sin(x4) * sin(x0)),10,0.0509496162054173,33.33333333333333
+Imstepf_F4_LHS,25_Percent_Noise,cos(x1 * x2) - (sin(x4) * sin(sin(x0))),11,0.0404967922044379,33.33333333333333
+Imstepf_F4_LHS,25_Percent_Noise,cos(x1 * x2) + (sin(x0) * cos(x3 / x4)),12,0.032344936829135,33.33333333333333
+Imstepf_F4_LHS,25_Percent_Noise,(cos(x2 * x1) + sin(x0)) + (sin(x3) * cos(x4)),13,1.3779893677624403e-09,100.0
+Imstepf_F4_RandSample,25_Percent_Noise,x2,1,15.63055685662168,0.0
+Imstepf_F4_RandSample,25_Percent_Noise,sin(x0),2,0.8350347491239224,33.33333333333333
+Imstepf_F4_RandSample,25_Percent_Noise,x3 - x4,3,0.5299072162808249,0.0
+Imstepf_F4_RandSample,25_Percent_Noise,cos(x4 + x0),4,0.2549517705001141,0.0
+Imstepf_F4_RandSample,25_Percent_Noise,cos(x0 + x4) / cos(cos(x4)),8,0.2253960487295353,0.0
+Imstepf_F4_RandSample,25_Percent_Noise,cos(x1 * x2) + cos(x0 + x4),9,0.0266265058209269,33.33333333333333
+Imstepf_F4_RandSample,25_Percent_Noise,(cos(x2 * x1) - cos(x4)) + sin(x0),10,0.0039973973973391,66.66666666666666
+Imstepf_F4_RandSample,25_Percent_Noise,(cos(x2 * x1) - cos(x4)) + ((sin(x0) / x1) * x1),14,0.0039973973973391,66.66666666666666
+Imstepf_F4_RandSample,25_Percent_Noise,sin(x0) + (cos(x2 * x1) - (cos(x4) / 1.0592113338737092)),15,0.0029665391377841,66.66666666666666
+Imstepf_F4_RandSample,25_Percent_Noise,(cos(x2 * x1) - cos(x4)) + (sin(x0) - (x1 / (x0 ^ x4))),16,0.0028742749283445,66.66666666666666
+Imstepf_F4_RandSample,25_Percent_Noise,sin(x0) + (cos(x2 * x1) - (cos(x4) / (4.754817598442696 / x3))),17,0.0009356695943441,66.66666666666666
+Imstepf_F4_RandSample,25_Percent_Noise,((sin(x0) - 3.6016793474206792e-6) + (cos(x4) * sin(x3))) + cos(x2 * x1),18,1.0202059170773767e-09,100.0
+Imstepf_F4_Uniform,25_Percent_Noise,x0,1,19.500192330621704,0.0
+Imstepf_F4_Uniform,25_Percent_Noise,sin(x0),2,0.6318044599529958,33.33333333333333
+Imstepf_F4_Uniform,25_Percent_Noise,sin(sin(x0)),3,0.6017650481968227,0.0
+Imstepf_F4_Uniform,25_Percent_Noise,cos(x0 * x0),4,0.3096781546601853,0.0
+Imstepf_F4_Uniform,25_Percent_Noise,sin(cos(x0 * x0)),5,0.3074896780317571,0.0
+Imstepf_F4_Uniform,25_Percent_Noise,cos(x3 * x0) + sin(x0),7,0.1212196651452559,33.33333333333333
+Imstepf_F4_Uniform,25_Percent_Noise,cos(x1 * x1) + sin(sin(x0)),8,0.1052339489095003,0.0
+Imstepf_F4_Uniform,25_Percent_Noise,cos(x1 * x1) + sin(sin(sin(x0))),9,0.1009844696497186,0.0
+Imstepf_F4_Uniform,25_Percent_Noise,cos(x3 * x0) - (cos(cos(x0)) ^ x4),10,0.0259168439546959,0.0
+Imstepf_F4_Uniform,25_Percent_Noise,(cos(x0 * x3) - (x0 / x4)) - cos(x1),11,0.0031357436146198,0.0
+Imstepf_F4_Uniform,25_Percent_Noise,cos(x0 * x3) + (-0.9160453736729423 - cos(x4)),12,0.0018405978998126,0.0
+Imstepf_F4_Uniform,25_Percent_Noise,cos(x1 * x2) - (sin(x1) * (3.6667473945397457 - x2)),14,0.0002656192292406,33.33333333333333
+Imstepf_F4_Uniform,25_Percent_Noise,(cos(x2 * x1) + sin(x0)) - (sin(x3) * ((x2 - x2) - cos(x4))),17,1.755234558282031e-07,100.0
+Imstepf_F1_LHS,3_Percent_Noise,x1,1,253.8050777501866,20.0
+Imstepf_F1_LHS,3_Percent_Noise,x1 * x0,3,20.793729596276386,0.0
+Imstepf_F1_LHS,3_Percent_Noise,19.89745209793433,4,1.1921124654636437,0.0
+Imstepf_F1_LHS,3_Percent_Noise,15.941233347934991 + x2,6,0.2485256756433211,20.0
+Imstepf_F1_LHS,3_Percent_Noise,(x2 + x2) - -11.985014597425328,8,0.0703386213698735,0.0
+Imstepf_F1_LHS,3_Percent_Noise,(cos(x2) - -16.50660406486674) + x2,9,0.0183332818902208,20.0
+Imstepf_F1_LHS,3_Percent_Noise,21.316683075684427 + (2.5102661579256376 * cos(x2)),12,0.0120276448722136,0.0
+Imstepf_F1_LHS,3_Percent_Noise,(cos(cos(x2)) + cos(x2)) + (cos(x2) - -20.26473375444313),14,0.0059649577453784,0.0
+Imstepf_F1_LHS,3_Percent_Noise,sin(x2 / -0.44849579635383297) - (sin(x2) - 19.495382316587147),15,0.0026463561281344,0.0
+Imstepf_F1_LHS,3_Percent_Noise,(20.588299437921236 + cos(x2)) - sin(cos(x2 * 1.916583168888046)),16,0.0009281127624769,0.0
+Imstepf_F1_LHS,3_Percent_Noise,sin(x2) + ((x2 + 16.6374733661587) - cos(1.9404287247695717 * x2)),17,0.0008459454838463,20.0
+Imstepf_F1_LHS,3_Percent_Noise,(17.98611526191937 + (0.5387882728941108 * x2)) - cos(1.8709265290428827 * x2),19,0.0002562662351568,0.0
+Imstepf_F1_LHS,3_Percent_Noise,(20.575200908752976 + cos(x2)) - (cos(x2 * 1.9214512679462037) / 1.2061072709600413),20,0.0001534140300872,0.0
+Imstepf_F1_LHS,3_Percent_Noise,(20.495638572020912 + sin(cos(x2))) - (cos(x2 * 1.933203296016137) / 1.1079938115147103),21,7.433896683056613e-05,0.0
+Imstepf_F1_LHS,3_Percent_Noise,sin(x2 + (x2 - 2.378845797336597)) - ((sin(x2) * 1.2110188559657142) - 19.465111472909292),22,7.560034195722047e-06,0.0
+Imstepf_F1_LHS,3_Percent_Noise,sin(x2 + (x2 - 2.3369499488824554)) - ((sin(x2) - 19.946417766124384) + (1.4178303560907117 / x2)),24,4.467244818358724e-06,0.0
+Imstepf_F1_LHS,3_Percent_Noise,sin((x2 - 2.3400096491802898) + x2) - (((0.8688911017924532 + x2) / (x2 * x2)) + (sin(x2) - 19.89871930982926)),28,4.343216309993565e-06,0.0
+Imstepf_F1_LHS,3_Percent_Noise,sin(x2 + (x2 - 2.3389998537272674)) - ((sin(x2) - 19.918339628398805) + (1.1810949615562127 / (x2 - 0.36301973323035513))),29,4.296720953569275e-06,0.0
+Imstepf_F1_LHS,3_Percent_Noise,sin((-0.42592205753497603 - 1.716307912293306) + (1.9584006632830238 * x2)) - (sin(x2 - 0.11281273759669753) - 19.649810169328813),30,1.627181371573425e-06,0.0
+Imstepf_F1_RandSample,3_Percent_Noise,x1 + x1,3,133.5866656019625,0.0
+Imstepf_F1_RandSample,3_Percent_Noise,(x1 * x0) + x3,5,3.715718491050867,20.0
+Imstepf_F1_RandSample,3_Percent_Noise,15.744293718659042 + x4,6,1.5338657312665267,20.0
+Imstepf_F1_RandSample,3_Percent_Noise,x1 + (x4 + (x0 + (x3 + x2))),9,4.0866544006701693e-10,100.0
+Imstepf_F1_Uniform,3_Percent_Noise,x4 + x4,3,146.71201138728009,0.0
+Imstepf_F1_Uniform,3_Percent_Noise,x4 + (x4 + x4),5,64.13128149030726,0.0
+Imstepf_F1_Uniform,3_Percent_Noise,(x3 * x1) + cos(x2),6,21.776049850835538,0.0
+Imstepf_F1_Uniform,3_Percent_Noise,(cos(cos(x4)) + x4) * x1,7,7.244049796255904,0.0
+Imstepf_F1_Uniform,3_Percent_Noise,(x1 / 0.24907453565744803) + x3,8,6.105815827938956e-05,20.0
+Imstepf_F1_Uniform,3_Percent_Noise,(x2 + (x3 + (x2 + x0))) + x3,9,1.4665464694936993e-06,20.0
+Imstepf_F1_Uniform,3_Percent_Noise,((x4 + x1) + ((x1 + x3) + (x1 - x4))) + x4,13,1.4665464694930036e-06,40.0
+Imstepf_F1_Uniform,3_Percent_Noise,(x2 / 1.000000516732051) + (x4 + ((x2 + x2) + x0)),14,1.466542059678351e-06,40.0
+Imstepf_F1_Uniform,3_Percent_Noise,(((x3 + x0) + (x3 + x1)) + x3) - (cos(x1) / ((x2 ^ x3) ^ x2)),18,1.466233513963182e-06,40.0
+Imstepf_F1_Uniform,3_Percent_Noise,(((x0 + x3) + (x0 + x4)) + x3) - ((cos(x2) - (x2 + x0)) / ((x2 ^ x2) ^ x2)),22,1.464186947867187e-06,20.0
+Imstepf_F1_Uniform,3_Percent_Noise,(((x3 + x0) + (x3 + x1)) + x3) - (((x3 - x4) / cos(x2)) / ((x2 - x4) + (x1 ^ x0))),24,1.4537661393135875e-06,40.0
+Imstepf_F2_LHS,3_Percent_Noise,x4,1,931800.8677236056,0.0
+Imstepf_F2_LHS,3_Percent_Noise,x0 ^ x4,3,409402.88417903066,0.0
+Imstepf_F2_LHS,3_Percent_Noise,(x0 ^ x4) + x1,5,404899.6250673447,0.0
+Imstepf_F2_LHS,3_Percent_Noise,(x0 ^ x4) + (x2 ^ x3),7,242039.6662295284,0.0
+Imstepf_F2_LHS,3_Percent_Noise,((x0 + x0) * (x2 * x4)) * x0,9,206846.34430038556,0.0
+Imstepf_F2_LHS,3_Percent_Noise,(2.914048752221087 ^ x2) * (x4 + x4),10,203574.60508857077,0.0
+Imstepf_F2_LHS,3_Percent_Noise,(0.9039958511124823 / 0.004731836985588877) * x2,11,48392.83886335066,0.0
+Imstepf_F2_LHS,3_Percent_Noise,((x3 + x3) + x3) - (-886.0367656240246 - x0),12,4576.974999513529,0.0
+Imstepf_F2_LHS,3_Percent_Noise,(x3 + (x4 * (x0 * x2))) - (-886.0367656240246 - x0),14,247.8287760309586,0.0
+Imstepf_F2_LHS,3_Percent_Noise,(x1 + x1) * (-30.63680942222831 / (x1 / -15.643003257074461)),15,118.5612641995734,0.0
+Imstepf_F2_LHS,3_Percent_Noise,sin(x2) + ((x2 + x3) - ((-958.6701664655285 - x4) - sin(x3))),16,0.3012582622659643,0.0
+Imstepf_F2_LHS,3_Percent_Noise,(cos(1663.4733090438108) + x2) * ((344.6296795507587 - -624.7625745289657) / x2),19,3.0002340571227714e-10,0.0
+Imstepf_F2_RandSample,3_Percent_Noise,x0,1,998181.2569263044,0.0
+Imstepf_F2_RandSample,3_Percent_Noise,x1 ^ x2,3,462460.98886016425,0.0
+Imstepf_F2_RandSample,3_Percent_Noise,x0 + (x1 ^ x2),5,458133.4306852939,0.0
+Imstepf_F2_RandSample,3_Percent_Noise,909.5380921743567 + x1,6,8036.87289125478,0.0
+Imstepf_F2_RandSample,3_Percent_Noise,sin(x2) + 1003.9357411649618,7,0.080070631247414,0.0
+Imstepf_F2_RandSample,3_Percent_Noise,(x3 / x3) + 1002.1890813167471,8,0.0001346557248627,0.0
+Imstepf_F2_RandSample,3_Percent_Noise,1003.1924825058247 + (sin(x2) / (x4 ^ x2)),11,9.610662771678058e-05,0.0
+Imstepf_F2_RandSample,3_Percent_Noise,1003.2251435198395 + sin(x0 * (-0.03271884990333852 / x4)),14,5.344272884766069e-05,0.0
+Imstepf_F2_RandSample,3_Percent_Noise,(cos(x4) / (x1 ^ x4)) + ((x1 / x1) + 1002.1964512990435),15,5.012386252606703e-05,0.0
+Imstepf_F2_RandSample,3_Percent_Noise,(-0.23226354317244266 / x4) + (941.3623413867986 - -61.889715998046164),16,4.165063830012801e-06,0.0
+Imstepf_F2_RandSample,3_Percent_Noise,(5.3156678887025715 * 188.72337858009465) + (sin(sin(251.34151256522384)) * cos(-30.379906953341923 / x4)),24,2.685944884040758e-06,0.0
+Imstepf_F2_RandSample,3_Percent_Noise,(0.01566734815847326 * x4) + ((978.9991767657972 - (-39.208610203017045 - -43.75294926147791)) - -28.67439130357838),26,2.319920425368153e-06,0.0
+Imstepf_F2_Uniform,3_Percent_Noise,x4,1,1365915.6556075634,0.0
+Imstepf_F2_Uniform,3_Percent_Noise,x0 ^ x1,3,906511.902474947,0.0
+Imstepf_F2_Uniform,3_Percent_Noise,(x0 ^ x0) + x3,5,889560.905810922,0.0
+Imstepf_F2_Uniform,3_Percent_Noise,x4 + 1102.648502796926,6,4366.205814824521,0.0
+Imstepf_F2_Uniform,3_Percent_Noise,(x4 * x4) + 1102.648502796926,8,2859.167110650604,0.0
+Imstepf_F2_Uniform,3_Percent_Noise,1139.433666620951 + (x3 * (x3 + x3)),10,71.62863089193611,0.0
+Imstepf_F2_Uniform,3_Percent_Noise,((x3 - x3) + 42.66968691320664) + 1130.1261091454357,13,6.18283732315832e-05,0.0
+Imstepf_F2_Uniform,3_Percent_Noise,1172.765286899929 + ((x3 * (x3 + x3)) * 0.0009144847736799606),15,1.816928223426209e-06,0.0
+Imstepf_F2_Uniform,3_Percent_Noise,1172.7654725651466 + ((x2 * (x1 + x2)) * (x3 + (0.0009201729068579415 - x3))),19,1.809240627835045e-06,0.0
+Imstepf_F2_Uniform,3_Percent_Noise,1172.7949972159488 + (((x3 + x3) * x4) * ((-0.0017656712797175507 - x3) + (1.000427931575351 * x3))),24,8.61196966093176e-09,0.0
+Imstepf_F3_LHS,3_Percent_Noise,x0,1,2226855.363723512,20.0
+Imstepf_F3_LHS,3_Percent_Noise,x3 ^ x3,3,1228763.3848874182,0.0
+Imstepf_F3_LHS,3_Percent_Noise,(x0 ^ x2) * x1,5,601328.8599484293,0.0
+Imstepf_F3_LHS,3_Percent_Noise,1500.1658887914532 - x1,6,0.2804768619719255,0.0
+Imstepf_F3_LHS,3_Percent_Noise,sin(x2) - -1496.9504897970608,7,0.1248848729953336,0.0
+Imstepf_F3_LHS,3_Percent_Noise,(x4 - x4) - -1496.3039762915867,8,7.985344959060526e-05,0.0
+Imstepf_F3_LHS,3_Percent_Noise,1496.2505866329582 + (0.01342293964499924 * x4),11,1.819900448409564e-05,0.0
+Imstepf_F3_LHS,3_Percent_Noise,((x4 * 1.0134229395699457) - x4) - -1496.2505866332383,13,1.8199004483906827e-05,0.0
+Imstepf_F3_LHS,3_Percent_Noise,(((x4 - -0.08500250623184857) - x4) * (cos(x4) / x3)) - -1496.3159386516702,18,9.655559267916478e-06,0.0
+Imstepf_F3_RandSample,3_Percent_Noise,x3,1,1778102.344801779,0.0
+Imstepf_F3_RandSample,3_Percent_Noise,x2 ^ x3,3,807851.6835199186,0.0
+Imstepf_F3_RandSample,3_Percent_Noise,1341.9320893818203 - x0,6,0.267092272513344,0.0
+Imstepf_F3_RandSample,3_Percent_Noise,1338.4726304225833 + sin(x0),7,0.0751541701916733,0.0
+Imstepf_F3_RandSample,3_Percent_Noise,1337.697433131805 + (x2 - x2),8,0.0009984203172198,0.0
+Imstepf_F3_RandSample,3_Percent_Noise,cos(cos(x4) / x4) + 1336.7248760194718,10,0.0001601376313852,0.0
+Imstepf_F3_RandSample,3_Percent_Noise,(0.05164811253297935 * x4) + 1337.5030267310244,11,2.332039363067601e-05,0.0
+Imstepf_F3_RandSample,3_Percent_Noise,(sin(cos(x4)) / (x4 * x4)) + 1337.7488275428384,12,2.054510984368913e-05,0.0
+Imstepf_F3_RandSample,3_Percent_Noise,1336.7421994359393 + cos(cos(x4) / -2.5721789090043514),13,1.0889843760828408e-05,0.0
+Imstepf_F3_RandSample,3_Percent_Noise,(sin(25.37921948986152 / x4) * sin(cos(2429.9759576522647))) + 1337.712765972142,19,8.224058541959767e-06,0.0
+Imstepf_F3_Uniform,3_Percent_Noise,x3,1,2521191.797473938,0.0
+Imstepf_F3_Uniform,3_Percent_Noise,x3 ^ x0,3,1588281.3885074707,0.0
+Imstepf_F3_Uniform,3_Percent_Noise,x2 + (x3 ^ x0),5,1580819.7004279336,0.0
+Imstepf_F3_Uniform,3_Percent_Noise,x0 ^ (x1 - cos(x4)),6,1051069.8557201435,0.0
+Imstepf_F3_Uniform,3_Percent_Noise,sin(cos(x1)) + 1591.8238932181373,8,0.41688110854758,0.0
+Imstepf_F3_Uniform,3_Percent_Noise,(x0 / 15190.359704316805) + 1591.8238932181373,11,0.0029769886882217,0.0
+Imstepf_F3_Uniform,3_Percent_Noise,(x0 / ((x0 ^ x0) + x0)) + 1591.8238932181373,12,0.001768476040224,0.0
+Imstepf_F3_Uniform,3_Percent_Noise,sin(x1 - x2) + ((x3 - x0) + 1591.8238932181373),13,0.0002819111381176,0.0
+Imstepf_F3_Uniform,3_Percent_Noise,(cos(x0) / (x0 ^ x0)) + ((x3 - x0) + 1591.8234275598704),15,4.327731056017775e-05,0.0
+Imstepf_F3_Uniform,3_Percent_Noise,((cos(x4) / (x0 * x1)) / x4) + ((x3 - x0) + 1591.8238932181373),17,3.7149179938297104e-05,0.0
+Imstepf_F3_Uniform,3_Percent_Noise,((cos(x4) / (x2 * x1)) / x4) + (sin(x3 - x0) + 1591.8238932181373),18,3.6152866422798336e-05,0.0
+Imstepf_F3_Uniform,3_Percent_Noise,(sin(cos(x4)) / ((x0 * x1) * x0)) + (sin(x3 - x0) + 1591.8238932181373),19,2.609014689630434e-05,0.0
+Imstepf_F3_Uniform,3_Percent_Noise,1591.8701840143544 + (cos(5003.140054956316 / 3185.0703917541296) * (x4 - (x0 ^ x0))),21,9.996408859561911e-06,0.0
+Imstepf_F3_Uniform,3_Percent_Noise,(((x0 - 2.295035265853116) / 17152.182728116586) * ((x1 + x0) * (x0 * x3))) + (1591.8224255018024 + (x2 - x0)),28,9.41994641821358e-10,0.0
+Imstepf_F3_Uniform,3_Percent_Noise,(((x0 - 2.295035265853116) / (x3 + 17152.182728116586)) * ((x1 + x0) * (x0 * x3))) + (1591.8224255018024 + (x2 - x0)),30,9.174462671793647e-10,0.0
+Imstepf_F4_LHS,3_Percent_Noise,x2,1,20.930258246411316,0.0
+Imstepf_F4_LHS,3_Percent_Noise,sin(x0),2,0.6312941945559145,33.33333333333333
+Imstepf_F4_LHS,3_Percent_Noise,sin(sin(x0)),3,0.6279002849679014,0.0
+Imstepf_F4_LHS,3_Percent_Noise,cos(x2 * x1),4,0.383914330636132,33.33333333333333
+Imstepf_F4_LHS,3_Percent_Noise,cos((x0 ^ x2) / x3),6,0.3823414675162418,0.0
+Imstepf_F4_LHS,3_Percent_Noise,cos(x2 * x1) + sin(x0),7,0.1898466163038547,66.66666666666666
+Imstepf_F4_LHS,3_Percent_Noise,cos(x2 * x1) + sin(sin(x0)),8,0.158813745529627,33.33333333333333
+Imstepf_F4_LHS,3_Percent_Noise,cos(x2 * x1) + sin(sin(sin(x0))),9,0.1481796485833544,33.33333333333333
+Imstepf_F4_LHS,3_Percent_Noise,cos(x2 * x1) + sin(x0 + cos(x4)),10,0.0842535433969589,33.33333333333333
+Imstepf_F4_LHS,3_Percent_Noise,cos(x1 * x2) + sin(sin(x4) + (x3 - x0)),12,0.0598015900984692,33.33333333333333
+Imstepf_F4_LHS,3_Percent_Noise,(sin(x3) * cos(x4)) + (sin(x0) + cos(x2 * x1)),13,0.0007127918743678,100.0
+Imstepf_F4_RandSample,3_Percent_Noise,x2,1,17.984578781910983,0.0
+Imstepf_F4_RandSample,3_Percent_Noise,sin(x0),2,0.7221153486700721,33.33333333333333
+Imstepf_F4_RandSample,3_Percent_Noise,sin(sin(x0)),3,0.7038205364518566,0.0
+Imstepf_F4_RandSample,3_Percent_Noise,cos(x1 * x2),4,0.3517029192008892,33.33333333333333
+Imstepf_F4_RandSample,3_Percent_Noise,cos(x2 * x1) + cos(x3),7,0.260213002129072,33.33333333333333
+Imstepf_F4_RandSample,3_Percent_Noise,cos(x1 * x2) + sin(sin(x0)),8,0.2313937720577596,33.33333333333333
+Imstepf_F4_RandSample,3_Percent_Noise,cos(x1 * x2) + cos(x4 + x0),9,0.0248606964505627,33.33333333333333
+Imstepf_F4_RandSample,3_Percent_Noise,(cos(x2 * x1) - cos(x4)) + sin(x0),10,0.0184532230692939,66.66666666666666
+Imstepf_F4_RandSample,3_Percent_Noise,(sin(x0) + cos(x1 * x2)) - (cos(x4) * cos(cos(x3))),14,0.0029280219826632,66.66666666666666
+Imstepf_F4_RandSample,3_Percent_Noise,(sin(x0) + cos(x2 * x1)) - (cos(x4) * cos(x3 - -1.5800392639535343)),18,4.293167432655623e-06,66.66666666666666
+Imstepf_F4_RandSample,3_Percent_Noise,(sin(x0) + cos(x2 * x1)) - ((cos(x4) * 0.9999882034555303) * cos(x3 - -1.5707098039099214)),23,6.167716325586293e-10,66.66666666666666
+Imstepf_F4_RandSample,3_Percent_Noise,((sin(x0) + 1.8105455919782783e-5) + cos(x2 * x1)) - ((cos(x4) - sin(-2.4666478184389096e-5)) * cos(-1.5706974852361313 - x3)),29,6.060722664543744e-10,66.66666666666666
+Imstepf_F4_Uniform,3_Percent_Noise,x0,1,19.500192330637923,0.0
+Imstepf_F4_Uniform,3_Percent_Noise,sin(x0),2,0.6318044599678254,33.33333333333333
+Imstepf_F4_Uniform,3_Percent_Noise,sin(sin(x0)),3,0.6017650482116547,0.0
+Imstepf_F4_Uniform,3_Percent_Noise,cos(x0 * x0),4,0.3096781546622943,0.0
+Imstepf_F4_Uniform,3_Percent_Noise,sin(cos(x0 * x0)),5,0.3074896780363462,0.0
+Imstepf_F4_Uniform,3_Percent_Noise,sin(x0) + cos(x0 * x3),7,0.1212196651451922,33.33333333333333
+Imstepf_F4_Uniform,3_Percent_Noise,cos(x1 * x1) + sin(sin(x0)),8,0.105233948910028,0.0
+Imstepf_F4_Uniform,3_Percent_Noise,cos(x1 * x1) + sin(sin(sin(x0))),9,0.1009844696502528,0.0
+Imstepf_F4_Uniform,3_Percent_Noise,cos(x3 * x0) - (cos(cos(x0)) ^ x4),10,0.025916843954733,0.0
+Imstepf_F4_Uniform,3_Percent_Noise,cos(x3 * x0) - ((x0 / x4) + cos(x1)),11,0.0031357436141539,0.0
+Imstepf_F4_Uniform,3_Percent_Noise,(-0.9160453737939043 + cos(x3 * x0)) - cos(x4),12,0.0018405978993603,0.0
+Imstepf_F4_Uniform,3_Percent_Noise,(cos(x1 * x2) - cos(x3)) - cos(cos(x3) * sin(x4)),14,0.0006488438016439,33.33333333333333
+Imstepf_F4_Uniform,3_Percent_Noise,(cos(x3 * x0) - sin(cos(x4))) - (x1 / (x4 - cos(x0))),15,0.0005528288139576,0.0
+Imstepf_F4_Uniform,3_Percent_Noise,cos(x3 * x0) - ((x4 / x0) + (1.118767389286196 * cos(x1))),16,0.0005225607284988,0.0
+Imstepf_F4_Uniform,3_Percent_Noise,(cos(x0 * x3) - sin(cos(x3))) - cos(cos(x0) * -0.7372627609187006),17,0.0004150301151399,0.0
+Imstepf_F4_Uniform,3_Percent_Noise,(cos(x1 * x2) - ((x4 / x0) * cos(x4))) - cos(cos(x3) * sin(x4)),18,0.0002126049358724,33.33333333333333
+Imstepf_F4_Uniform,3_Percent_Noise,(cos(x2 * x1) - sin(cos(x4))) - cos((x0 * -0.2133550421744628) * cos(x0)),19,1.0498337483818008e-05,33.33333333333333
+Imstepf_F1_LHS,50_Percent_Noise,x0 - x0,3,406.4953563855087,0.0
+Imstepf_F1_LHS,50_Percent_Noise,sin(x0) + x2,4,279.06207575486707,20.0
+Imstepf_F1_LHS,50_Percent_Noise,x0 * (x4 + x1),5,172.48571133463133,0.0
+Imstepf_F1_LHS,50_Percent_Noise,(x4 - sin(x2)) + x1,6,129.90398563543928,40.0
+Imstepf_F1_LHS,50_Percent_Noise,(x4 - (sin(x2) * x2)) + x1,8,81.65054665099554,40.0
+Imstepf_F1_LHS,50_Percent_Noise,cos(-2.5578220084477383) + (x4 * x1),9,28.21646280885663,0.0
+Imstepf_F1_LHS,50_Percent_Noise,(x4 + ((x2 + x1) + x0)) - sin(sin(x4)),11,11.240474354628782,80.0
+Imstepf_F1_LHS,50_Percent_Noise,(((x2 - x2) - x3) / -0.2517035407641844) + x2,12,2.370624483864376,20.0
+Imstepf_F1_LHS,50_Percent_Noise,(x4 + (x2 + x0)) - (x3 / sin(-2.6122207446506933)),13,0.386512466836371,60.0
+Imstepf_F1_LHS,50_Percent_Noise,(((x2 + x1) + x0) + x4) - (x3 * sin(-1.5626010280764082)),15,1.8492185035274072e-08,80.0
+Imstepf_F1_LHS,50_Percent_Noise,(x1 + (x0 + (x2 + x4))) - ((x3 / sin(-1.5742620928849564)) + sin(2.339572832646902e-5)),21,1.1283549657455394e-09,80.0
+Imstepf_F1_LHS,50_Percent_Noise,(x1 + (x0 + (x2 + x4))) - ((x3 / sin(-1.5692561501283273)) + (-1.5384111326520086e-6 / sin(x0))),23,1.0490387477178523e-09,80.0
+Imstepf_F1_RandSample,50_Percent_Noise,cos(cos(sin(x0))),4,374.0283502563318,0.0
+Imstepf_F1_RandSample,50_Percent_Noise,x4 + (x3 * x1),5,7.260279690770228,20.0
+Imstepf_F1_RandSample,50_Percent_Noise,cos(x2) + ((x3 * x4) + x3),8,5.725555169970905,20.0
+Imstepf_F1_RandSample,50_Percent_Noise,(x4 + (x3 + x1)) + (x0 + x2),9,3.562721633883777e-09,100.0
+Imstepf_F1_Uniform,50_Percent_Noise,x3 * x3,3,14.90014439727883,0.0
+Imstepf_F1_Uniform,50_Percent_Noise,(x3 * x4) + x2,5,5.231317495253784,20.0
+Imstepf_F1_Uniform,50_Percent_Noise,(x2 - cos(x3)) * x3,6,2.584534130615489,0.0
+Imstepf_F1_Uniform,50_Percent_Noise,sin(x4) + (x0 / 0.19120843467000054),9,0.0304431012178131,0.0
+Imstepf_F1_Uniform,50_Percent_Noise,sin(sin(x4)) + (x0 / 0.1917105989020858),10,0.0188160974767639,0.0
+Imstepf_F1_Uniform,50_Percent_Noise,(sin(x1) / x4) + (x0 / 0.19646261959929112),11,0.000905515137143,0.0
+Imstepf_F1_Uniform,50_Percent_Noise,sin(sin(0.20494005544596336)) + (x0 / 0.2000010749977565),13,1.466276858723968e-06,0.0
+Imstepf_F1_Uniform,50_Percent_Noise,sin(sin(x4 - x4)) + ((x0 - -0.04042588870620771) / 0.20000128460387095),17,1.466270040342422e-06,0.0
+Imstepf_F2_LHS,50_Percent_Noise,x1,1,903321.169797907,0.0
+Imstepf_F2_LHS,50_Percent_Noise,x1 ^ x4,3,423431.7830299184,0.0
+Imstepf_F2_LHS,50_Percent_Noise,(x1 ^ x4) + x2,5,418784.35508735065,0.0
+Imstepf_F2_LHS,50_Percent_Noise,x3 - -950.6193474366139,6,0.2699908295833251,0.0
+Imstepf_F2_LHS,50_Percent_Noise,cos(x3) - -955.1331653160811,7,0.1117490104307359,0.0
+Imstepf_F2_LHS,50_Percent_Noise,953.4791911866215 + (x4 / x4),8,0.0001760691247344,0.0
+Imstepf_F2_LHS,50_Percent_Noise,(cos(x3) / (x3 ^ x3)) - -954.4883315697028,11,5.21378774517606e-05,0.0
+Imstepf_F2_LHS,50_Percent_Noise,(cos(-1.911896094724681) / x3) - -954.5675224651039,12,2.7794827472122644e-05,0.0
+Imstepf_F2_LHS,50_Percent_Noise,(sin(cos(x3)) / (2.7379187553447992 ^ x3)) - -954.495625903146,15,2.4356534390735563e-05,0.0
+Imstepf_F2_LHS,50_Percent_Noise,(cos(x3 / 0.36481695513850176) / ((x3 * x2) * x3)) - -954.4869688317054,18,1.6369708210715284e-05,0.0
+Imstepf_F2_LHS,50_Percent_Noise,(cos(x3 / 0.3554173094611882) / (x3 / 0.06432357292446114)) - -954.4819732523702,19,1.0894679530737942e-06,0.0
+Imstepf_F2_LHS,50_Percent_Noise,(cos(x3 / 0.3551978202842328) / (x4 + (x3 / 0.06930980651914985))) - -954.4818204593608,21,9.5212811686924e-07,0.0
+Imstepf_F2_RandSample,50_Percent_Noise,x1,1,921789.672591678,0.0
+Imstepf_F2_RandSample,50_Percent_Noise,x2 ^ x3,3,381383.7884279156,0.0
+Imstepf_F2_RandSample,50_Percent_Noise,(x2 ^ x3) + x4,5,379399.714840562,0.0
+Imstepf_F2_RandSample,50_Percent_Noise,959.6285308250386 + x2,6,0.2366663527993453,0.0
+Imstepf_F2_RandSample,50_Percent_Noise,964.5044354602471 + sin(x4),7,0.1113563310259735,0.0
+Imstepf_F2_RandSample,50_Percent_Noise,963.8162824992448 + (x0 - x0),8,0.0184942754990789,0.0
+Imstepf_F2_RandSample,50_Percent_Noise,963.9558111537987 + -0.0037178287477212333,9,4.96950942825473e-05,0.0
+Imstepf_F2_RandSample,50_Percent_Noise,964.0055273875678 + (-0.22784128952348806 / x2),11,7.564535037308112e-06,0.0
+Imstepf_F2_RandSample,50_Percent_Noise,((x2 + x2) - (-85.92775507139083 / cos(-1.3788701283743574))) * (x2 + ((x2 - 2.1196873255843625) / -0.9909560939180433)),28,4.544935768025859e-06,0.0
+Imstepf_F2_Uniform,50_Percent_Noise,x4,1,1365915.3730043122,0.0
+Imstepf_F2_Uniform,50_Percent_Noise,x0 ^ x0,3,893954.5987492763,0.0
+Imstepf_F2_Uniform,50_Percent_Noise,(x0 ^ x0) + x2,5,889558.9986012897,0.0
+Imstepf_F2_Uniform,50_Percent_Noise,x0 + 1168.8045225521969,6,0.2333479576410069,0.0
+Imstepf_F2_Uniform,50_Percent_Noise,1172.098237527159 - sin(x4),7,0.0624254930430959,0.0
+Imstepf_F2_Uniform,50_Percent_Noise,1173.8162662587602 - (x4 / x0),8,0.0008678084277802,0.0
+Imstepf_F2_Uniform,50_Percent_Noise,((x4 - x1) * x3) - -1172.5501482447355,10,5.556064803242901e-05,0.0
+Imstepf_F2_Uniform,50_Percent_Noise,1172.8381830965473 - (cos(x4) * (x0 - x4)),11,5.0896029040962576e-05,0.0
+Imstepf_F2_Uniform,50_Percent_Noise,1172.8367296731801 - (-0.07803665485721467 * cos(x4)),12,4.9677144243387246e-05,0.0
+Imstepf_F2_Uniform,50_Percent_Noise,1172.6476212618666 - (cos(cos(x0)) * -0.19126078512951908),13,3.5625885343125504e-05,0.0
+Imstepf_F2_Uniform,50_Percent_Noise,1172.7002794504017 - ((-0.030076512981448606 * x0) * cos(cos(x0))),15,1.7215549747985118e-05,0.0
+Imstepf_F2_Uniform,50_Percent_Noise,1172.80266710454 - (0.044910390549641376 * cos(x2 / 0.5278100503360484)),17,6.386939903652303e-06,0.0
+Imstepf_F2_Uniform,50_Percent_Noise,1172.8026314180447 - (sin(0.0447729259610028) * cos(x0 / 0.5225741501382004)),18,5.83125527254872e-06,0.0
+Imstepf_F2_Uniform,50_Percent_Noise,(1172.67538779142 - (cos(x4) / (x1 ^ x2))) - ((-0.035245015327009806 * x4) * cos(cos(x1))),22,3.3017011138069274e-06,0.0
+Imstepf_F2_Uniform,50_Percent_Noise,(1172.7673906946502 + (sin(x2) * 0.12305089899263104)) - (cos(cos(x0)) * (0.2011179949249378 * sin(x0))),24,1.0250836530069122e-06,0.0
+Imstepf_F2_Uniform,50_Percent_Noise,(1172.771422508333 + (sin(x4) * 0.11582031126279148)) - ((sin(0.19073809617910906) * sin(x0)) * cos(cos(x0))),25,5.8036868611677e-07,0.0
+Imstepf_F2_Uniform,50_Percent_Noise,(1172.733589084624 - (-0.19700974729774734 / x1)) - (((0.003090881998173892 * x3) * x4) * cos(x1 / -0.49970027506912285)),28,2.3205033560251845e-07,0.0
+Imstepf_F3_LHS,50_Percent_Noise,x0,1,2004575.132560233,20.0
+Imstepf_F3_LHS,50_Percent_Noise,x4 ^ x4,3,1170693.44356265,0.0
+Imstepf_F3_LHS,50_Percent_Noise,(x0 ^ x4) * x3,5,898547.793812205,0.0
+Imstepf_F3_LHS,50_Percent_Noise,x1 / 0.0026927308361200442,6,48954.2789845368,0.0
+Imstepf_F3_LHS,50_Percent_Noise,(1417.2067422685677 + x2) - x2,8,6.954650564148802,0.0
+Imstepf_F3_LHS,50_Percent_Noise,(x1 + 1415.2852488952815) - cos(x1),9,0.0379229569253678,0.0
+Imstepf_F3_LHS,50_Percent_Noise,(x3 - -35459.516398349246) / 24.977001514335324,11,0.0004982931583673,0.0
+Imstepf_F3_LHS,50_Percent_Noise,(x3 + (50085.2779149944 + x4)) / 35.28075371339291,13,0.0003790950019565,0.0
+Imstepf_F3_LHS,50_Percent_Noise,(58976.22367514993 - -34284.21778030187) / 65.6835879337737,14,6.564407437784114e-05,0.0
+Imstepf_F3_LHS,50_Percent_Noise,1419.840456754613 - ((0.025429788265386093 / x1) * sin(sin(x1))),15,6.313085004210054e-05,0.0
+Imstepf_F3_LHS,50_Percent_Noise,(cos(x4) + (42123.607355309665 - -31156.284596562113)) / 51.61081881246959,17,7.645519143896248e-06,0.0
+Imstepf_F3_RandSample,50_Percent_Noise,x0,1,2738487.0564591056,20.0
+Imstepf_F3_RandSample,50_Percent_Noise,x0 ^ x0,3,1188352.4386850833,0.0
+Imstepf_F3_RandSample,50_Percent_Noise,(x0 ^ x0) + x4,5,1182911.6959184303,0.0
+Imstepf_F3_RandSample,50_Percent_Noise,1663.3406804791434 - x3,6,0.220562940360948,0.0
+Imstepf_F3_RandSample,50_Percent_Noise,sin(x3) + 1659.912493369033,7,0.0414638907476915,0.0
+Imstepf_F3_RandSample,50_Percent_Noise,(x3 / x3) - -1658.1315929791454,8,0.0022702373092124,0.0
+Imstepf_F3_RandSample,50_Percent_Noise,1658.9806788514786 - (sin(x4) / x4),9,0.0015745312811379,0.0
+Imstepf_F3_RandSample,50_Percent_Noise,1659.3102088523176 - (cos(sin(x4)) / x3),10,0.0003802424724195,0.0
+Imstepf_F3_RandSample,50_Percent_Noise,(x4 * 0.07635092503667336) - -1658.8223459643077,11,0.0001266546441851,0.0
+Imstepf_F3_RandSample,50_Percent_Noise,(0.10481310506827413 * cos(x4)) - -1659.1847541867924,12,0.0001103513035906,0.0
+Imstepf_F3_RandSample,50_Percent_Noise,(0.250822012881569 * cos(cos(x4))) - -1658.9339257517947,13,6.301173263448178e-05,0.0
+Imstepf_F3_RandSample,50_Percent_Noise,(sin(0.25352931449144656) * cos(cos(x4))) - -1658.9339257549516,14,6.301173263419678e-05,0.0
+Imstepf_F3_RandSample,50_Percent_Noise,((0.0387401960958173 * x4) * cos(cos(x4))) - -1659.0036476547125,15,3.5377703913507124e-05,0.0
+Imstepf_F3_RandSample,50_Percent_Noise,(-0.0580828887065574 * cos(x4 * 1.9115685872163266)) - -1659.1345494316013,17,8.753607094254267e-06,0.0
+Imstepf_F3_RandSample,50_Percent_Noise,(cos(1.9115764788541134 * x4) * sin(sin(-0.058145196764867756))) - -1659.1345485531747,19,8.753603487901828e-06,0.0
+Imstepf_F3_RandSample,50_Percent_Noise,1659.0854968556894 + ((sin(x4) / (1.8298416746096293 * x4)) * sin(x4 - 0.48729633612110934)),22,2.0498436419606765e-06,0.0
+Imstepf_F3_Uniform,50_Percent_Noise,x4,1,2521127.29862902,0.0
+Imstepf_F3_Uniform,50_Percent_Noise,x4 ^ x0,3,1587832.3728734015,0.0
+Imstepf_F3_Uniform,50_Percent_Noise,(x4 ^ x0) + x4,5,1580397.9223478383,0.0
+Imstepf_F3_Uniform,50_Percent_Noise,x4 - -1587.8057416947236,6,0.2252801805935585,0.0
+Imstepf_F3_Uniform,50_Percent_Noise,1591.1802566665226 - sin(x4),7,0.0586456785065851,0.0
+Imstepf_F3_Uniform,50_Percent_Noise,1592.8982853981302 - (x4 / x0),8,0.0014545198517003,0.0
+Imstepf_F3_Uniform,50_Percent_Noise,1591.7088160444478 - (sin(x4) / x4),9,0.0011293009663351,0.0
+Imstepf_F3_Uniform,50_Percent_Noise,(x0 * (x4 - x0)) + 1591.5558421222784,10,9.31581371477831e-05,0.0
+Imstepf_F3_Uniform,50_Percent_Noise,1591.5660425738995 + (0.0769200114046748 * x3),11,8.879030064162811e-05,0.0
+Imstepf_F3_Uniform,50_Percent_Noise,1591.9298342224956 + (cos(x4) * 0.0991129489017492),12,8.445259719538982e-05,0.0
+Imstepf_F3_Uniform,50_Percent_Noise,(0.24366398462591357 * cos(cos(x0))) + 1591.689072668865,13,5.198651461666991e-05,0.0
+Imstepf_F3_Uniform,50_Percent_Noise,((cos(51.79835296596484) * x3) * cos(cos(x0))) + 1591.7556498770955,16,2.5954491687803085e-05,0.0
+Imstepf_F3_Uniform,50_Percent_Noise,(cos(x1 / 0.5215711571310857) * -0.05722091466063168) + 1591.884570483305,17,1.053839391538406e-05,0.0
+Imstepf_F3_Uniform,50_Percent_Noise,(cos(x1 / 0.5215711571310857) * sin(-0.05722091466063168)) + 1591.884570483305,18,1.0519074972894296e-05,0.0
+Imstepf_F3_Uniform,50_Percent_Noise,((cos(x0) * (-0.00995127088919187 * x4)) * (cos(x1) * x1)) + 1591.9418039277418,19,5.634754227599912e-06,0.0
+Imstepf_F3_Uniform,50_Percent_Noise,1591.9404386258675 + (cos(x2 + -0.18321118110608922) * (cos(x0) * (-0.03319950026726289 * x1))),22,5.448506147212327e-07,0.0
+Imstepf_F4_LHS,50_Percent_Noise,x2,1,20.29787277714419,0.0
+Imstepf_F4_LHS,50_Percent_Noise,sin(x0),2,0.386369294655205,33.33333333333333
+Imstepf_F4_LHS,50_Percent_Noise,sin(sin(x0)),3,0.3733267842919243,0.0
+Imstepf_F4_LHS,50_Percent_Noise,cos(sin(x0) * x1),5,0.191347330574809,0.0
+Imstepf_F4_LHS,50_Percent_Noise,cos(sin(sin(x0)) * x4),6,0.1236082183963866,0.0
+Imstepf_F4_LHS,50_Percent_Noise,sin(-32.72768984930352 / x0),7,0.0788057049004817,0.0
+Imstepf_F4_LHS,50_Percent_Noise,cos(x0 + (47.742324408185645 / x0)),9,0.073460389938745,0.0
+Imstepf_F4_LHS,50_Percent_Noise,sin((-32.15980214000363 + sin(x2)) / x0),10,0.0731545199606038,0.0
+Imstepf_F4_LHS,50_Percent_Noise,(x4 / x0) * sin(-32.65019708923684 / x0),11,0.0341994413615622,0.0
+Imstepf_F4_LHS,50_Percent_Noise,cos(x0 + (47.70581414356917 / x0)) / (x0 / x4),13,0.0295881483757143,0.0
+Imstepf_F4_LHS,50_Percent_Noise,sin(-32.50109343688451 / x0) * ((x4 - sin(x3)) / x0),14,0.0252091269563941,0.0
+Imstepf_F4_LHS,50_Percent_Noise,sin(sin(-32.51103629469904 / x0)) * (x4 / (x0 + sin(x3))),15,0.0206062032893714,0.0
+Imstepf_F4_LHS,50_Percent_Noise,(sin(-32.43347317633868 / x0) / x0) * (x4 + cos(x4 ^ x0)),16,0.0178694552713059,0.0
+Imstepf_F4_LHS,50_Percent_Noise,(cos(x4 + x0) / 1.8374035530416304) + cos(-37.52416894475424 / x0),17,0.0128024795983427,0.0
+Imstepf_F4_LHS,50_Percent_Noise,(sin(-32.159640700244935 / x0) * (x4 / x0)) + (cos(x0 + x4) / x0),18,0.010782868507868,0.0
+Imstepf_F4_LHS,50_Percent_Noise,(sin(x0 / -0.28263005201774977) - (cos(x0) * x4)) * sin(x0 / 1.0835663111184024),20,0.0106645712960019,0.0
+Imstepf_F4_LHS,50_Percent_Noise,(sin(-32.022997239444926 / x0) * (x4 / x0)) + (cos(x0 + x4) / (x0 + cos(x0))),21,0.0091004382244248,0.0
+Imstepf_F4_LHS,50_Percent_Noise,((x4 / (1.418261030717808 ^ x0)) * sin(-32.18866840499759 / x0)) + (cos(x4 + x0) / x0),23,0.0087234965346427,0.0
+Imstepf_F4_LHS,50_Percent_Noise,(sin(x0 / -0.2809568470838874) - (cos(x0) * x4)) * (sin(x0) + (3.5722492284482104 / (x4 * x1))),24,0.0073295992269288,0.0
+Imstepf_F4_LHS,50_Percent_Noise,(sin(x0) + ((13.599425751956316 / x4) / (x1 * x3))) * (sin(x0 / -0.2815553840401734) - (x4 * cos(x0))),26,0.0042758289274283,0.0
+Imstepf_F4_LHS,50_Percent_Noise,(sin(x0 / 1.0686262041133765) - (cos(x4) / (x1 * x1))) * (sin(x0 / -0.2830917264433309) - (cos(x0) * x4)),27,0.0042178550047963,0.0
+Imstepf_F4_LHS,50_Percent_Noise,(sin(x0 / 1.080605868507201) + (0.005254765038799507 / (x2 - x3))) * (sin(x0 / -0.28231014199048443) - (cos(x0) * x4)),29,0.0038149339622335,0.0
+Imstepf_F4_LHS,50_Percent_Noise,(sin(x0 / -0.28325407152597987) - (x4 * cos(x0))) * (sin(x0 / 1.0626048068183611) - (cos(x4) / (1.8387304032931642 ^ x1))),30,0.0032778814127754,0.0
+Imstepf_F1_LHS,5_Percent_Noise,x4,1,256.41416504287736,20.0
+Imstepf_F1_LHS,5_Percent_Noise,x4 * x0,3,18.78219985454179,0.0
+Imstepf_F1_LHS,5_Percent_Noise,20.019145958296868,4,2.09592984753292,0.0
+Imstepf_F1_LHS,5_Percent_Noise,15.973920958297294 + x0,6,1.330949725186616,20.0
+Imstepf_F1_LHS,5_Percent_Noise,(x0 + x3) + 12.017258456816423,8,0.8436639654470725,40.0
+Imstepf_F1_LHS,5_Percent_Noise,x4 + (x2 + (x3 + (x1 + x0))),9,3.8988532225442944e-05,100.0
+Imstepf_F1_RandSample,5_Percent_Noise,x4,1,256.8453646632343,20.0
+Imstepf_F1_RandSample,5_Percent_Noise,x2 * x4,3,18.03921520803732,0.0
+Imstepf_F1_RandSample,5_Percent_Noise,20.222631244931748,4,0.3806706473060009,0.0
+Imstepf_F1_RandSample,5_Percent_Noise,x3 - -16.13724999505947,6,0.0032927753844575,20.0
+Imstepf_F1_RandSample,5_Percent_Noise,((x3 + x3) - -16.13724999505947) - x3,10,0.0032927753844574,20.0
+Imstepf_F1_RandSample,5_Percent_Noise,(x3 * 1.0522103875156508) + 15.92395065672014,11,0.002361333641788,0.0
+Imstepf_F1_RandSample,5_Percent_Noise,cos(x3 * -1.1953049627981138) - -20.075561091087934,12,0.0004785938123038,0.0
+Imstepf_F1_RandSample,5_Percent_Noise,(cos(x3 * -1.1935252875534026) * 1.0298271708903455) - -20.075561091087934,17,0.0001675107615271,0.0
+Imstepf_F1_RandSample,5_Percent_Noise,(cos(1.1909707122788211 * x3) - -19.892513355980174) + (cos(cos(x3)) / x3),18,4.430187306602751e-05,0.0
+Imstepf_F1_RandSample,5_Percent_Noise,(x3 - -16.132095503566376) + (cos(x3 * -3.5695030502536675) / -10.443749514483036),19,2.2142412172234097e-05,20.0
+Imstepf_F1_RandSample,5_Percent_Noise,(cos(-1.4208862632111552 * x3) - -20.242545542877558) - sin(-1.2761372513478435 * x3),20,3.148137046077128e-06,0.0
+Imstepf_F1_RandSample,5_Percent_Noise,(cos(1.2256490534927287 * x3) - -19.99480287947467) + (cos(2.4894026813862706 * x3) / (x3 + (x3 * x3))),26,1.7715485215932731e-06,0.0
+Imstepf_F1_RandSample,5_Percent_Noise,(((0.6505773721453563 * x3) - -16.376119990716802) + (0.3617744773816613 ^ x3)) - (-1.4425938158591276 * cos(cos(x3))),27,1.3622200086081197e-06,0.0
+Imstepf_F1_RandSample,5_Percent_Noise,(cos(x3 * -1.2324167058128217) - -19.977899158389196) + (cos(x3 * -2.4734605110591077) / ((x1 / x3) + (x3 * x3))),28,9.65493598001982e-07,0.0
+Imstepf_F1_RandSample,5_Percent_Noise,(cos(1.2260700335044281 * x3) - -19.993939803878842) + (cos(2.490850127094655 * x3) / ((x3 * x3) * 1.2418221390510173)),29,3.224411297634659e-07,0.0
+Imstepf_F1_Uniform,5_Percent_Noise,cos(x1),2,434.3418760139709,0.0
+Imstepf_F1_Uniform,5_Percent_Noise,x3 * x3,3,14.900144397248969,0.0
+Imstepf_F1_Uniform,5_Percent_Noise,(x1 * x0) + x1,5,4.574309123247853,20.0
+Imstepf_F1_Uniform,5_Percent_Noise,x3 * (x3 + cos(sin(x0))),7,2.2955216322041467,0.0
+Imstepf_F1_Uniform,5_Percent_Noise,(x4 / 0.2117248254183143) - sin(x2),9,0.0897066374931772,0.0
+Imstepf_F1_Uniform,5_Percent_Noise,cos(cos(x2)) + (x4 / 0.2102258351248046),10,0.0026736146874701,0.0
+Imstepf_F1_Uniform,5_Percent_Noise,(x4 / 0.2106788928653109) + cos(sin(cos(x3))),11,0.001185273319532,0.0
+Imstepf_F1_Uniform,5_Percent_Noise,(x4 / 0.2000893997011806) + cos(1.7572365198852529),12,5.961960504950528e-05,0.0
+Imstepf_F1_Uniform,5_Percent_Noise,0.10156531966724237 + ((x1 + x1) / 0.40001124092354007),13,1.4694005642544885e-06,0.0
+Imstepf_F1_Uniform,5_Percent_Noise,sin(0.050419861693402186) + ((x0 + x3) / 0.3999975894451279),14,1.4676790751479334e-06,0.0
+Imstepf_F2_LHS,5_Percent_Noise,x0,1,857553.8720302508,0.0
+Imstepf_F2_LHS,5_Percent_Noise,x3 ^ x4,3,391307.7277229997,0.0
+Imstepf_F2_LHS,5_Percent_Noise,x0 + (x3 ^ x4),5,386694.98414590425,0.0
+Imstepf_F2_LHS,5_Percent_Noise,x1 + 926.0394961866476,6,0.3231401920898131,0.0
+Imstepf_F2_LHS,5_Percent_Noise,930.683052390201 + sin(x0),7,0.1310924030008292,0.0
+Imstepf_F2_LHS,5_Percent_Noise,930.0531342273538 - (x0 - x0),8,2.458510751033848e-05,0.0
+Imstepf_F2_LHS,5_Percent_Noise,930.0528482690924 - (sin(930.0528482690924) ^ x2),12,2.106977955476405e-05,0.0
+Imstepf_F2_LHS,5_Percent_Noise,(x4 - x4) + (930.0296838574359 + (0.006035315666368473 * x2)),15,1.1900783658861784e-05,0.0
+Imstepf_F2_LHS,5_Percent_Noise,930.0910353585584 - (sin(-66.4398535753118) / (x1 + (x2 + x2))),16,5.127590927404979e-06,0.0
+Imstepf_F2_RandSample,5_Percent_Noise,x4,1,1352096.0126478805,0.0
+Imstepf_F2_RandSample,5_Percent_Noise,x1 ^ x0,3,520623.13732896623,0.0
+Imstepf_F2_RandSample,5_Percent_Noise,x3 + (x1 ^ x0),5,515610.3748469365,0.0
+Imstepf_F2_RandSample,5_Percent_Noise,x0 ^ (x4 - cos(x4)),6,309799.8473363212,0.0
+Imstepf_F2_RandSample,5_Percent_Noise,(x3 ^ x0) + (x4 ^ x2),7,307124.4053058418,0.0
+Imstepf_F2_RandSample,5_Percent_Noise,(1158.5588837195098 + x2) - sin(x0),9,13.492076441817842,0.0
+Imstepf_F2_RandSample,5_Percent_Noise,(581.4858682405564 - -581.279927382455) + x0,11,0.3549734759386393,0.0
+Imstepf_F2_RandSample,5_Percent_Noise,x0 + ((578.7918662998538 - -583.6105303834051) - cos(x0)),14,0.0449425249232144,0.0
+Imstepf_F2_RandSample,5_Percent_Noise,((583.4764377831694 - -583.517582839842) - cos(x0)) + cos(x0),15,6.5761380504169675e-09,0.0
+Imstepf_F2_Uniform,5_Percent_Noise,x4,1,1365915.6556075634,0.0
+Imstepf_F2_Uniform,5_Percent_Noise,x0 ^ x0,3,893981.5804355722,0.0
+Imstepf_F2_Uniform,5_Percent_Noise,(x0 ^ x0) + x4,5,889535.8089538955,0.0
+Imstepf_F2_Uniform,5_Percent_Noise,x1 - -1168.037385130068,6,0.8145609089422657,0.0
+Imstepf_F2_Uniform,5_Percent_Noise,cos(x0) + 1172.7129767190816,7,0.5778903689044353,0.0
+Imstepf_F2_Uniform,5_Percent_Noise,(x4 - x1) + 1172.7129767190816,8,0.0005555274237499,0.0
+Imstepf_F2_Uniform,5_Percent_Noise,1173.795552731984 - cos(sin(5303.030478412251)),11,6.182837336724988e-05,0.0
+Imstepf_F2_Uniform,5_Percent_Noise,(x4 - x1) + ((x1 - x3) + 1172.7755960586421),12,6.18283732315832e-05,0.0
+Imstepf_F2_Uniform,5_Percent_Noise,(x3 - x3) + ((x2 * (x4 - x3)) + 1172.7143584961425),14,1.074111699745006e-05,0.0
+Imstepf_F2_Uniform,5_Percent_Noise,(x4 - x1) + (((-0.2110335397029714 - x3) / x2) + 1173.793485831572),17,7.373757915997938e-06,0.0
+Imstepf_F2_Uniform,5_Percent_Noise,(4146.949089782809 / (-4211.974224535262 / x3)) + (1172.7129767190816 + x4),18,3.3600340115869416e-06,0.0
+Imstepf_F2_Uniform,5_Percent_Noise,((0.08992099618038397 / x0) + ((x4 - x3) * x4)) + ((x4 - x3) * 58053.99197670918),21,2.159323920615474e-06,0.0
+Imstepf_F2_Uniform,5_Percent_Noise,(1172.5030232030078 + ((0.009323031898420386 / x3) / (x3 - x2))) + ((x1 * (x4 * x4)) * ((0.0430409401323849 / x0) / x3)),30,1.4535882057840868e-07,0.0
+Imstepf_F3_LHS,5_Percent_Noise,x2,1,2231183.78227693,0.0
+Imstepf_F3_LHS,5_Percent_Noise,x2 ^ x2,3,1296547.0294145923,0.0
+Imstepf_F3_LHS,5_Percent_Noise,x2 + (x2 ^ x2),5,1289288.6012357243,0.0
+Imstepf_F3_LHS,5_Percent_Noise,x0 ^ (x2 - cos(x1)),6,874879.7202582303,0.0
+Imstepf_F3_LHS,5_Percent_Noise,970.6843968547661 - sin(x2),7,277066.82627296814,0.0
+Imstepf_F3_LHS,5_Percent_Noise,1513.894279649714 - (x3 * x3),8,20.03809046385476,0.0
+Imstepf_F3_LHS,5_Percent_Noise,1234.5725500560268 - -263.16164030181227,9,7.71820256165589e-05,0.0
+Imstepf_F3_LHS,5_Percent_Noise,1497.7332609108728 - (x0 * -0.0002338566368129053),11,7.716350144770583e-05,0.0
+Imstepf_F3_LHS,5_Percent_Noise,((x3 - -1.9776026952202802e6) - x2) / 1320.3962819234184,13,7.689192979573847e-05,0.0
+Imstepf_F3_LHS,5_Percent_Noise,(1234.5986332124276 + (-0.20202745816927076 / x4)) - -263.1877117477229,16,1.0865633180344426e-05,0.0
+Imstepf_F3_LHS,5_Percent_Noise,((0.013921924607758512 * x4) + 1498.4983752593994) - cos(cos(cos(-60.10742121786132))),19,5.432994917650409e-06,0.0
+Imstepf_F3_LHS,5_Percent_Noise,((0.02064461583938214 * cos(x4)) + 309.30230323570066) - (5.337243346080159 * -222.66990385764686),22,2.3067320830036773e-06,0.0
+Imstepf_F3_LHS,5_Percent_Noise,(415.63577543835254 - (-136.83698907964376 * 7.908022515071903)) - (sin(65.99409181257923) * cos(x4)),23,2.3067320829688985e-06,0.0
+Imstepf_F3_RandSample,5_Percent_Noise,x4,1,3456477.3669417477,0.0
+Imstepf_F3_RandSample,5_Percent_Noise,x4 ^ x4,3,1566758.444760729,0.0
+Imstepf_F3_RandSample,5_Percent_Noise,x4 * (x2 ^ x3),5,1226729.416729692,0.0
+Imstepf_F3_RandSample,5_Percent_Noise,x4 + 1859.16035093429,6,0.1564556024275819,0.0
+Imstepf_F3_RandSample,5_Percent_Noise,1862.6273044517748 - sin(x4),7,0.0339050905247302,0.0
+Imstepf_F3_RandSample,5_Percent_Noise,1863.470732184435 - (x2 - x2),8,0.0008361355994199,0.0
+Imstepf_F3_RandSample,5_Percent_Noise,946.2058466665891 + 917.2648855177097,9,0.0008361355994199,0.0
+Imstepf_F3_RandSample,5_Percent_Noise,1863.7051324306767 - (x3 / (x4 * x3)),10,0.0001280251937467,0.0
+Imstepf_F3_RandSample,5_Percent_Noise,(cos(x4) / (x1 * x4)) + 1863.4940663598522,11,8.024941198974085e-05,0.0
+Imstepf_F3_RandSample,5_Percent_Noise,(0.07896154217364176 * cos(x4)) + 1863.4985234671515,12,7.944351173937075e-05,0.0
+Imstepf_F3_RandSample,5_Percent_Noise,(cos(x4) / ((x4 + x1) + x1)) + 1863.5007615431641,13,6.356667233450335e-05,0.0
+Imstepf_F3_RandSample,5_Percent_Noise,1863.499175340286 + ((cos(x4) / x1) / (x4 + sin(x3))),14,5.358029371184726e-05,0.0
+Imstepf_F3_RandSample,5_Percent_Noise,(cos(x4 / 0.9202679894885034) / (x1 * x1)) + 1863.4728394904757,16,5.3454766798054415e-05,0.0
+Imstepf_F3_RandSample,5_Percent_Noise,(cos(x4 / 0.3842414011793359) * 0.04028587127917295) + 1863.462912163835,17,2.7395025326127e-06,0.0
+Imstepf_F3_RandSample,5_Percent_Noise,(sin(0.04028587127917295) * cos(x4 / 0.3842414011793359)) + 1863.462912163835,18,2.7394370357851387e-06,0.0
+Imstepf_F3_RandSample,5_Percent_Noise,(cos(x4 / 0.3842414011793359) * sin(0.04028587127917295)) + (1863.462912163835 + (x2 / (1863.4636353555836 ^ x0))),27,2.739436957997474e-06,0.0
+Imstepf_F3_RandSample,5_Percent_Noise,(1863.4629121663684 + ((x4 ^ x2) / (1863.462912163835 ^ x0))) + (0.04027495890445693 * cos(x4 / 0.38424140956440334)),28,2.739413764881758e-06,0.0
+Imstepf_F3_RandSample,5_Percent_Noise,(sin(0.04028585162487185) * cos(x4 / 0.38424140466698364)) + (1863.4629121622656 + ((x2 ^ x2) / (1863.462912163835 ^ x0))),29,2.739410888979944e-06,0.0
+Imstepf_F3_RandSample,5_Percent_Noise,(sin(sin(0.040295673068334266)) * cos(x4 / 0.38424155709171687)) + (1863.462911548714 + ((x2 ^ x2) / (446.7984443781782 ^ x0))),30,2.737586206932474e-06,0.0
+Imstepf_F3_Uniform,5_Percent_Noise,x4,1,2521127.297950292,0.0
+Imstepf_F3_Uniform,5_Percent_Noise,x4 ^ x0,3,1587832.3715750475,0.0
+Imstepf_F3_Uniform,5_Percent_Noise,(x4 ^ x0) + x4,5,1580397.921050995,0.0
+Imstepf_F3_Uniform,5_Percent_Noise,1587.8057414779366 + x4,6,0.225280037649266,0.0
+Imstepf_F3_Uniform,5_Percent_Noise,(x3 - x4) + 1591.899787843145,8,0.0016561196634587,0.0
+Imstepf_F3_Uniform,5_Percent_Noise,1872.0516962744707 + -280.1739922965487,9,0.0016525707152799,0.0
+Imstepf_F3_Uniform,5_Percent_Noise,1591.9195014612417 + (cos(x3) / (x0 * x0)),11,0.0001397442485938,0.0
+Imstepf_F3_Uniform,5_Percent_Noise,(cos(1584.8576613292207) * x0) + 1591.577987400513,12,9.625287312483492e-05,0.0
+Imstepf_F3_Uniform,5_Percent_Noise,x2 - ((0.9230795549534202 * x1) - 1591.5489481891807),13,8.885900940800714e-05,0.0
+Imstepf_F3_Uniform,5_Percent_Noise,((cos(x0) * 0.3627948642054794) / x0) + 1591.9356044277008,14,6.131398707740591e-05,0.0
+Imstepf_F3_Uniform,5_Percent_Noise,(cos(x0 * 63.6670459510066) / (x0 * x0)) + 1591.9161008748276,16,5.248015918325295e-05,0.0
+Imstepf_F3_Uniform,5_Percent_Noise,(sin(x0 - 0.4899639417080999) * (sin(x1) / (x4 + x1))) - -1591.8415794892132,19,9.024785845024611e-06,0.0
+Imstepf_F3_Uniform,5_Percent_Noise,((sin(x0) * (x3 * x1)) * -0.014551256850706245) - ((-2.2322653960234704 / x4) - 1591.146494943151),23,6.073910997113043e-06,0.0
+Imstepf_F4_LHS,5_Percent_Noise,x0,1,14.541472425714597,0.0
+Imstepf_F4_LHS,5_Percent_Noise,sin(x0),2,1.081247045673358,33.33333333333333
+Imstepf_F4_LHS,5_Percent_Noise,x2 - x2,3,0.6211487747095338,0.0
+Imstepf_F4_LHS,5_Percent_Noise,cos(x2 * x1),4,0.2434682413777913,33.33333333333333
+Imstepf_F4_LHS,5_Percent_Noise,sin(cos(x2 * x1)),5,0.2221189515851792,0.0
+Imstepf_F4_LHS,5_Percent_Noise,sin(sin(cos(x2 * x1))),6,0.2191063253326263,0.0
+Imstepf_F4_LHS,5_Percent_Noise,cos(x2 * x1) / (x4 / x3),8,0.2068033954090822,0.0
+Imstepf_F4_LHS,5_Percent_Noise,sin(cos(x1 * x2) - (x0 - x3)),9,0.1431858712176874,0.0
+Imstepf_F4_LHS,5_Percent_Noise,cos(x1 * x2) + (sin(x0) - cos(x4)),10,0.1146352437149592,66.66666666666666
+Imstepf_F4_LHS,5_Percent_Noise,sin(cos(x1 * x2) + (sin(x0) - cos(x4))),11,0.0577889640960775,0.0
+Imstepf_F4_LHS,5_Percent_Noise,cos(x1 * x2) + (sin(x0) + (sin(x3) * cos(x4))),13,1.791529686518177e-09,100.0
+Imstepf_F4_RandSample,5_Percent_Noise,x3,1,20.83854091827709,0.0
+Imstepf_F4_RandSample,5_Percent_Noise,sin(x0),2,0.873333319734879,33.33333333333333
+Imstepf_F4_RandSample,5_Percent_Noise,cos(x1 * x2),4,0.394001238957768,33.33333333333333
+Imstepf_F4_RandSample,5_Percent_Noise,cos(x1 * x2) + sin(x0),7,0.2183194361866345,66.66666666666666
+Imstepf_F4_RandSample,5_Percent_Noise,cos(x1 * x2) + sin(sin(x0)),8,0.1899538073792528,33.33333333333333
+Imstepf_F4_RandSample,5_Percent_Noise,cos(x1 * x2) + sin(sin(sin(x0))),9,0.1795215266597306,33.33333333333333
+Imstepf_F4_RandSample,5_Percent_Noise,cos(x1 * x2) + sin(sin(x4) + x4),10,0.1534165489108655,33.33333333333333
+Imstepf_F4_RandSample,5_Percent_Noise,(cos(x2 * x1) + sin(x0)) - sin(cos(x4)),11,0.1285367479349265,66.66666666666666
+Imstepf_F4_RandSample,5_Percent_Noise,sin((x3 - x0) + sin(x4)) + cos(x2 * x1),12,0.077126798473205,33.33333333333333
+Imstepf_F4_RandSample,5_Percent_Noise,(cos(x1 * x2) + sin(x0)) - (sin(x4 + x3) * cos(x4)),15,0.0239214422185877,66.66666666666666
+Imstepf_F4_RandSample,5_Percent_Noise,(cos(x2 * x1) + sin(x0)) - (sin(x4 + x3) * sin(cos(x4))),16,0.0200468201207104,66.66666666666666
+Imstepf_F4_RandSample,5_Percent_Noise,(sin(x0) + cos(x2 * x1)) - (sin(x3 + -3.141601614489684) * cos(x4)),18,1.3376154441233063e-09,66.66666666666666
+Imstepf_F4_RandSample,5_Percent_Noise,(cos(x2 * x1) + sin(x0)) - (cos(x4 / -0.9999993314821098) * sin(x3 + -3.141601532645062)),23,1.3354182692386099e-09,66.66666666666666
+Imstepf_F4_RandSample,5_Percent_Noise,((sin(x0) - (1.738056247989202e-5 / x0)) + cos(x1 * x2)) - (cos(x4) * sin(-3.1415965329494857 + x3)),25,1.323448192748056e-09,66.66666666666666
+Imstepf_F4_Uniform,5_Percent_Noise,x0,1,19.500192330623797,0.0
+Imstepf_F4_Uniform,5_Percent_Noise,sin(x0),2,0.6318044599549056,33.33333333333333
+Imstepf_F4_Uniform,5_Percent_Noise,sin(sin(x0)),3,0.6017650481987328,0.0
+Imstepf_F4_Uniform,5_Percent_Noise,cos(x0 * x0),4,0.3096781546604582,0.0
+Imstepf_F4_Uniform,5_Percent_Noise,sin(cos(x0 * x0)),5,0.3074896780323491,0.0
+Imstepf_F4_Uniform,5_Percent_Noise,sin(x0) + cos(x3 * x0),7,0.1212196651452483,33.33333333333333
+Imstepf_F4_Uniform,5_Percent_Noise,cos(x1 * x1) + sin(sin(x0)),8,0.1052339489095692,0.0
+Imstepf_F4_Uniform,5_Percent_Noise,sin(sin(sin(x0))) + cos(x1 * x1),9,0.1009844696497883,0.0
+Imstepf_F4_Uniform,5_Percent_Noise,cos(x3 * x0) - (cos(cos(x0)) ^ x4),10,0.0259168439547004,0.0
+Imstepf_F4_Uniform,5_Percent_Noise,cos(x0 * x3) - ((x0 / x4) + cos(x1)),11,0.00313574361456,0.0
+Imstepf_F4_Uniform,5_Percent_Noise,cos(x0 * x3) - (0.9160453737935854 + cos(x4)),12,0.0018405978997546,0.0
+Imstepf_F4_Uniform,5_Percent_Noise,cos(x3 * x0) - (cos(x4) + cos(-0.4126896834270883)),13,0.0018405978997546,0.0
+Imstepf_F4_Uniform,5_Percent_Noise,cos(x3 * x0) - (sin(cos(x0)) + (x1 / 4.434825362143603)),15,0.0008806187300137,0.0
+Imstepf_F4_Uniform,5_Percent_Noise,cos(x3 * x0) - ((x4 / x0) + (cos(x1) * 1.1113268486986436)),16,0.0005438822539354,0.0
+Imstepf_F4_Uniform,5_Percent_Noise,(cos(x0 * x3) + sin(x0)) - (cos(3.222246352120202 + x0) * sin(x3)),18,4.979466458232334e-07,33.33333333333333
+Imstepf_F4_Uniform,5_Percent_Noise,(cos(x2 * x1) + sin(x0)) - (cos(x1 - 4.671990072701689) * sin(x2 - 4.671985143188898)),23,1.755156253593869e-07,66.66666666666666
+Imstepf_F4_Uniform,5_Percent_Noise,(cos(x2 * x1) + (sin(x0) + -0.20885814788472537)) - (cos(4.477685296507128 - x2) * sin(x2 - 4.8864899231152235)),28,1.755156253575128e-07,66.66666666666666
