@@ -10,6 +10,7 @@ import tkinter as tk
 from tkinter import messagebox
 from stat_plots import *
 from calculate_errors import *
+import concurrent.futures as cf
 
 # MATPLOTLIB FONT SETTINGS #
 from matplotlib.font_manager import FontProperties
@@ -26,42 +27,118 @@ plt.rcParams.update({
 
 
 
-''' // For v7 // 
+''' // For v8 // 
 Need to:
-    + Use two test_train_split's for input into runModel ++
-    + change runModel to take X_train, X_test, y_train, y_test, y_val ++
-    - Record mean, SD for z-score transformation
+    - Record mean, SD for z-score transformation ++
     + add RMSE ++
-    + Add a variable density visualization
+    + Add a variable density visualization ++
 '''
 
-base_directory = r'C:\Users\brand\Desktop\Raj-Sindi\training_data\sim_csv_v11\train'
-#dataset_name = 'w1_only_bias_train_e3.csv'
-training_datasets = ['flux_only_nobias_train_e3.csv', 'flux_only_bias_train_e3.csv','w1_only_nobias_train_e3.csv', 'w1_only_bias_train_e3.csv' ]
-dataset_size = 1000 # test/train and  validate size
-# --------------------------------------------- #
-separate_validation = True # True if you want to use a separate validation set
-train_directory = r'C:\Users\brand\Desktop\Raj-Sindi\training_data\sim_csv_v11\train'
-val_directory = r'C:\Users\brand\Desktop\Raj-Sindi\training_data\sim_csv_v11\val'
-#validation_dataset = 'w1_only_bias_val_e3.csv'
-validation_datasets = ['flux_only_nobias_val_e3.csv', 'flux_only_bias_val_e3.csv','w1_only_nobias_val_e3.csv', 'w1_only_val_train_e3.csv' ]
+# -------------------- RUNTIME PARAMS -------------------- #
+# All runtime parameters for easy configuration
+RUNTIME_PARAMS = {
+    'base_directory': r'C:\Users\brand\Desktop\Raj-Sindi\training_data\sim_csv_v11\train',
+    'train_directory': r'C:\Users\brand\Desktop\Raj-Sindi\training_data\sim_csv_v11\train',
+    'val_directory': r'C:\Users\brand\Desktop\Raj-Sindi\training_data\sim_csv_v11\val',
+    'training_datasets': [
+        'flux_only_nobias_train_e3.csv',
+        'flux_only_bias_train_e3.csv',
+        'w1_only_nobias_train_e3.csv',
+        'w1_only_bias_train_e3.csv'
+    ],
+    'validation_datasets': [
+        'flux_only_nobias_val_e3.csv',
+        'flux_only_bias_val_e3.csv',
+        'w1_only_nobias_val_e3.csv',
+        'w1_only_bias_val_e3.csv'
+    ],
+    'dataset_size': 1000,  # test/train and validate size
+    'runtime': 60*5,       # in seconds
+    'scale_boolean': True,
+    'troubleshooting_boolean': False,
+    'batch_boolean': False,
+    'val_batch_boolean': True, # If you want to use process_large_dataset() which means you have a single dataset for training and validation
+    'separate_validation': True # If you want to use process_large_dataset_with_validation() which means you have separate validation datasets 
+}
+# -------------------------------------------------------- #
 
-# --------------------------------------------- #
-# Batch is taken from the base_directory and all subdirectories that end in Noise
-# and all .csv files in those directories
-batch_boolean = False # Batch if you're doing every .csv in the base_directory rather than a single file
-val_batch_boolean = True # Same as above but with  validation datasets
-# --------------------------------------------- #
+global scale_boolean, troubleshooting_boolean
 
-runtime = 60*2 # in seconds
+# Unpack runtime params for legacy code compatibility
+base_directory = RUNTIME_PARAMS['base_directory']
+train_directory = RUNTIME_PARAMS['train_directory']
+val_directory = RUNTIME_PARAMS['val_directory']
+training_datasets = RUNTIME_PARAMS['training_datasets']
+validation_datasets = RUNTIME_PARAMS['validation_datasets']
+dataset_size = RUNTIME_PARAMS['dataset_size']
+runtime = RUNTIME_PARAMS['runtime']
+scale_boolean = RUNTIME_PARAMS['scale_boolean']
+troubleshooting_boolean = RUNTIME_PARAMS['troubleshooting_boolean']
+batch_boolean = RUNTIME_PARAMS['batch_boolean']
+val_batch_boolean = RUNTIME_PARAMS['val_batch_boolean']
+separate_validation = RUNTIME_PARAMS['separate_validation']
 
-def runModel(x_train, x_test, y_train, y_test, x_validate, y_validate, func_name, directory,feature_columns,target_column,runtime):
+
+
+
+# -------------------- PYSR PARAMS -------------------- #
+PYSR_PARAMS = {
+    "procs": 4,
+    "populations": 32,
+    "population_size": 500,
+    "ncycles_per_iteration": 10000,
+    "niterations": 100000,
+    "complexity_of_constants": 5,
+    "constraints": {
+        "/": (-1, 9),
+        "^": (-1, 1),
+        "square": 9,
+        "cube": 9,
+        "exp": 9,
+    },
+    "early_stop_condition": "stop_if(loss,complexity) = loss < 1e-7 && complexity < 20 || loss < 1e-9",
+    "timeout_in_seconds": runtime,
+    "maxsize": 45,
+    "maxdepth": 5,
+    "binary_operators": ["*", "+", "-", "/", "^"],
+    "unary_operators": ["exp", "log"],
+    "nested_constraints": {
+        "log": {"log": 0},
+        "/": {"log": 0},
+    },
+    "progress": False,
+    "weight_randomize": 5,
+    "weight_add_node": 3,
+    "weight_optimize": 0.001,
+    "precision": 32,
+    "warm_start": False,
+    "turbo": False,
+    "denoise": False,
+    "model_selection": "accurate",
+}
+# ----------------------------------------------------- #
+
+def runModel(x_train, x_test, y_train, y_test, x_validate, y_validate, func_name, directory, feature_columns, target_column, runtime, scale_boolean, troubleshooting_boolean):
+    """
+    Trains a PySRRegressor model, evaluates, logs, and visualizes results.
+
+    Args:
+        x_train, x_test, y_train, y_test: Training and test data
+        x_validate, y_validate: Validation data
+        func_name: Name of the function/dataset
+        directory: Directory to save results
+        feature_columns: List of feature names
+        target_column: Name of target column
+        runtime: Time limit for PySRRegressor
+        scale_boolean: Whether to scale data
+        troubleshooting_boolean: Whether to print troubleshooting info
+
+    Returns:
+        None
+    """
     # Change the working directory to the target directory
     os.chdir(directory)
 
-    scale_boolean = True
-    troubleshooting_boolean = False
-    
     if scale_boolean:
         # scale data to make it easier
         #x, y = scale_data_ZScore(x, y)
@@ -71,44 +148,9 @@ def runModel(x_train, x_test, y_train, y_test, x_validate, y_validate, func_name
         
     
     # Learn equations using PySR
-    model = PySRRegressor(
-        procs=4,  # Number of processes
-        populations=32,  # Number of populations in the evolutionary algorithm
-        population_size=500,  # Size of each population
-        ncycles_per_iteration=10000,  # Number of cycles per iteration
-        niterations=100000,  # Maximum number of iterations
-        complexity_of_constants=5,
-        #parsimony = 0.01,
-        #adaptive_parsimony_scaling = 1000,
-         constraints={
-         "/": (-1, 9),
-         "^": (-1, 1),
-         "square": 9,
-         "cube": 9,
-         "exp": 9,
-         },
-        early_stop_condition=("stop_if(loss,complexity) = loss < 1e-7 && complexity < 20 || loss < 1e-9"),  # Early stopping condition
-        timeout_in_seconds=runtime,  # Timeout in seconds/minutes/hours
-        maxsize=45,  # Maximum size of the equations
-        maxdepth=5,  # Maximum depth of the equations
-        binary_operators=["*", "+", "-", "/","^"],  # Binary operators to be used
-        unary_operators=["exp","log"],  # Unary operators to be used
-        #unary_operators=["sin","cos","log"],  # Unary operators to be used
-        nested_constraints={
-            "log": {"log":0},
-            "/": {"log": 0},  # Prevents division by log(x) so no 0 in denominator
-        },  # Constraints on nesting unary operators
-        #select_k_features=4,  # Number of features to be selected
-        progress=False,  # Show progress
-        weight_randomize=5,  # Randomization weight
-        weight_add_node=3, #default = 2 
-        weight_optimize=0.001,
-        precision=32,  # Precision of the calculations
-        warm_start=False,  # Use the previous model as a warm start
-        turbo=False,  # Use turbo mode for faster computations
-        denoise=False,  # Denoiser (Gaussian white noise kernel)
-        model_selection="accurate",  # Save the best/accurate equations
-    )
+    params = PYSR_PARAMS.copy()
+    params["timeout_in_seconds"] = runtime  # ensure runtime is current
+    model = PySRRegressor(**params)
 
     start_time = datetime.now()
 
@@ -150,7 +192,22 @@ def runModel(x_train, x_test, y_train, y_test, x_validate, y_validate, func_name
     # Prepare directory for saving results
     equation_dir = os.path.join(directory, "Info")
     os.makedirs(equation_dir, exist_ok=True)
-    
+
+    # --- Linear Regression Comparison --- #
+    from dataset_plots import plot_linear_regression_residuals, compare_regression_metrics
+    run_linear_regression_and_compare(
+        x_train, x_test, y_train, y_test, x_validate, y_validate,
+        feature_columns, target_column, output_dir=equation_dir
+    )
+    # Move linear regression residual plot to Visualizations
+    plot_linear_regression_residuals(
+        y_train, y_train_pred=None, y_test=y_test, y_test_pred=None,  # Will be loaded inside the function
+        output_dir=os.path.join(equation_dir, "Visualizations")
+    )
+    # Compare symbolic and linear regression metrics visually
+    compare_regression_metrics(
+        equation_dir, os.path.join(equation_dir, "Visualizations")
+    )
     # for BEST equation #
     best_eq = model.sympy(best_idx)
     best_y_train_pred = model.predict(x_train, index=best_idx)
@@ -158,18 +215,36 @@ def runModel(x_train, x_test, y_train, y_test, x_validate, y_validate, func_name
 
     best_mse_train, best_nmse_train = calculate_mse_nmse(y_train, best_y_train_pred)
     best_mse_test, best_nmse_test = calculate_mse_nmse(y_test,best_y_test_pred)
+    best_rmse_train = calculate_rmse(y_train, best_y_train_pred)
+    best_rmse_test = calculate_rmse(y_test, best_y_test_pred)
 
     best_residuals_train = np.abs(y_train.flatten() - best_y_train_pred)
     best_residuals_test = np.abs(y_test.flatten() - best_y_test_pred)
     # ----------------------------------------------------------- #
 
-    # Write equation and timing to log
+    # Record mean and SD for z-score transformation
+    if scale_boolean:
+        feature_means = PredScaleFit_train.mean_
+        feature_stds = PredScaleFit_train.scale_
+        target_mean = TargetScaleFit_train.mean_
+        target_std = TargetScaleFit_train.scale_
+    else:
+        feature_means = feature_stds = target_mean = target_std = None
+
+    # Write equation, timing, mean/SD, and RMSE to log
     with open(os.path.join(equation_dir, "best.txt"), "a") as file:
         file.write(f"Selected Best Function: {best_idx}, {best_eq}\n")
         file.write(f"Train MSE: {best_mse_train}\n")
         file.write(f"Train NMSE: {best_nmse_train}\n")
+        file.write(f"Train RMSE: {best_rmse_train}\n")
         file.write(f"Test MSE: {best_mse_test}\n")
         file.write(f"Test NMSE: {best_nmse_test}\n")
+        file.write(f"Test RMSE: {best_rmse_test}\n")
+        if scale_boolean:
+            file.write("Feature Means: " + ", ".join([f"{m:.6f}" for m in feature_means]) + "\n")
+            file.write("Feature Stds: " + ", ".join([f"{s:.6f}" for s in feature_stds]) + "\n")
+            file.write(f"Target Mean: {target_mean[0]:.6f}\n")
+            file.write(f"Target Std: {target_std[0]:.6f}\n")
         file.write("***************************************************************\n")
         file.write(f"Train Residuals: {best_residuals_train}\n")
         file.write("***************************************************************\n")
@@ -303,6 +378,7 @@ def runModel(x_train, x_test, y_train, y_test, x_validate, y_validate, func_name
 
     validation_datalog_primary = pd.DataFrame(x_validate, columns=feature_columns)
     validation_datalog_primary[target_column] = y_validate
+    
     # --------------------------------------- #
 
     # populate primary datalogs #
@@ -399,6 +475,9 @@ def runModel(x_train, x_test, y_train, y_test, x_validate, y_validate, func_name
     # Main Graphs #
     plot_complexity_vs_error(model.equations_['complexity'], nmse_train_list, nmse_validation_list, save_path=visualization_dir, best=best_idx)
     plot_complexity_vs_error_loglog(model.equations_['complexity'], nmse_train_list, nmse_validation_list, save_path=visualization_dir,best=best_idx)
+    # Variable density visualization for features
+    from dataset_plots import plot_variable_density
+    plot_variable_density(x_train, feature_columns, output_dir=visualization_dir, filename_prefix="train_density")
     # --------------------------------------- #
     # Training Graphs #
     training_dir = os.path.join(visualization_dir, "Training")
@@ -428,18 +507,18 @@ def runModel(x_train, x_test, y_train, y_test, x_validate, y_validate, func_name
 
 def plot_and_save_results(x_train, y_train, y_train_pred, x_test, y_test, y_test_pred, func_name, mse_train, mse_test, directory, residuals_train, residuals_test):
     """
-    Plots and saves the results including residuals on both training and testing data.
+    Plots and saves residuals for training and testing data.
 
     Args:
-    - x_train, y_train: Training data and predictions.
-    - x_test, y_test: Testing data and predictions.
-    - func_name: Name of the function/dataset.
-    - mse_train, mse_test: Mean Squared Error for training and testing data.
-    - directory: Directory to save the plots.
-    - residuals_train, residuals_test: Residuals for training and testing data.
-    
+        x_train, y_train: Training data and predictions
+        x_test, y_test: Testing data and predictions
+        func_name: Name of the function/dataset
+        mse_train, mse_test: Mean Squared Error for training and testing data
+        directory: Directory to save the plots
+        residuals_train, residuals_test: Residuals for training and testing data
+
     Returns:
-    - None
+        None
     """
 
     # Calculate normalized residuals
@@ -483,16 +562,20 @@ def process_all_datasets(base_directory):
             # Run the model on the dataset
             runModel(x, y, func_name, dataset_dir,validation_set)
 
-def process_large_dataset(base_directory, dataset, sample_size,runtime):
-    '''
-    Input:
-        base_directory: the directory the dataset is contained in
-        dataset: the filename of the dataset
-        size: how many rows of the csv to use for test/train = validation 
-                e.g. size = 1000 means 1000 for test/train split and 1000 for validation, sampled without replacement
-    Output:
-        None -- the RunModel function itself creates all graphs and data.
-    '''
+def process_large_dataset(base_directory, dataset, sample_size, runtime, scale_boolean, troubleshooting_boolean):
+    """
+    Loads a large dataset, splits into train/test/validation, and runs model pipeline.
+    Args:
+        base_directory: Directory for dataset
+        dataset: Dataset filename
+        sample_size: Number of rows for train/test/validation
+        runtime: Time limit for PySRRegressor
+        scale_boolean: Whether to scale data
+        troubleshooting_boolean: Whether to print troubleshooting info
+    Returns:
+        None
+    """
+
     print("Running proccess_large_dataset...")
 
     # Create dataframe from dataset
@@ -519,19 +602,23 @@ def process_large_dataset(base_directory, dataset, sample_size,runtime):
     os.makedirs(dataset_dir, exist_ok=True)
 
 
-    runModel(X_train, X_test, y_train, y_test, X_val, y_val, func_name, dataset_dir,feature_columns,target_column,runtime)
+    runModel(X_train, X_test, y_train, y_test, X_val, y_val, func_name, dataset_dir,feature_columns,target_column,runtime, scale_boolean, troubleshooting_boolean)
 
-def process_large_dataset_with_validation(training_directory, training_dataset, validation_directory, validation_dataset,runtime):
-    '''
-    Input:
-        training_directory: the directory the dataset is contained in
-        training_dataset: the filename of the dataset
-        validation_directory: the directory the dataset is contained in
-        validation_dataset: the filename of the dataset
-        dataset: the filename of the dataset
-    Output:
-        None -- the RunModel function itself creates all graphs and data.
-    '''
+def process_large_dataset_with_validation(training_directory, training_dataset, validation_directory, validation_dataset, runtime, scale_boolean, troubleshooting_boolean):
+    """
+    Loads training and validation datasets, splits, and runs model pipeline.
+    Args:
+        training_directory: Directory for training data
+        training_dataset: Training dataset filename
+        validation_directory: Directory for validation data
+        validation_dataset: Validation dataset filename
+        runtime: Time limit for PySRRegressor
+        scale_boolean: Whether to scale data
+        troubleshooting_boolean: Whether to print troubleshooting info
+    Returns:
+        None
+    """
+
     print("Running proccess_large_dataset_with_validation...")
 
 
@@ -561,28 +648,266 @@ def process_large_dataset_with_validation(training_directory, training_dataset, 
     os.makedirs(dataset_dir, exist_ok=True)
 
 
-    runModel(X_train, X_test, y_train, y_test, X_val, y_val, func_name, dataset_dir,feature_columns,target_column,runtime)
+    runModel(X_train, X_test, y_train, y_test, X_val, y_val, func_name, dataset_dir,feature_columns,target_column,runtime, scale_boolean, troubleshooting_boolean)
 
+def parallel_process_datasets(train_datasets, val_datasets, train_dir, val_dir, runtime, scale_boolean, troubleshooting_boolean):
+    """
+    Parallelizes processing of multiple train/validation dataset pairs.
+    Args:
+        train_datasets: list of training dataset filenames
+        val_datasets: list of validation dataset filenames
+        train_dir: directory containing training datasets
+        val_dir: directory containing validation datasets
+        runtime: time limit for each run
+        scale_boolean: Whether to scale data
+        troubleshooting_boolean: Whether to print troubleshooting info
+    """
+    with cf.ProcessPoolExecutor() as executor:
+        futures = []
+        for train_dataset, val_dataset in zip(train_datasets, val_datasets):
+            print(f"Submitting: train={train_dataset}, val={val_dataset}")
+            futures.append(
+                executor.submit(
+                    process_large_dataset_with_validation,
+                    train_dir, train_dataset, val_dir, val_dataset, runtime, scale_boolean, troubleshooting_boolean
+                )
+            )
+        for future in cf.as_completed(futures):
+            try:
+                future.result()
+            except Exception as exc:
+                print(f"A dataset run failed: {exc}")
 
-if batch_boolean:
-    noise_folders = [f for f in os.listdir(base_directory) if f.endswith('Noise')]
-    for folder in noise_folders:
-        location = base_directory + '/' + folder
-        csv_files = [f for f in os.listdir(location) if f.endswith('.csv')]
-        for file in csv_files:
-            print(f'folder: {folder}')
-            print(f'file: {file}')
-            process_large_dataset(location,file,dataset_size,runtime)
+# --- Feature Engineering Utilities --- #
+# This function adds polynomial features (e.g., x, x^2, x1*x2, etc.) to your feature matrix X.
+# It can help capture nonlinear relationships for models that benefit from such features.
+def add_polynomial_features(X, degree=2):
+    """
+    Adds polynomial features up to the specified degree for each feature in X.
+    Args:
+        X: 2D numpy array of features
+        degree: maximum degree of polynomial features to add
+    Returns:
+        X_poly: 2D numpy array with original and polynomial features
+    """
+    from sklearn.preprocessing import PolynomialFeatures
+    poly = PolynomialFeatures(degree=degree, include_bias=False)
+    return poly.fit_transform(X)
 
-# Single
-if not batch_boolean:
-    os.chdir(base_directory)
-    if separate_validation and not val_batch_boolean:
-        process_large_dataset_with_validation(train_directory, training_datasets[0], val_directory, validation_datasets[0], runtime)
-    elif val_batch_boolean:
-        for train_dataset, val_dataset in zip(training_datasets, validation_datasets):
-            print(f'train_dataset: {train_dataset}')
-            print(f'val_dataset: {val_dataset}')
-            process_large_dataset_with_validation(train_directory, train_dataset, val_directory, val_dataset, runtime)
+# --- Hyperparameter Tuning Utilities --- #
+# This function runs a grid search over combinations of PySRRegressor hyperparameters.
+# It launches each combination in parallel, so you can efficiently find the best settings.
+# You must adapt runModel to accept and use the params dictionary for this to work fully.
+def hyperparameter_grid_search(param_grid, train_datasets, val_datasets, train_dir, val_dir, runtime):
+    """
+    Runs a grid search over PySRRegressor hyperparameters in parallel.
+    Args:
+        param_grid: dict of parameter lists, e.g. {'population_size': [100, 500], 'maxsize': [20, 45]}
+        train_datasets, val_datasets, train_dir, val_dir, runtime: as before
+    Returns:
+        results: list of (params, score) tuples
+    """
+    import itertools
+    results = []
+    keys, values = zip(*param_grid.items())
+    param_combos = [dict(zip(keys, v)) for v in itertools.product(*values)]
+    def run_with_params(params, train_dataset, val_dataset):
+        # You would need to pass params into PySRRegressor in runModel
+        # This is a stub for illustration
+        print(f"Running {train_dataset} with params {params}")
+        # runModel(..., **params)
+        return params, 0  # Replace 0 with actual score
+    with cf.ProcessPoolExecutor() as executor:
+        futures = []
+        for params in param_combos:
+            for train_dataset, val_dataset in zip(train_datasets, val_datasets):
+                futures.append(executor.submit(run_with_params, params, train_dataset, val_dataset))
+        for future in cf.as_completed(futures):
+            try:
+                results.append(future.result())
+            except Exception as exc:
+                print(f"A grid search run failed: {exc}")
+    return results
+
+# --- K-Fold Cross-Validation Utility --- #
+# This function splits your data into k folds, trains and evaluates your model k times,
+# each time using a different fold as the test set and the rest as training data.
+# It returns a list of scores (e.g., NMSE or RMSE) for each fold.
+def k_fold_cross_validation(X, y, k=5, model_func=None, **model_kwargs):
+    """
+    Perform k-fold cross-validation for a given model function.
+    Args:
+        X: Features (numpy array)
+        y: Target (numpy array)
+        k: Number of folds
+        model_func: Function to train and evaluate model, must return score (e.g., NMSE)
+        model_kwargs: Additional arguments for model_func
+    Returns:
+        scores: List of scores for each fold
+    """
+    from sklearn.model_selection import KFold
+    scores = []
+    kf = KFold(n_splits=k, shuffle=True, random_state=42)
+    for train_idx, test_idx in kf.split(X):
+        X_train, X_test = X[train_idx], X[test_idx]
+        y_train, y_test = y[train_idx], y[test_idx]
+        # model_func should fit and evaluate the model, returning a score (e.g., NMSE)
+        score = model_func(X_train, X_test, y_train, y_test, **model_kwargs)
+        scores.append(score)
+    return scores
+
+def symbolic_regression_score(X_train, X_test, y_train, y_test, feature_columns, target_column, runtime, scale_boolean, troubleshooting_boolean):
+    """
+    Wrapper for k-fold cross-validation: trains symbolic regression and returns NMSE on test set.
+    """
+    from pysr import PySRRegressor
+    from calculate_errors import calculate_mse_nmse
+    # Optionally scale data here if needed
+    if scale_boolean:
+        from stat_plots import scale_data_Nuttii
+        X_train, y_train, _, _ = scale_data_Nuttii(X_train, y_train)
+        X_test, y_test, _, _ = scale_data_Nuttii(X_test, y_test)
+    params = PYSR_PARAMS.copy()
+    params["timeout_in_seconds"] = runtime
+    model = PySRRegressor(**params)
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_test)
+    _, nmse = calculate_mse_nmse(y_test, y_pred)
+    return nmse
+
+# --- Linear Regression Comparison --- #
+# This function fits a linear regression model on the same data splits as your symbolic regression.
+# It saves metrics, predictions, and residual plots for direct comparison.
+def run_linear_regression_and_compare(x_train, x_test, y_train, y_test, x_validate, y_validate, feature_columns, target_column, visualization_dir):
+    """
+    Fit a linear regression on the same data and save results for comparison.
+    Args:
+        x_train, x_test, y_train, y_test, x_validate, y_validate: Data splits
+        feature_columns: list of feature names
+        target_column: name of target
+        output_dir: directory to save results
+    """
+    from sklearn.linear_model import LinearRegression
+    from calculate_errors import calculate_mse_nmse, calculate_rmse
+
+    os.makedirs(visualization_dir, exist_ok=True)
+    model = LinearRegression()
+    model.fit(x_train, y_train)
+    y_train_pred = model.predict(x_train)
+    y_test_pred = model.predict(x_test)
+    y_validate_pred = model.predict(x_validate)
+
+    mse_train, nmse_train = calculate_mse_nmse(y_train, y_train_pred)
+    mse_test, nmse_test = calculate_mse_nmse(y_test, y_test_pred)
+    mse_validate, nmse_validate = calculate_mse_nmse(y_validate, y_validate_pred)
+    rmse_train = calculate_rmse(y_train, y_train_pred)
+    rmse_test = calculate_rmse(y_test, y_test_pred)
+    rmse_validate = calculate_rmse(y_validate, y_validate_pred)
+
+    # Save results
+    parent_dir = os.path.dirname(visualization_dir)
+    with open(os.path.join(parent_dir, "linear_regression_results.txt"), "w") as f:
+        f.write(f"Linear Regression Results\n")
+        f.write(f"Train MSE: {mse_train}\n")
+        f.write(f"Train NMSE: {nmse_train}\n")
+        f.write(f"Train RMSE: {rmse_train}\n")
+        f.write(f"Test MSE: {mse_test}\n")
+        f.write(f"Test NMSE: {nmse_test}\n")
+        f.write(f"Test RMSE: {rmse_test}\n")
+        f.write(f"Validation MSE: {mse_validate}\n")
+        f.write(f"Validation NMSE: {nmse_validate}\n")
+        f.write(f"Validation RMSE: {rmse_validate}\n")
+        f.write(f"Coefficients: {model.coef_}\n")
+        f.write(f"Intercept: {model.intercept_}\n")
+
+    # Optionally, save predictions for further analysis
+    pd.DataFrame(y_train_pred, columns=[f"{target_column}_pred"]).to_csv(os.path.join(parent_dir, "linear_train_pred.csv"), index=False)
+    pd.DataFrame(y_test_pred, columns=[f"{target_column}_pred"]).to_csv(os.path.join(parent_dir, "linear_test_pred.csv"), index=False)
+    pd.DataFrame(y_validate_pred, columns=[f"{target_column}_pred"]).to_csv(os.path.join(parent_dir, "linear_validate_pred.csv"), index=False)
+
+    # Optionally, plot residuals
+    import matplotlib.pyplot as plt
+    residuals_train = y_train.flatten() - y_train_pred.flatten()
+    residuals_test = y_test.flatten() - y_test_pred.flatten()
+    plt.figure()
+    plt.scatter(y_train, residuals_train, alpha=0.5, label='Train')
+    plt.scatter(y_test, residuals_test, alpha=0.5, label='Test')
+    plt.axhline(0, color='red', linestyle='--')
+    plt.xlabel('True Value')
+    plt.ylabel('Residual')
+    plt.title('Linear Regression Residuals')
+    plt.legend()
+    plt.savefig(os.path.join(visualization_dir, "linear_regression_residuals.png"))
+    plt.close()
+# --- Hyperparameter Tuning Utilities --- #
+def hyperparameter_grid_search(param_grid, train_datasets, val_datasets, train_dir, val_dir, runtime):
+    """
+    Runs a grid search over PySRRegressor hyperparameters in parallel.
+    Args:
+        param_grid: dict of parameter lists, e.g. {'population_size': [100, 500], 'maxsize': [20, 45]}
+        train_datasets, val_datasets, train_dir, val_dir, runtime: as before
+    Returns:
+        results: list of (params, score) tuples
+    """
+    import itertools
+    results = []
+    keys, values = zip(*param_grid.items())
+    param_combos = [dict(zip(keys, v)) for v in itertools.product(*values)]
+    def run_with_params(params, train_dataset, val_dataset):
+        # You would need to pass params into PySRRegressor in runModel
+        # This is a stub for illustration
+        print(f"Running {train_dataset} with params {params}")
+        # runModel(..., **params)
+        return params, 0  # Replace 0 with actual score
+    with cf.ProcessPoolExecutor() as executor:
+        futures = []
+        for params in param_combos:
+            for train_dataset, val_dataset in zip(train_datasets, val_datasets):
+                futures.append(executor.submit(run_with_params, params, train_dataset, val_dataset))
+        for future in cf.as_completed(futures):
+            try:
+                results.append(future.result())
+            except Exception as exc:
+                print(f"A grid search run failed: {exc}")
+    return results
+
+def k_fold_cross_validation(X, y, k=5, model_func=None, **model_kwargs):
+    """
+    Perform k-fold cross-validation for a given model function.
+    Args:
+        X: Features (numpy array)
+        y: Target (numpy array)
+        k: Number of folds
+        model_func: Function to train and evaluate model, must return score (e.g., NMSE)
+        model_kwargs: Additional arguments for model_func
+    Returns:
+        scores: List of scores for each fold
+    """
+    from sklearn.model_selection import KFold
+    scores = []
+    kf = KFold(n_splits=k, shuffle=True, random_state=42)
+    for train_idx, test_idx in kf.split(X):
+        X_train, X_test = X[train_idx], X[test_idx]
+        y_train, y_test = y[train_idx], y[test_idx]
+        score = model_func(X_train, X_test, y_train, y_test, **model_kwargs)
+        scores.append(score)
+    return scores
+
+if __name__ == "__main__":
+    if batch_boolean:
+        noise_folders = [f for f in os.listdir(base_directory) if f.endswith('Noise')]
+        for folder in noise_folders:
+            location = base_directory + '/' + folder
+            csv_files = [f for f in os.listdir(location) if f.endswith('.csv')]
+            for file in csv_files:
+                print(f'folder: {folder}')
+                print(f'file: {file}')
+                process_large_dataset(location, file, dataset_size, runtime, scale_boolean, troubleshooting_boolean)
     else:
-        process_large_dataset(base_directory,dataset_name,dataset_size,runtime)
+        os.chdir(base_directory)
+        if separate_validation and not val_batch_boolean:
+            process_large_dataset_with_validation(train_directory, training_datasets[0], val_directory, validation_datasets[0], runtime, scale_boolean, troubleshooting_boolean)
+        elif val_batch_boolean:
+            parallel_process_datasets(training_datasets, validation_datasets, train_directory, val_directory, runtime, scale_boolean, troubleshooting_boolean)
+        else:
+            process_large_dataset(base_directory, training_datasets[0], dataset_size, runtime, scale_boolean, troubleshooting_boolean)

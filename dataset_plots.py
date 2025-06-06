@@ -168,3 +168,155 @@ def plot_accuracy_vs_noise3(results_df):
     plt.grid(True)
     plt.xticks(rotation=45)
     plt.show()
+
+def plot_variable_density(X, feature_columns, output_dir=None, filename_prefix="variable_density"):
+    """
+    Plots a variable density (KDE) for each feature in X.
+    Args:
+        X: 2D numpy array of features
+        feature_columns: list or array of feature names
+        output_dir: directory to save plots (optional)
+        filename_prefix: prefix for saved plot files
+    """
+    import os
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+    import numpy as np
+
+    X = np.array(X)
+    n_features = X.shape[1]
+    for i in range(n_features):
+        plt.figure(figsize=(8, 5))
+        sns.kdeplot(X[:, i], fill=True, color='blue', alpha=0.5)
+        plt.title(f"Density Plot for {feature_columns[i]}")
+        plt.xlabel(feature_columns[i])
+        plt.ylabel("Density")
+        plt.grid(True, ls='--', alpha=0.5)
+        if output_dir:
+            os.makedirs(output_dir, exist_ok=True)
+            plt.savefig(os.path.join(output_dir, f"{filename_prefix}_{feature_columns[i]}.png"))
+            plt.close()
+        else:
+            plt.show()
+
+def advanced_error_analysis(y_true, y_pred, feature_matrix=None, feature_names=None, output_dir=None, prefix=""): 
+    """
+    Advanced error analysis: residual plots, QQ plot, error vs. features.
+    Args:
+        y_true: true target values
+        y_pred: predicted target values
+        feature_matrix: (optional) features for error vs. feature plots
+        feature_names: (optional) names of features
+        output_dir: (optional) directory to save plots
+        prefix: (optional) prefix for plot filenames
+    """
+    import matplotlib.pyplot as plt
+    import numpy as np
+    import scipy.stats as stats
+    import os
+    residuals = y_true.flatten() - y_pred.flatten()
+    # Residual vs. Predicted
+    plt.figure()
+    plt.scatter(y_pred, residuals, alpha=0.5)
+    plt.axhline(0, color='red', linestyle='--')
+    plt.xlabel('Predicted')
+    plt.ylabel('Residuals')
+    plt.title('Residuals vs. Predicted')
+    if output_dir:
+        os.makedirs(output_dir, exist_ok=True)
+        plt.savefig(os.path.join(output_dir, f"{prefix}residuals_vs_pred.png"))
+        plt.close()
+    else:
+        plt.show()
+    # QQ plot
+    plt.figure()
+    stats.probplot(residuals, dist="norm", plot=plt)
+    plt.title('QQ Plot of Residuals')
+    if output_dir:
+        plt.savefig(os.path.join(output_dir, f"{prefix}qqplot.png"))
+        plt.close()
+    else:
+        plt.show()
+    # Error vs. Features
+    if feature_matrix is not None and feature_names is not None:
+        for i, name in enumerate(feature_names):
+            plt.figure()
+            plt.scatter(feature_matrix[:, i], residuals, alpha=0.5)
+            plt.xlabel(name)
+            plt.ylabel('Residuals')
+            plt.title(f'Residuals vs. {name}')
+            if output_dir:
+                plt.savefig(os.path.join(output_dir, f"{prefix}residuals_vs_{name}.png"))
+                plt.close()
+            else:
+                plt.show()
+
+def plot_linear_regression_residuals(y_train=None, y_train_pred=None, y_test=None, y_test_pred=None, output_dir=None):
+    """
+    Move or plot linear regression residuals to the Visualizations directory.
+    If predictions are not provided, tries to load them from CSVs in output_dir.
+    """
+    import os
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    if y_train_pred is None and output_dir is not None:
+        try:
+            y_train_pred = pd.read_csv(os.path.join(output_dir, "linear_train_pred.csv")).values.flatten()
+            y_test_pred = pd.read_csv(os.path.join(output_dir, "linear_test_pred.csv")).values.flatten()
+        except Exception as e:
+            print(f"Could not load linear regression predictions: {e}")
+            return
+    if y_train is None or y_test is None or y_train_pred is None or y_test_pred is None:
+        print("Insufficient data for plotting linear regression residuals.")
+        return
+    residuals_train = y_train.flatten() - y_train_pred.flatten()
+    residuals_test = y_test.flatten() - y_test_pred.flatten()
+    plt.figure()
+    plt.scatter(y_train, residuals_train, alpha=0.5, label='Train')
+    plt.scatter(y_test, residuals_test, alpha=0.5, label='Test')
+    plt.axhline(0, color='red', linestyle='--')
+    plt.xlabel('True Value')
+    plt.ylabel('Residual')
+    plt.title('Linear Regression Residuals')
+    plt.legend()
+    os.makedirs(output_dir, exist_ok=True)
+    plt.savefig(os.path.join(output_dir, "linear_regression_residuals.png"))
+    plt.close()
+
+
+def compare_regression_metrics(equation_dir, vis_dir):
+    """
+    Compare symbolic regression and linear regression metrics visually.
+    Reads best.txt and linear_regression_results.txt, and plots bar charts for MSE, NMSE, RMSE.
+    """
+    import os
+    import matplotlib.pyplot as plt
+    import re
+    # Read symbolic regression metrics
+    best_path = os.path.join(equation_dir, "best.txt")
+    linreg_path = os.path.join(equation_dir, "linear_regression_results.txt")
+    metrics = ["Train MSE", "Test MSE", "Validation MSE", "Train NMSE", "Test NMSE", "Validation NMSE", "Train RMSE", "Test RMSE", "Validation RMSE"]
+    sym_vals = {}
+    lin_vals = {}
+    def extract_metrics(path, dest):
+        if not os.path.exists(path):
+            return
+        with open(path, "r") as f:
+            for line in f:
+                for m in metrics:
+                    if m in line:
+                        val = re.findall(r"[-+]?[0-9]*\.?[0-9]+(?:[eE][-+]?[0-9]+)?", line)
+                        if val:
+                            dest[m] = float(val[0])
+    extract_metrics(best_path, sym_vals)
+    extract_metrics(linreg_path, lin_vals)
+    # Plot comparison
+    for m in ["Train MSE", "Test MSE", "Validation MSE", "Train RMSE", "Test RMSE", "Validation RMSE"]:
+        if m in sym_vals and m in lin_vals:
+            plt.figure()
+            plt.bar(["Symbolic", "Linear"], [sym_vals[m], lin_vals[m]], color=["orange", "blue"])
+            plt.title(f"{m} Comparison")
+            plt.ylabel(m)
+            plt.savefig(os.path.join(vis_dir, f"compare_{m.replace(' ', '_').lower()}.png"))
+            plt.close()
+
