@@ -295,28 +295,41 @@ def compare_regression_metrics(equation_dir, vis_dir):
     # Read symbolic regression metrics
     best_path = os.path.join(equation_dir, "best.txt")
     linreg_path = os.path.join(equation_dir, "linear_regression_results.txt")
-    metrics = ["Train MSE", "Test MSE", "Validation MSE", "Train NMSE", "Test NMSE", "Validation NMSE", "Train RMSE", "Test RMSE", "Validation RMSE"]
+    metrics = [
+        ("Train MSE", "Train MSE"),
+        ("Test MSE", "Test MSE"),
+        ("Validation MSE", "Validation MSE"),
+        ("Train NMSE", "Train NMSE"),
+        ("Test NMSE", "Test NMSE"),
+        ("Validation NMSE", "Validation NMSE"),
+        ("Train RMSE", "Train RMSE"),
+        ("Test RMSE", "Test RMSE"),
+        ("Validation RMSE", "Validation RMSE")
+    ]
     sym_vals = {}
     lin_vals = {}
     def extract_metrics(path, dest):
         if not os.path.exists(path):
+            print(f"File not found: {path}")
             return
         with open(path, "r") as f:
             for line in f:
-                for m in metrics:
+                for m, _ in metrics:
                     if m in line:
                         val = re.findall(r"[-+]?[0-9]*\.?[0-9]+(?:[eE][-+]?[0-9]+)?", line)
                         if val:
                             dest[m] = float(val[0])
     extract_metrics(best_path, sym_vals)
     extract_metrics(linreg_path, lin_vals)
-    # Plot comparison
-    for m in ["Train MSE", "Test MSE", "Validation MSE", "Train RMSE", "Test RMSE", "Validation RMSE"]:
+    os.makedirs(vis_dir, exist_ok=True)
+    for m, label in metrics:
         if m in sym_vals and m in lin_vals:
             plt.figure()
             plt.bar(["Symbolic", "Linear"], [sym_vals[m], lin_vals[m]], color=["orange", "blue"])
-            plt.title(f"{m} Comparison")
-            plt.ylabel(m)
-            plt.savefig(os.path.join(vis_dir, f"compare_{m.replace(' ', '_').lower()}.png"))
+            plt.title(f"{label} Comparison")
+            plt.ylabel(label)
+            plt.savefig(os.path.join(vis_dir, f"compare_{label.replace(' ', '_').lower()}.png"))
             plt.close()
+        else:
+            print(f"Metric {m} missing in one or both result files.")
 
