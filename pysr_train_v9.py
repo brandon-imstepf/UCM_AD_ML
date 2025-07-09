@@ -114,10 +114,24 @@ class PySRRunner:
         elif mode == 'batch_noise_folders':
             self.run_batch_noise_folders()
     
-    def run_separate_validation(self, sequential=False):
+    def run_separate_validation(self, sequential=False, train_file=None, val_file=None):
         """Process datasets with separate training and validation files."""
         runtime_params = self.config['runtime_params']
         pysr_params = self.config['pysr_params']
+        # If specific files are provided, process only that pair
+        if train_file and val_file:
+            print(f"Processing user-specified files: train={train_file}, val={val_file}")
+            process_large_dataset_with_validation(
+                runtime_params['train_directory'],
+                train_file,
+                runtime_params['val_directory'],
+                val_file,
+                runtime_params['runtime'],
+                runtime_params['scale_boolean'],
+                runtime_params['troubleshooting_boolean'],
+                pysr_params
+            )
+            return
         if sequential:
             for train, val in zip(runtime_params['training_datasets'], runtime_params['validation_datasets']):
                 print(f"Processing sequentially: train={train}, val={val}")
@@ -204,6 +218,17 @@ def main():
         help='Path to JSON configuration file'
     )
 
+    parser.add_argument(
+        '--train_file', 
+        type=str, 
+        help='Specific training file'
+    )
+    
+    parser.add_argument(
+        '--val_file', 
+        type=str, 
+        help='Specific validation file'
+    )
 
     parser.add_argument(
         '--mode',
@@ -257,7 +282,11 @@ def main():
     
     # Run the analysis
     try:
-        runner.run(sequential=args.sequential)
+        # If both --train_file and --val_file are provided, run only that pair (sequentially, regardless of --sequential)
+        if args.train_file and args.val_file:
+            runner.run_separate_validation(sequential=True, train_file=args.train_file, val_file=args.val_file)
+        else:
+            runner.run(sequential=args.sequential)
     except Exception as e:
         print(f"Error during execution: {e}")
         sys.exit(1)
