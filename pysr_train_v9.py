@@ -99,7 +99,7 @@ class PySRRunner:
             if not runtime_params.get('base_directory'):
                 raise ValueError("batch_noise_folders mode requires base_directory")
     
-    def run(self):
+    def run(self, sequential=False):
         """Execute the appropriate processing mode."""
         mode = self.config['runtime_params']['processing_mode']
         
@@ -108,27 +108,40 @@ class PySRRunner:
         print(f"{'='*60}\n")
         
         if mode == 'separate_validation':
-            self.run_separate_validation()
+            self.run_separate_validation(sequential=sequential)
         elif mode == 'single_dataset_split':
             self.run_single_dataset_split()
         elif mode == 'batch_noise_folders':
             self.run_batch_noise_folders()
     
-    def run_separate_validation(self):
+    def run_separate_validation(self, sequential=False):
         """Process datasets with separate training and validation files."""
         runtime_params = self.config['runtime_params']
         pysr_params = self.config['pysr_params']
-        
-        parallel_process_datasets(
-            runtime_params['training_datasets'],
-            runtime_params['validation_datasets'],
-            runtime_params['train_directory'],
-            runtime_params['val_directory'],
-            runtime_params['runtime'],
-            runtime_params['scale_boolean'],
-            runtime_params['troubleshooting_boolean'],
-            pysr_params  # Pass PySR parameters from config
-        )
+        if sequential:
+            for train, val in zip(runtime_params['training_datasets'], runtime_params['validation_datasets']):
+                print(f"Processing sequentially: train={train}, val={val}")
+                process_large_dataset_with_validation(
+                    runtime_params['train_directory'],
+                    train,
+                    runtime_params['val_directory'],
+                    val,
+                    runtime_params['runtime'],
+                    runtime_params['scale_boolean'],
+                    runtime_params['troubleshooting_boolean'],
+                    pysr_params
+                )
+        else:
+            parallel_process_datasets(
+                runtime_params['training_datasets'],
+                runtime_params['validation_datasets'],
+                runtime_params['train_directory'],
+                runtime_params['val_directory'],
+                runtime_params['runtime'],
+                runtime_params['scale_boolean'],
+                runtime_params['troubleshooting_boolean'],
+                pysr_params  # Pass PySR parameters from config
+            )
     
     def run_single_dataset_split(self):
         """Process single datasets and split them into train/val/test."""
@@ -190,7 +203,8 @@ def main():
         required=True,
         help='Path to JSON configuration file'
     )
-    
+
+
     parser.add_argument(
         '--mode',
         type=str,
@@ -216,6 +230,12 @@ def main():
         help='Enable troubleshooting mode'
     )
     
+    parser.add_argument(
+        '--sequential',
+        action='store_true',
+        help='Process separate_validation datasets sequentially instead of in parallel'
+    )
+    
     args = parser.parse_args()
     
     # Load configuration
@@ -237,7 +257,7 @@ def main():
     
     # Run the analysis
     try:
-        runner.run()
+        runner.run(sequential=args.sequential)
     except Exception as e:
         print(f"Error during execution: {e}")
         sys.exit(1)
