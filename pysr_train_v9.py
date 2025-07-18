@@ -344,6 +344,13 @@ def runModel(x_train, x_test, y_train, y_test, x_validate, y_validate,
     equation_dir = os.path.join(directory, "Info")
     os.makedirs(equation_dir, exist_ok=True)
 
+    # After finding best_idx and if scale_boolean is True
+    if scale_boolean:
+        save_scaling_params_for_matlab(
+            equation_dir, PredScaleFit_train, TargetScaleFit_train,
+            feature_columns, model, best_idx
+        )
+
     # Calculate metrics for best equation
     best_metrics = _calculate_best_equation_metrics(
         model, best_idx, x_train, y_train, x_test, y_test,
@@ -686,19 +693,35 @@ def _calculate_best_equation_metrics(model, best_idx, x_train, y_train,
                                    x_test, y_test, scale_boolean, 
                                    pred_scale_fit, target_scale_fit):
     """Calculate metrics for the best equation."""
-    # Make predictions
+    # Make predictions (these are in scaled space if scale_boolean=True)
     best_y_train_pred = model.predict(x_train, index=best_idx)
     best_y_test_pred = model.predict(x_test, index=best_idx)
+    
+    if scale_boolean:
+        # Inverse transform predictions back to original scale
+        best_y_train_pred = target_scale_fit.inverse_transform(
+            best_y_train_pred.reshape(-1, 1)
+        ).flatten()
+        best_y_test_pred = target_scale_fit.inverse_transform(
+            best_y_test_pred.reshape(-1, 1)
+        ).flatten()
+        
+        # Also inverse transform the actual y values for comparison
+        y_train_original = target_scale_fit.inverse_transform(y_train)
+        y_test_original = target_scale_fit.inverse_transform(y_test)
+    else:
+        y_train_original = y_train
+        y_test_original = y_test
 
-    # Calculate metrics
-    best_mse_train, best_nmse_train = calculate_mse_nmse(y_train, best_y_train_pred)
-    best_mse_test, best_nmse_test = calculate_mse_nmse(y_test, best_y_test_pred)
-    best_rmse_train = calculate_rmse(y_train, best_y_train_pred)
-    best_rmse_test = calculate_rmse(y_test, best_y_test_pred)
+    # NOW calculate metrics in original scale
+    best_mse_train, best_nmse_train = calculate_mse_nmse(y_train_original, best_y_train_pred)
+    best_mse_test, best_nmse_test = calculate_mse_nmse(y_test_original, best_y_test_pred)
+    best_rmse_train = calculate_rmse(y_train_original, best_y_train_pred)
+    best_rmse_test = calculate_rmse(y_test_original, best_y_test_pred)
 
-    # Calculate residuals
-    best_residuals_train = np.abs(y_train.flatten() - best_y_train_pred)
-    best_residuals_test = np.abs(y_test.flatten() - best_y_test_pred)
+    # Calculate residuals in original scale
+    best_residuals_train = np.abs(y_train_original.flatten() - best_y_train_pred)
+    best_residuals_test = np.abs(y_test_original.flatten() - best_y_test_pred)
 
     return {
         'mse_train': best_mse_train,
@@ -1156,6 +1179,41 @@ def plot_variable_density(X, feature_names, output_dir, filename_prefix="density
     plt.savefig(os.path.join(output_dir, f'{filename_prefix}.png'), dpi=150)
     plt.close()
 
+
+def save_scaling_params_for_matlab(equation_dir, pred_scale_fit, target_scale_fit, 
+                                  feature_columns, model, best_idx):
+    """Save scaling parameters in a format MATLAB can easily use."""
+    import scipy.io
+    
+    # Prepare scaling data
+    scaling_data = {
+        'feature_names': feature_columns,
+        'feature_means': pred_scale_fit.mean_,
+        'feature_stds': pred_scale_fit.scale_,
+        'target_mean': target_scale_fit.mean_[0],
+        'target_std': target_scale_fit.scale_[0],
+        'equation_string': str(model.sympy(best_idx)),
+        'scaled_equation': str(model.sympy(best_idx))  # This is in scaled space
+    }
+    
+    # Save as .mat file
+    scipy.io.savemat(os.path.join(equation_dir, 'scaling_params.mat'), scaling_data)
+    
+    # Also create a MATLAB function template
+    with open(os.path.join(equation_dir, 'apply_sr_equation.m'), 'w') as f:
+        f.write("function output = apply_sr_equation(input_values, equation_func)\n")
+        f.write("    % Load scaling parameters\n")
+        f.write("    load('scaling_params.mat');\n")
+        f.write("    \n")
+        f.write("    % Scale inputs\n")
+        f.write("    scaled_inputs = (input_values - feature_means) ./ feature_stds;\n")
+        f.write("    \n")
+        f.write("    % Apply equation (in scaled space)\n")
+        f.write("    scaled_output = equation_func(scaled_inputs);\n")
+        f.write("    \n")
+        f.write("    % Unscale output\n")
+        f.write("    output = scaled_output * target_std + target_mean;\n")
+        f.write("end\n")
 
 
 
