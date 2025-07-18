@@ -334,7 +334,7 @@ def runModel(x_train, x_test, y_train, y_test, x_validate, y_validate,
     # Train the model
     start_time = datetime.now()
     print(f"Starting model training for {func_name}...")
-    print(f"Training runtime = {np.mod(runtime/3600)} hours, {np.mod(runtime/60)} minutes, {runtime%60} seconds")
+    print(f"Training runtime = {runtime//3600} hours, {(runtime%3600)//60} minutes, {runtime%60} seconds")
     model.fit(x_train, y_train)
 
     # Find best equation
