@@ -33,7 +33,7 @@ import sys
 from pathlib import Path
 import numpy as np
 import matplotlib.pyplot as plt
-from datetime import datetime
+from datetime import date, datetime
 from pysr import PySRRegressor
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -341,7 +341,8 @@ def runModel(x_train, x_test, y_train, y_test, x_validate, y_validate,
     best_idx = _select_best_equation(model)
     
     # Prepare directory for saving results
-    equation_dir = os.path.join(directory, "Info")
+    dirname = f"{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}_{runtime}_Info"
+    equation_dir = os.path.join(directory, dirname)
     os.makedirs(equation_dir, exist_ok=True)
 
     # After finding best_idx and if scale_boolean is True
