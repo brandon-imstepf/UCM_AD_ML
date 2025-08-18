@@ -341,8 +341,9 @@ def runModel(x_train, x_test, y_train, y_test, x_validate, y_validate,
     best_idx = _select_best_equation(model)
     
     # Prepare directory for saving results
-    dirname = f"{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}_{runtime}_Info"
+    dirname = f"{datetime.now().strftime('%Y-%m-%d_%H-%M')}_{runtime}_Info"
     equation_dir = os.path.join(directory, dirname)
+    print(f"Saving results to: {equation_dir}")
     os.makedirs(equation_dir, exist_ok=True)
 
     # After finding best_idx and if scale_boolean is True
