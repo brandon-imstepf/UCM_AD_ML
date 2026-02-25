@@ -1,3 +1,0 @@
-Dataset: Nguyen_F10_RandSample
-In-sample x shape: (20, 2)
-In-sample y shape: (20,)

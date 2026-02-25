@@ -1,3 +1,0 @@
-Nguyen_F6_Uniform_oos: sin(x0) + sin(x0 + x0*x0)
-Train MSE: 1.2738221022798702e-32
-Test MSE: 1.3506455882761157e-25

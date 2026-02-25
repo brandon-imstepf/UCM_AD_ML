@@ -1,5 +1,0 @@
-Complexity,Loss,Equation
-2,1.0607741,"sin(x0)"
-3,0.7885983,"cos(log(x1))"
-4,0.002451788,"sin(x1 + x0)"
-8,1.0247672e-9,"sin(x1 + x0) - (x1 - x0)"

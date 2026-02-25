@@ -1,3 +1,0 @@
-allparams_testing: (x4 - x5)/exp(x3)
-Train MSE: 1.1708948042788907e-21
-Test MSE: 3.038184408349565e-21

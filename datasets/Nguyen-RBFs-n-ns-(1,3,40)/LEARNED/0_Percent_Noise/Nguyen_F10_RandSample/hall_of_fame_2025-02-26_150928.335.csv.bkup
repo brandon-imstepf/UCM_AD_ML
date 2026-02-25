@@ -1,8 +1,0 @@
-Complexity,Loss,Equation
-2,0.15583244,"cos(x1)"
-4,0.052749377,"sin(x1 + x1)"
-5,0.024073765,"cos(x1) + cos(x1)"
-6,0.008125569,"cos(x1) / cos(sin(x0))"
-7,0.002653617,"cos(x1) / sin(cos(sin(x0)))"
-8,5.849987e-11,"(sin(x0) + sin(x0)) * cos(x1)"
-14,6.271428e-12,"((sin(x0) + sin(x0)) / 0.9999933) * cos(x1)"

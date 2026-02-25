@@ -1,3 +1,0 @@
-Nguyen_F6_RandSample_oos: sin(x0) + sin(x0*x0 + x0)
-Train MSE: 1.675943974295038e-29
-Test MSE: 5.0794014130082305e-28

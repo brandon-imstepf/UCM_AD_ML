@@ -1,3 +1,0 @@
-Imstepf_F2_RandSample: 1014.19120046118 + cos(x1)/(x4**x0)
-Train MSE: 77333.2221157514
-Test MSE: 162943.2698518769

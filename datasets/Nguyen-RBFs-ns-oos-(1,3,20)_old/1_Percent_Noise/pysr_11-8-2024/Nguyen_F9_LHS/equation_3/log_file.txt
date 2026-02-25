@@ -1,3 +1,0 @@
-Nguyen_F9_LHS: sin(x0) + sin(x1*x1)
-Train MSE: 1.6803738764778633e-32
-Test MSE: 1.552781017662209e-33

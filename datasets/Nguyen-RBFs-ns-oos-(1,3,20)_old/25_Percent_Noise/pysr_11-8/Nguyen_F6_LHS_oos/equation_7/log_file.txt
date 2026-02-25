@@ -1,3 +1,0 @@
-Nguyen_F6_LHS_oos: sin(x0) + sin(x0 + x0*x0)
-Train MSE: 5.655939050215809e-27
-Test MSE: 2.465190328815662e-32

@@ -1,3 +1,0 @@
-Nguyen_F10_RandSample: (0.6001767250212946 - x0**x0)*(x0*x0 - x0**x1) + sin(x0)/cos(cos(x1))
-Train MSE: 0.0014238616098771928
-Test MSE: 0.016645281836121004

@@ -1,3 +1,0 @@
-Imstepf_F1_Uniform: x0 + x0 + x1*(-x1 + x1) + x2 + x4 + x4
-Train MSE: 9.398538128609711e-32
-Test MSE: 5.238529448733282e-32

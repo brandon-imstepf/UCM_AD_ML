@@ -1,9 +1,0 @@
-complexity,loss,score,equation,sympy_format,lambda_format
-2,55.348278,0.0,log(x0),log(x0),PySRFunction(X=>log(x0))
-4,13.970804,0.6883379120249143,log(x0 * x0),log(x0**2),PySRFunction(X=>log(x0**2))
-6,0.021083752,3.248111153021007,log(x0 * (x0 * x0)),log(x0**3),PySRFunction(X=>log(x0**3))
-8,0.0028549507,0.9997240607209753,log(((x0 * x0) + x0) * x0),log(x0*(x0**2 + x0)),PySRFunction(X=>log(x0*(x0**2 + x0)))
-10,0.0014601751,0.33524910748601566,log(x0 * ((x0 * x0) + (x0 + x0))),log(x0*(x0**2 + 2*x0)),PySRFunction(X=>log(x0*(x0**2 + 2*x0)))
-12,0.00032576738,0.7500640353187032,log(((x0 * x0) + x0) + (x0 * (x0 * x0))),log(x0**3 + x0**2 + x0),PySRFunction(X=>log(x0**3 + x0**2 + x0))
-13,0.000118876385,1.0080993966891376,log(((x0 / x0) + x0) * ((x0 * x0) + sin(x0))),log((x0 + 1)*(x0**2 + sin(x0))),PySRFunction(X=>log((x0 + 1)*(x0**2 + sin(x0))))
-14,7.2208906e-10,12.01144624656958,log(((x0 / x0) + x0) * ((x0 * x0) + (x0 / x0))),log((x0 + 1)*(x0**2 + 1)),PySRFunction(X=>log((x0 + 1)*(x0**2 + 1)))

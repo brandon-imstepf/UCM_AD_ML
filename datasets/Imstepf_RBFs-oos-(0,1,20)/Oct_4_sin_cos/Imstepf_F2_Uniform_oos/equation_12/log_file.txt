@@ -1,3 +1,0 @@
-Imstepf_F2_Uniform_oos: sin(x3*x4**x1)*sin(x3)*1.3155563947594149*x3*x4*x3
-Train MSE: 5.848130808771891e-07
-Test MSE: 8.941248257832423e-07

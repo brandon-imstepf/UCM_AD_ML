@@ -1,8 +1,0 @@
-complexity,loss,score,equation,sympy_format,lambda_format
-1,3408.3945,0.0,x0,x0,PySRFunction(X=>x0)
-2,0.48615637,8.855221596152681,sin(x0),sin(x0),PySRFunction(X=>sin(x0))
-4,0.48615545,9.461985148245823e-07,sin(exp(log(x0))),sin(x0),PySRFunction(X=>sin(x0))
-6,0.47710514,0.009395771418883253,sin(x0) / cos(sin(x1)),sin(x0)/cos(sin(x1)),PySRFunction(X=>sin(x0)/cos(sin(x1)))
-7,5.7081007e-08,15.93877600949195,sin(x1 * x1) + sin(x0),sin(x0) + sin(x1*x1),PySRFunction(X=>sin(x0) + sin(x1*x1))
-13,5.7072622e-08,2.4484547968463958e-05,(sin(x1 * x1) + sin(x0)) * 1.0000017,(sin(x0) + sin(x1*x1))*1.0000017,PySRFunction(X=>(sin(x0) + sin(x1*x1))*1.0000017)
-19,5.5659065e-08,0.004179928255604592,sin(5.7357818e-5 + x0) + (sin(x1 * x1) * 1.0000076),sin(x1*x1)*1.0000076 + sin(x0 + 5.7357818e-5),PySRFunction(X=>sin(x1*x1)*1.0000076 + sin(x0 + 5.7357818e-5))

@@ -1,3 +1,0 @@
-Imstepf_F1_LHS: x0 + x1 + x2 + x3 + x4
-Train MSE: 5.546678239835239e-32
-Test MSE: 2.465190328815662e-32

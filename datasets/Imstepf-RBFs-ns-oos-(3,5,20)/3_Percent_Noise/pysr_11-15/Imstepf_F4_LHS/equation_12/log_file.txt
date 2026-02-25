@@ -1,3 +1,0 @@
-Imstepf_F4_LHS: sin(x0) + cos(x1*x2) + sin(x3)*cos(x4)
-Train MSE: 0.0003328557394341315
-Test MSE: 0.00034017785970949277

@@ -1,9 +1,0 @@
-testtrain = False
-noise = False
-out_of_sample = False
-small_sample = False
-use_lhs = True
-use_uniform = True
-use_randsample = True
-
-Datasets generated:
