@@ -1,0 +1,14 @@
+Linear Regression Results
+==================================================
+Train MSE: 0.765274
+Train NMSE: 0.765274
+Train RMSE: 0.874799
+Test MSE: 0.817193
+Test NMSE: 0.817193
+Test RMSE: 0.903987
+Validation MSE: 0.751690
+Validation NMSE: 0.751690
+Validation RMSE: 0.867000
+
+Coefficients: [[-0.28491751  0.10837732  0.090676   -0.18937269 -0.2671356  -0.16441147]]
+Intercept: [-5.60482731e-16]
