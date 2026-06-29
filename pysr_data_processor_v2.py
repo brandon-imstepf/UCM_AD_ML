@@ -175,6 +175,9 @@ def analyze_best_equation_terms_by_dataset(base_directory, save_dir=None):
 
     return best_equations, norm_term_freq, norm_op_freq
 
+
+
+
 def load_scaling_params(model_path):
     """Load scaling parameters from scaling_params.mat in the model directory."""
     mat_path = os.path.join(os.path.dirname(model_path), "scaling_params.mat")
@@ -1149,7 +1152,7 @@ def evaluate_models_on_datasets_structured(output_dir, n_bootstrap=10):
         'C:/Users/brand/Desktop/School/Quals/data/train/w1_only_nobias_train_e3_narrowtau/2025-08-21_01-05_172800_Info/model_equations.csv'
     ]
 
-    base_data_dir = r'C:\Users\brand\Desktop\Raj-Sindi\training_data\sim_csv_v11\e3_data'
+    base_data_dir = r'C:\Users\USER\Documents\Code\UCM_AD_ML\datasets\sim_csv_v11\e3_data'
 
     # Train datasets
     train_datasets = [
@@ -1419,7 +1422,7 @@ def analyze_equation_terms_by_complexity(base_directory, use_sympy_format=True):
                 dataset_name = os.path.basename(os.path.dirname(root))
                 for _, row in df.iterrows():
                     complexity = row['complexity']
-                    expr_str = row[4] if use_sympy_format else row[2]
+                    expr_str = row['sympy_format'] if use_sympy_format else row['equation']
                     ops, terms, consts = extract_terms_and_ops(expr_str)
                     
                     # Count equations for normalization
@@ -1539,16 +1542,46 @@ def analyze_equation_terms_by_complexity(base_directory, use_sympy_format=True):
         for dataset in sorted(dataset_equation_counts.keys()):
             print(f"  {dataset}: {dataset_equation_counts[dataset]} equations")
         
+def get_best_equation_complexities(base_directory):
+    """
+    Walks base_directory for best.txt files and extracts the complexity of each
+    selected best equation from the line:
+        Selected Best Function: <complexity>, <equation>
+
+    Returns a list of dicts with keys: dataset, run, complexity, equation.
+    """
+    import re
+    results = []
+    pattern = re.compile(r"Selected Best Function:\s*(\d+),\s*(.*)")
+
+    for root, _, files in os.walk(base_directory):
+        if "best.txt" in files:
+            with open(os.path.join(root, "best.txt"), "r") as f:
+                first_line = f.readline()
+            match = pattern.match(first_line.strip())
+            if match:
+                results.append({
+                    "dataset": os.path.basename(os.path.dirname(root)),
+                    "run": os.path.basename(root),
+                    "complexity": int(match.group(1)),
+                    "equation": match.group(2).strip(),
+                })
+
+    for r in results:
+        print(f"{r['dataset']} / {r['run']}: complexity={r['complexity']}, eq={r['equation']}")
+
+    return results
+
 if __name__ == '__main__':
     # --- Configuration ---
     # Define the base directory where all your run folders are located.
     # You should have 6 folders in total for the PySR runs.
     # Example: 'C:/Users/brand/Desktop/My_PySR_Runs/'
-    all_runs_base_dir = r'C:/Users/brand/Desktop/Raj-Sindi/training_data/sim_csv_v11/'
+    all_runs_base_dir = r'C:\Users\USER\Documents\Code\UCM_AD_ML\datasets\sim_csv_v11'
     train_dir = os.path.join(all_runs_base_dir, 'train')
     val_dir = os.path.join(all_runs_base_dir, 'val')
 
-    csv_folder = r"C:\Users\brand\Desktop\School\Quals\data\flux_only_bias_12hr 5-set"
+    #csv_folder = r"C:\Users\brand\Desktop\School\Quals\data\flux_only_bias_12hr 5-set"
     #plot_nmse_vs_complexity_from_subdirs(csv_folder)
 
     # Define the specific folder names for each run.
@@ -1567,7 +1600,7 @@ if __name__ == '__main__':
     }
 
     # Define where to save the final presentation plots
-    output_visualization_dir = os.path.join(r"C:\Users\brand\Desktop\School\Quals", "Presentation_Visualizations")
+    output_visualization_dir = os.path.join(r"C:\Users\USER\Documents\Code\UCM_AD_ML", "Presentation_Visualizations")
     os.makedirs(output_visualization_dir, exist_ok=True)
     
     # --- Generate Visualizations ---
@@ -1590,7 +1623,7 @@ if __name__ == '__main__':
     #   print("Could not generate Method Showdown plot because the best PySR NMSE could not be determined.")
 
     # NMSE Scouring Directory
-    nmse_scour_directory = r'C:\Users\brand\Desktop\School\Quals\data\train'
+    nmse_scour_directory = r'C:\Users\USER\Documents\Code\UCM_AD_ML\datasets\sim_csv_v11\train'
     flux_bias_directory = nmse_scour_directory + r'\flux_only_bias_train_e3'
     w1_bias_directory = nmse_scour_directory + r'\w1_only_bias_train_e3'
     flux_nobias_directory = nmse_scour_directory + r'\flux_only_nobias_train_e3'
@@ -1615,7 +1648,13 @@ if __name__ == '__main__':
     # )
 
 
-    analyze_equation_terms_by_complexity(train_dir, use_sympy_format=True)
+    #analyze_equation_terms_by_complexity(train_dir, use_sympy_format=True)
+    best_results = get_best_equation_complexities(train_dir)
+    # Turn best_results into a DataFrame for easier analysis
+    best_results_df = pd.DataFrame(best_results)
+    print("\nBest Equation Complexities Summary:")
+    print(best_results_df['complexity'].describe())
+
 
     
 
