@@ -1290,6 +1290,85 @@ def evaluate_models_on_datasets_structured(output_dir, n_bootstrap=10):
     return {"train": train_results, "val": val_results}
 
 
+def evaluate_chosen_winners(flux_winner, w1_winner, n_bootstrap=200, seed=42):
+    """
+    Evaluate the figure's chosen best-of-best equations (flux_winner, w1_winner)
+    on every relevant dataset using bootstrap resampling.
+
+    Each winner is a dict from rank_best_equations_by_bootstrap with keys:
+        run_dir, equation, complexity, mean_nmse (bootstrap on bias_val), target.
+
+    The winner's own scaling params (from its run_dir) are applied to every
+    dataset so that features are standardised identically to how the model was
+    trained.
+
+    Parameters
+    ----------
+    flux_winner, w1_winner : dict
+    n_bootstrap : int   number of bootstrap resamples (default 200)
+    seed        : int   base random seed
+
+    Returns
+    -------
+    pd.DataFrame  one row per (dataset, target) with mean_nmse and std_nmse
+    """
+    base_data_dir = r'C:\Users\USER\Documents\Code\UCM_AD_ML\datasets\sim_csv_v11\e3_data'
+    feature_cols  = ['gamma1', 'lambda1', 'delta', 'epsilon', 'NRow', 'NCol']
+
+    datasets = [
+        {'name': 'bias_train_e3', 'csv': f'{base_data_dir}/bias_train_e3.csv'},
+        {'name': 'bias_val_e3',   'csv': f'{base_data_dir}/bias_val_e3.csv'},
+    ]
+
+    winners = [
+        ('FValue', flux_winner),
+        ('W1',     w1_winner),
+    ]
+
+    records = []
+    for ds in datasets:
+        if not os.path.exists(ds['csv']):
+            print(f"  [skip] {ds['name']} not found")
+            continue
+        df = pd.read_csv(ds['csv']).dropna()
+
+        for target, winner in winners:
+            model_eq_path = os.path.join(winner['run_dir'], 'model_equations.csv')
+            try:
+                scaling = load_scaling_params(model_eq_path)
+                X_sc, y_sc, _ = apply_scaling(df, target, scaling,
+                                              feature_cols=feature_cols)
+            except Exception as e:
+                print(f"  [error] scaling for {target} on {ds['name']}: {e}")
+                continue
+
+            bootstrap_nmse = []
+            for i in range(n_bootstrap):
+                np.random.seed(seed + i)
+                idx = np.random.choice(len(y_sc), size=len(y_sc), replace=True)
+                nmse = evaluate_single_equation_scaled(
+                    winner['equation'], X_sc[idx], y_sc[idx], scaling
+                )
+                bootstrap_nmse.append(nmse)
+
+            mean_nmse = float(np.nanmean(bootstrap_nmse))
+            std_nmse  = float(np.nanstd(bootstrap_nmse))
+            print(f"  {ds['name']:38s}  {target:7s}  "
+                  f"c={winner['complexity']:2d}  "
+                  f"NMSE = {mean_nmse:.4f} +/- {std_nmse:.4f}")
+            records.append({
+                'dataset':    ds['name'],
+                'target':     target,
+                'complexity': winner['complexity'],
+                'equation':   winner['equation'],
+                'mean_nmse':  mean_nmse,
+                'std_nmse':   std_nmse,
+            })
+
+    results_df = pd.DataFrame(records)
+    return results_df
+
+
 def evaluate_single_equation_scaled(equation_str, X_scaled, y_scaled, scaling):
     """
     Evaluate a single equation on scaled features and targets.
@@ -1542,11 +1621,14 @@ def analyze_equation_terms_by_complexity(base_directory, use_sympy_format=True):
         for dataset in sorted(dataset_equation_counts.keys()):
             print(f"  {dataset}: {dataset_equation_counts[dataset]} equations")
         
-def get_best_equation_complexities(base_directory):
+def get_best_equation_complexities(base_directory, name_filter=None):
     """
     Walks base_directory for best.txt files and extracts the complexity of each
     selected best equation from the line:
         Selected Best Function: <complexity>, <equation>
+
+    name_filter: optional substring; if provided, only datasets whose folder
+                 name contains that string are included (e.g. '_only_bias').
 
     Returns a list of dicts with keys: dataset, run, complexity, equation.
     """
@@ -1556,21 +1638,320 @@ def get_best_equation_complexities(base_directory):
 
     for root, _, files in os.walk(base_directory):
         if "best.txt" in files:
+            dataset_name = os.path.basename(os.path.dirname(root))
+            if name_filter and name_filter not in dataset_name:
+                continue
             with open(os.path.join(root, "best.txt"), "r") as f:
                 first_line = f.readline()
             match = pattern.match(first_line.strip())
             if match:
                 results.append({
-                    "dataset": os.path.basename(os.path.dirname(root)),
+                    "dataset": dataset_name,
                     "run": os.path.basename(root),
                     "complexity": int(match.group(1)),
                     "equation": match.group(2).strip(),
                 })
 
-    for r in results:
-        print(f"{r['dataset']} / {r['run']}: complexity={r['complexity']}, eq={r['equation']}")
+    flux_results = [r for r in results if r['dataset'].startswith('flux')]
+    w1_results   = [r for r in results if r['dataset'].startswith('w1')]
+
+    print("--- Flux ---")
+    for r in flux_results:
+        print(f"  {r['dataset']} / {r['run']}: complexity={r['complexity']}, eq={r['equation']}")
+    print("--- W1 ---")
+    for r in w1_results:
+        print(f"  {r['dataset']} / {r['run']}: complexity={r['complexity']}, eq={r['equation']}")
+
+    return {'flux': flux_results, 'w1': w1_results}
+
+
+def rank_best_equations_by_bootstrap(base_directory, val_csv, target_col=None,
+                                     feature_cols=None,
+                                     name_filter=None,
+                                     n_bootstrap=200,
+                                     seed=42):
+    """
+    Walk base_directory for best.txt files, evaluate each selected equation
+    on a validation dataset via bootstrap resampling, and return all candidates
+    sorted from best (lowest mean NMSE) to worst.
+
+    Each run must contain both best.txt and model_equations.csv (for locating
+    scaling_params.mat).  Runs missing either file are skipped with a warning.
+
+    Parameters
+    ----------
+    base_directory : str
+        Root folder to walk (e.g. the 'train' dir or a single dataset subdir).
+    val_csv : str
+        Path to the validation CSV file (unscaled, same columns as training).
+    target_col : str or None
+        Target column to evaluate against ('FValue', 'W1', etc.).
+        If None (default), the target is inferred automatically from the
+        dataset folder name: folders containing 'flux' use 'FValue', folders
+        containing 'w1' use 'W1'.  Pass an explicit string to override this
+        for all runs.
+    feature_cols : list of str, optional
+        Feature column names in the order that corresponds to x0..x5 in the
+        equations.  Defaults to ['gamma1','lambda1','delta','epsilon','NRow','NCol'].
+    name_filter : str, optional
+        If given, only dataset folders whose name contains this substring are
+        included (e.g. '_only_bias' to skip nobias runs).
+    n_bootstrap : int
+        Number of bootstrap resamples per equation (default 200).
+    seed : int
+        Random seed for reproducibility.
+
+    Returns
+    -------
+    list of dict, sorted ascending by mean_nmse.  Each dict has keys:
+        dataset    – parent folder name (e.g. 'flux_only_bias_train_e3')
+        run        – timestamped run folder name
+        run_dir    – full path to the run folder
+        complexity – integer complexity from best.txt
+        equation   – sympy_format equation string from best.txt
+        target     – the target column actually used for this run
+        mean_nmse  – mean bootstrap NMSE on the validation set
+        std_nmse   – std  bootstrap NMSE on the validation set
+    Candidates that could not be evaluated are omitted from the returned list
+    but a warning is printed for each.
+    """
+    if feature_cols is None:
+        feature_cols = ['gamma1', 'lambda1', 'delta', 'epsilon', 'NRow', 'NCol']
+
+    def _infer_target(dataset_name):
+        """Infer the output variable from the dataset folder name."""
+        if 'flux' in dataset_name.lower():
+            return 'FValue'
+        if 'w1' in dataset_name.lower():
+            return 'W1'
+        return None
+
+    np.random.seed(seed)
+    pattern = re.compile(r"Selected Best Function:\s*(\d+),\s*(.*)")
+    syms    = sp.symbols("x0 x1 x2 x3 x4 x5")
+
+    # Load validation data once
+    val_df = pd.read_csv(val_csv).dropna()
+    print(f"Loaded validation data: {len(val_df)} rows from {val_csv}")
+
+    ranked = []
+
+    for root, _, files in os.walk(base_directory):
+        if 'best.txt' not in files:
+            continue
+
+        dataset_name = os.path.basename(os.path.dirname(root))
+        run_name     = os.path.basename(root)
+
+        # Apply optional dataset-name filter
+        if name_filter and name_filter not in dataset_name:
+            continue
+
+        # Determine the correct target column for this run
+        run_target = target_col if target_col is not None else _infer_target(dataset_name)
+        if run_target is None:
+            print(f"  [skip – could not infer target for dataset '{dataset_name}']"
+                  f" pass target_col explicitly to override")
+            continue
+        if run_target not in val_df.columns:
+            print(f"  [skip – column '{run_target}' not found in val_csv] {run_name}")
+            continue
+
+        # Parse equation and complexity from best.txt
+        with open(os.path.join(root, 'best.txt'), 'r') as fh:
+            first_line = fh.readline()
+        m = pattern.match(first_line.strip())
+        if not m:
+            print(f"  [skip – unrecognised best.txt format] {run_name}")
+            continue
+        complexity = int(m.group(1))
+        equation   = m.group(2).strip()
+
+        # Locate scaling_params.mat via model_equations.csv in the same folder
+        model_eq_path = os.path.join(root, 'model_equations.csv')
+        if not os.path.exists(model_eq_path):
+            print(f"  [skip – no model_equations.csv] {run_name}")
+            continue
+        try:
+            scaling = load_scaling_params(model_eq_path)
+        except FileNotFoundError:
+            print(f"  [skip – no scaling_params.mat] {run_name}")
+            continue
+
+        # Scale validation features and target using this run's training stats
+        try:
+            X_sc, y_sc, _ = apply_scaling(
+                val_df, run_target, scaling, feature_cols=feature_cols
+            )
+        except Exception as exc:
+            print(f"  [skip – scaling error in {run_name}]: {exc}")
+            continue
+
+        # Compile the equation into a vectorised numpy function
+        try:
+            expr  = sp.sympify(equation)
+            func  = sp.lambdify(syms, expr, 'numpy')
+            y_hat = np.asarray(
+                func(*[X_sc[:, i] for i in range(X_sc.shape[1])]),
+                dtype=float,
+            ).flatten()
+        except Exception as exc:
+            print(f"  [skip – equation eval error in {run_name}]: {exc}")
+            continue
+
+        # Bootstrap NMSE
+        n          = len(y_sc)
+        boot_nmse  = []
+        for _ in range(n_bootstrap):
+            idx  = np.random.choice(n, size=n, replace=True)
+            mse  = np.mean((y_sc[idx] - y_hat[idx]) ** 2)
+            var  = np.var(y_sc[idx])
+            boot_nmse.append(mse / var if var > 0 else np.inf)
+
+        mean_nmse = float(np.nanmean(boot_nmse))
+        std_nmse  = float(np.nanstd(boot_nmse))
+
+        ranked.append({
+            'dataset':    dataset_name,
+            'run':        run_name,
+            'run_dir':    root,
+            'complexity': complexity,
+            'equation':   equation,
+            'target':     run_target,
+            'mean_nmse':  mean_nmse,
+            'std_nmse':   std_nmse,
+        })
+
+    # Sort best → worst
+    ranked.sort(key=lambda r: r['mean_nmse'])
+
+    # Print ranked table
+    print(f"\n{'Rank':<6}{'NMSE':>10}{'±':>10}{'C':>5}  {'Dataset / Run'}")
+    print('-' * 80)
+    for rank, r in enumerate(ranked, start=1):
+        label = f"{r['dataset']} / {r['run']}"
+        print(f"{rank:<6}{r['mean_nmse']:>10.4f}{r['std_nmse']:>10.4f}"
+              f"{r['complexity']:>5}  {label}")
+        print(f"       eq: {r['equation']}")
+
+    return ranked
+
+
+def select_best_of_best(ranked, factor=1.5):
+    """
+    Apply PySR's own selection rule at the meta-level across all runs.
+
+    Within each output variable group (target='FValue' or 'W1'):
+      - Find the minimum mean_nmse  (most accurate equation)
+      - Compute threshold = min_nmse * factor  (default 1.5×)
+      - Among all equations with mean_nmse ≤ threshold, return the one
+        with the lowest complexity  (ties broken by lower mean_nmse)
+
+    Parameters
+    ----------
+    ranked : list of dicts from rank_best_equations_by_bootstrap()
+    factor : float — the tolerance multiplier (default 1.5, matching PySR)
+
+    Returns
+    -------
+    dict with keys 'FValue' and 'W1', each mapping to the winning candidate
+    dict (same structure as entries in ranked), or None if no candidates exist.
+    """
+    results = {}
+    for target in ('FValue', 'W1'):
+        group = [r for r in ranked if r['target'] == target]
+        if not group:
+            results[target] = None
+            continue
+
+        min_nmse  = min(r['mean_nmse'] for r in group)
+        threshold = min_nmse * factor
+        eligible  = [r for r in group if r['mean_nmse'] <= threshold]
+
+        # Simplest first; break ties by accuracy
+        winner = min(eligible, key=lambda r: (r['complexity'], r['mean_nmse']))
+
+        print(f"\n[select_best_of_best] target={target}")
+        print(f"  min NMSE = {min_nmse:.4f}  ->  threshold ({factor}x) = {threshold:.4f}")
+        print(f"  {len(eligible)} eligible equation(s):")
+        for r in sorted(eligible, key=lambda r: r['complexity']):
+            mark = ' <-- SELECTED' if r is winner else ''
+            print(f"    c={r['complexity']:3d}  NMSE={r['mean_nmse']:.4f}  {r['run']}{mark}")
+
+        results[target] = winner
 
     return results
+
+
+def plot_ranked_complexity_vs_nmse(ranked, save_path=None):
+    """
+    Plot bootstrap NMSE vs equation complexity for each run in the ranked list,
+    split into two subplots: one for FValue (flux) runs and one for W1 runs.
+
+    Each point represents one run's selected best equation.  Points are labelled
+    with a short date extracted from the run folder name and sorted left-to-right
+    by complexity so the Pareto trade-off is easy to read.  Error bars show the
+    bootstrap standard deviation.
+
+    Parameters
+    ----------
+    ranked    : list of dicts returned by rank_best_equations_by_bootstrap().
+    save_path : str or None – if provided, the figure is saved to this path.
+    """
+    # Split by output variable
+    flux_runs = [r for r in ranked if r['target'] == 'FValue']
+    w1_runs   = [r for r in ranked if r['target'] == 'W1']
+
+    def _short_label(run_name):
+        # Extract just the date portion: '2025-10-18_10-12_...' → '10-18'
+        parts = run_name.split('_')
+        return parts[0][5:] if len(parts) >= 1 else run_name  # strip '2025-'
+
+    def _draw(ax, runs, title):
+        if not runs:
+            ax.set_title(title)
+            ax.text(0.5, 0.5, 'No data', transform=ax.transAxes,
+                    ha='center', va='center', color='grey')
+            return
+
+        # Sort by complexity so the curve reads left to right
+        runs_sorted = sorted(runs, key=lambda r: r['complexity'])
+        xs     = [r['complexity'] for r in runs_sorted]
+        ys     = [r['mean_nmse']  for r in runs_sorted]
+        errs   = [r['std_nmse']   for r in runs_sorted]
+        labels = [_short_label(r['run']) for r in runs_sorted]
+
+        ax.errorbar(xs, ys, yerr=errs,
+                    fmt='o-', color='steelblue', ecolor='lightsteelblue',
+                    capsize=4, linewidth=1.2, markersize=6, zorder=3)
+
+        # Label each point with its date
+        for x, y, lbl in zip(xs, ys, labels):
+            ax.annotate(lbl, (x, y),
+                        textcoords='offset points', xytext=(0, 8),
+                        ha='center', fontsize=8, color='dimgrey')
+
+        ax.set_xlabel('Complexity', fontsize=13)
+        ax.set_ylabel('Bootstrap NMSE', fontsize=13)
+        ax.set_title(title, fontsize=16)
+        ax.grid(True, linestyle='--', alpha=0.4)
+        ax.set_ylim(bottom=0)
+
+    fig, (ax_flux, ax_w1) = plt.subplots(1, 2, figsize=(14, 5))
+    fig.suptitle('Best-Equation Complexity vs Bootstrap NMSE (Bias Runs)',
+                 fontsize=16, y=1.01)
+
+    _draw(ax_flux, flux_runs, r'$\phi_\tau$ (FValue)')
+    _draw(ax_w1,   w1_runs,   r'$\Delta_\tau$ (W1)')
+
+    plt.tight_layout()
+
+    if save_path:
+        plt.savefig(save_path, dpi=150, bbox_inches='tight')
+        print(f"Saved to {save_path}")
+
+    plt.show()
+
 
 if __name__ == '__main__':
     # --- Configuration ---
@@ -1642,21 +2023,56 @@ if __name__ == '__main__':
     #analyze_nmse_by_complexity_subplots(all_directories)
     #analyze_nmse_by_complexity_with_inset(nmse_scour_directory)
 
-    # results_matrix, metadata_df, summary_df = evaluate_models_on_datasets_structured(
-    #     output_dir=f"{output_visualization_dir}/nmse_box_train", 
-    #     n_bootstrap=1000
-    # )
+    # Evaluate the chosen best-of-best winners on all datasets
+    ranked_for_eval = rank_best_equations_by_bootstrap(
+        base_directory=train_dir,
+        val_csv=r'C:\Users\USER\Documents\Code\UCM_AD_ML\datasets\sim_csv_v11\e3_data\bias_val_e3.csv',
+        name_filter='_only_bias',
+        n_bootstrap=200,
+        seed=42,
+    )
+    _winners = select_best_of_best(ranked_for_eval, factor=1.5)
+    _flux_winner = _winners['FValue']
+    _w1_winner   = _winners['W1']
+
+    # Override W1 to c=14 (same as figure)
+    _w1_candidates = [r for r in ranked_for_eval if r['target'] == 'W1' and r['complexity'] == 14]
+    if _w1_candidates:
+        _w1_winner = min(_w1_candidates, key=lambda r: r['mean_nmse'])
+
+    print(f"\nFlux winner: c={_flux_winner['complexity']}  {_flux_winner['equation']}")
+    print(f"W1 winner:   c={_w1_winner['complexity']}  {_w1_winner['equation']}")
+    print("\n=== Bootstrap NMSE across all datasets ===")
+    results_df = evaluate_chosen_winners(_flux_winner, _w1_winner, n_bootstrap=200, seed=42)
+    print("\n--- Summary ---")
+    print(results_df[['dataset', 'target', 'complexity', 'mean_nmse', 'std_nmse']].to_string(index=False))
 
 
     #analyze_equation_terms_by_complexity(train_dir, use_sympy_format=True)
-    best_results = get_best_equation_complexities(train_dir)
+    best_results = get_best_equation_complexities(train_dir, name_filter='_only_bias')
     # Turn best_results into a DataFrame for easier analysis
-    best_results_df = pd.DataFrame(best_results)
+    best_flux_results_df = pd.DataFrame(best_results['flux'])
+    best_w1_results_df = pd.DataFrame(best_results['w1'])
     print("\nBest Equation Complexities Summary:")
-    print(best_results_df['complexity'].describe())
+    print("\n--- Flux ---")
+    print(best_flux_results_df['complexity'].describe())
+    print(best_flux_results_df[['dataset', 'run', 'complexity', 'equation']])
+    print("\n--- W1 ---")
+    print(best_w1_results_df['complexity'].describe())
+    print(best_w1_results_df[['dataset', 'run', 'complexity', 'equation']])
 
 
-    
+    ranked = rank_best_equations_by_bootstrap(
+        base_directory=r'C:\Users\USER\Documents\Code\UCM_AD_ML\datasets\sim_csv_v11\train',
+        val_csv=r'C:\Users\USER\Documents\Code\UCM_AD_ML\datasets\sim_csv_v11\e3_data\bias_val_e3.csv',
+        name_filter='_only_bias',
+        n_bootstrap=200,
+    )
+    ranked_df = pd.DataFrame(ranked)
+    print("\nRanked Best Equations by Bootstrap NMSE:")
+    print(ranked_df)
+
+    plot_ranked_complexity_vs_nmse(ranked, save_path=None)
 
 
     # Analyze best equations only (variable/operator frequency and table)
